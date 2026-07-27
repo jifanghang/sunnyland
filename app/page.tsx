@@ -38,7 +38,7 @@ export default async function Home() {
         </a>
         <nav aria-label="Main navigation">
           <a href="#products">Products</a>
-          <a href="#about">About</a>
+          <a href="/about">About</a>
           <a href="#news">News</a>
           <a href="#contact">Contact</a>
         </nav>
@@ -57,7 +57,7 @@ export default async function Home() {
           </p>
           <div className="hero-actions">
             <a className="button" href="#curling-title">Explore curling <span aria-hidden="true">↓</span></a>
-            <a className="text-link" href="#about">Meet Sunnyland <span aria-hidden="true">↗</span></a>
+            <a className="text-link" href="/about">Meet Sunnyland <span aria-hidden="true">↗</span></a>
           </div>
           <div className="hero-proof" aria-label="Company highlights">
             <div><strong>16+</strong><span>years making play</span></div>
@@ -144,6 +144,7 @@ export default async function Home() {
             <span>Quality control</span><span>Global logistics</span>
           </div>
           <a className="button button-cream" href="#contact">Build with us <span aria-hidden="true">→</span></a>
+          <a className="about-more-link" href="/about">Discover our full story <span aria-hidden="true">↗</span></a>
         </div>
       </section>
 
@@ -272,7 +273,7 @@ export default async function Home() {
           </a>
           <p>Novel sports and games, made in Ningbo and played around the world.</p>
         </div>
-        <div><strong>Explore</strong><a href="#products">Products</a><a href="#about">About us</a><a href="#news">News</a></div>
+        <div><strong>Explore</strong><a href="#products">Products</a><a href="/about">About us</a><a href="#news">News</a></div>
         <div><strong>Contact</strong><a href="tel:+8613003751301">+86 130 0375 1301</a><a href="mailto:info@chinasunnyland.com">Email us</a><span>King Intl Mansion, Haishu District,<br />Ningbo, China</span></div>
         <div className="footer-bottom"><span>© {new Date().getFullYear()} Sunnyland. All rights reserved.</span><a href="/admin">Content manager</a></div>
       </footer>
