@@ -5,9 +5,12 @@ import test from "node:test";
 test("defines the complete Sunnyland landing page", async () => {
   const page = await readFile(new URL("../app/page.tsx", import.meta.url), "utf8");
   assert.match(page, /Sunnyland/);
-  assert.match(page, /Bring more/);
+  assert.match(page, /Bring curling/);
+  assert.match(page, /CurlingCarousel/);
   assert.match(page, /Products worth/);
-  assert.match(page, /Ready to play/);
+  assert.match(page, /Ready<br \/>to play/);
+  assert.match(page, /formsubmit\.co\/info@chinasunnyland\.com/);
+  assert.match(page, /King Intl Mansion/);
   assert.doesNotMatch(page, /codex-preview|react-loading-skeleton|Starter Project/);
 });
 

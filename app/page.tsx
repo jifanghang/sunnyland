@@ -1,12 +1,13 @@
 import type { Metadata } from "next";
 import { getContentItems } from "../db/content";
+import CurlingCarousel from "./CurlingCarousel";
 
 export const dynamic = "force-dynamic";
 
 export const metadata: Metadata = {
   title: "Sunnyland Sports — Play, made better",
   description:
-    "Original sports, lawn, party and board games from an experienced Ningbo manufacturer.",
+    "Signature floor curling sets and original sports and games from an experienced Ningbo manufacturer.",
 };
 
 const categories = [
@@ -49,13 +50,13 @@ export default async function Home() {
       <section className="hero" id="top">
         <div className="hero-copy">
           <div className="eyebrow"><span /> Sports &amp; games manufacturer</div>
-          <h1>Bring more<br />play <em>outside.</em></h1>
+          <h1>Bring curling<br /><em>anywhere.</em></h1>
           <p>
-            Original games, thoughtful details, reliable production. We help
-            brands and retailers turn good ideas into products people love to play.
+            Sunnyland’s signature curling sets bring the strategy of the ice to
+            any smooth floor—alongside a full range of original games made for global brands.
           </p>
           <div className="hero-actions">
-            <a className="button" href="#products">Explore products <span aria-hidden="true">↓</span></a>
+            <a className="button" href="#curling-title">Explore curling <span aria-hidden="true">↓</span></a>
             <a className="text-link" href="#about">Meet Sunnyland <span aria-hidden="true">↗</span></a>
           </div>
           <div className="hero-proof" aria-label="Company highlights">
@@ -67,17 +68,17 @@ export default async function Home() {
         <div className="hero-visual" aria-label="Sunnyland products">
           <div className="hero-burst" />
           <div className="sticker sticker-one">PLAY<br />MORE</div>
-          <div className="sticker sticker-two">NEW<br />IDEAS!</div>
+          <div className="sticker sticker-two">ICE<br />OPTIONAL!</div>
           <figure className="product-shot shot-main">
-            <img src="/golf.jpg" alt="Sunnyland pop-up golf chipping practice net" />
+            <img src="/curling-2in1.jpg" alt="Sunnyland curling and shuffleboard two-in-one set" />
           </figure>
           <figure className="product-shot shot-top">
-            <img src="/ladder-ball.jpg" alt="Sunnyland ladder ball toss game" />
+            <img src="/curling-air.jpg" alt="Sunnyland air-cushioned curling stone set" />
           </figure>
           <figure className="product-shot shot-bottom">
-            <img src="/checkers.jpg" alt="Sunnyland giant checkers set" />
+            <img src="/curling-floor.jpg" alt="Sunnyland portable floor curling stone set" />
           </figure>
-          <span className="scribble">GOOD TIMES →</span>
+          <span className="scribble">OUR SIGNATURE GAME →</span>
         </div>
       </section>
 
@@ -86,6 +87,8 @@ export default async function Home() {
           <span key={category}>{category}<i>{index % 2 ? "✦" : "●"}</i></span>
         ))}
       </section>
+
+      <CurlingCarousel />
 
       <section className="section products-section" id="products">
         <div className="section-heading">
@@ -195,13 +198,71 @@ export default async function Home() {
       </section>
 
       <section className="contact-section" id="contact">
-        <div className="contact-sun" aria-hidden="true" />
-        <span className="kicker">Let’s make something fun</span>
-        <h2>Ready to play?</h2>
-        <p>Tell us what you’re building. Our team will be back to you within one business day.</p>
-        <a className="button button-dark" href="mailto:info@chinasunnyland.com?subject=New%20Sunnyland%20project">
-          info@chinasunnyland.com <span aria-hidden="true">↗</span>
-        </a>
+        <div className="contact-intro">
+          <span className="kicker">Let’s make something fun</span>
+          <h2>Ready<br />to play?</h2>
+          <p>Tell us what you’re building. Our team will be back to you within one business day.</p>
+          <div className="contact-details">
+            <div>
+              <span>Email</span>
+              <a href="mailto:info@chinasunnyland.com">info@chinasunnyland.com</a>
+            </div>
+            <div>
+              <span>Phone</span>
+              <a href="tel:+8613003751301">+86 130 0375 1301</a>
+            </div>
+            <div>
+              <span>Visit us</span>
+              <address>
+                2-28/2F, King Intl Mansion, No. 345 South Part,<br />
+                Huanchengxi Road, Haishu District, Ningbo, China
+              </address>
+            </div>
+          </div>
+        </div>
+        <form
+          className="contact-form"
+          action="https://formsubmit.co/info@chinasunnyland.com"
+          method="POST"
+        >
+          <input type="hidden" name="_subject" value="New inquiry from the Sunnyland website" />
+          <input type="hidden" name="_template" value="table" />
+          <input type="hidden" name="_captcha" value="false" />
+          <div className="form-title"><span>Start an inquiry</span><b>01</b></div>
+          <label>
+            Your name
+            <input type="text" name="name" autoComplete="name" required placeholder="Name or company" />
+          </label>
+          <div className="contact-form-row">
+            <label>
+              Email address
+              <input type="email" name="email" autoComplete="email" required placeholder="you@company.com" />
+            </label>
+            <label>
+              Phone <small>Optional</small>
+              <input type="tel" name="phone" autoComplete="tel" placeholder="+00 000 000 000" />
+            </label>
+          </div>
+          <label>
+            I’m interested in
+            <select name="interest" defaultValue="">
+              <option value="" disabled>Select a product or service</option>
+              <option>Curling &amp; shuffleboard sets</option>
+              <option>Golf and lawn games</option>
+              <option>Board and party games</option>
+              <option>OEM / ODM development</option>
+              <option>Full product catalogue</option>
+            </select>
+          </label>
+          <label>
+            Tell us about your project
+            <textarea name="message" rows={5} required placeholder="Market, quantities, timing, or the idea you have in mind…" />
+          </label>
+          <button type="submit" className="button button-dark">
+            Send inquiry <span aria-hidden="true">↗</span>
+          </button>
+          <p className="form-note">Your message will be sent directly to our Ningbo team.</p>
+        </form>
       </section>
 
       <footer>
@@ -212,7 +273,7 @@ export default async function Home() {
           <p>Novel sports and games, made in Ningbo and played around the world.</p>
         </div>
         <div><strong>Explore</strong><a href="#products">Products</a><a href="#about">About us</a><a href="#news">News</a></div>
-        <div><strong>Contact</strong><a href="tel:+8613003751301">+86 130 0375 1301</a><a href="mailto:info@chinasunnyland.com">Email us</a><span>Ningbo, China</span></div>
+        <div><strong>Contact</strong><a href="tel:+8613003751301">+86 130 0375 1301</a><a href="mailto:info@chinasunnyland.com">Email us</a><span>King Intl Mansion, Haishu District,<br />Ningbo, China</span></div>
         <div className="footer-bottom"><span>© {new Date().getFullYear()} Sunnyland. All rights reserved.</span><a href="/admin">Content manager</a></div>
       </footer>
     </main>
