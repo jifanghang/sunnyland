@@ -42,6 +42,12 @@ test("provides catalogue, news index and managed article pages", async () => {
   assert.match(migration, /ADD COLUMN body/);
 });
 
+test("lets the active jumbotron slide define the carousel height", async () => {
+  const css = await readFile(new URL("../app/globals.css", import.meta.url), "utf8");
+  assert.match(css, /\.hero-slide\.is-active\s*\{[^}]*position:\s*relative/s);
+  assert.match(css, /grid-template-rows:\s*minmax\(650px,\s*auto\)\s+560px/);
+});
+
 test("includes the content manager and durable database binding", async () => {
   const [page, layout, admin, hosting, packageJson] = await Promise.all([
     readFile(new URL("../app/page.tsx", import.meta.url), "utf8"),
