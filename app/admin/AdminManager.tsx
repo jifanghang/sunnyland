@@ -9,6 +9,7 @@ const blankItem: ContentInput = {
   title: "",
   slug: "",
   summary: "",
+  body: "",
   category: "",
   imageUrl: "/golf.jpg",
   publishedAt: new Date().toISOString().slice(0, 10),
@@ -104,7 +105,7 @@ export default function AdminManager({ initialItems, userName }: { initialItems:
         </header>
 
         <section className="admin-toolbar">
-          <p>Manage what appears on Sunnyland’s public landing page.</p>
+          <p>Manage Sunnyland’s product catalogue, homepage features and news pages.</p>
           <button onClick={() => beginNew(filter)}>+ Add {filter}</button>
         </section>
 
@@ -134,6 +135,7 @@ export default function AdminManager({ initialItems, userName }: { initialItems:
               <label>Product code / slug<input required value={draft.slug} onChange={(event) => setDraft({ ...draft, slug: event.target.value })} placeholder="e.g. SSL004" /></label>
               <label>Publish date<input required type="date" value={draft.publishedAt} onChange={(event) => setDraft({ ...draft, publishedAt: event.target.value })} /></label>
               <label className="wide">Summary<textarea required rows={4} value={draft.summary} onChange={(event) => setDraft({ ...draft, summary: event.target.value })} placeholder="One or two concise sentences" /></label>
+              <label className="wide">Page content<textarea required rows={8} value={draft.body} onChange={(event) => setDraft({ ...draft, body: event.target.value })} placeholder="Write the full product description or article. Separate paragraphs with a blank line." /></label>
               <label className="wide">Image path or URL<input required value={draft.imageUrl} onChange={(event) => setDraft({ ...draft, imageUrl: event.target.value })} placeholder="/product-photo.jpg or https://…" /></label>
               <label>Display order<input type="number" value={draft.sortOrder} onChange={(event) => setDraft({ ...draft, sortOrder: Number(event.target.value) })} /></label>
               <label className="checkbox-label"><input type="checkbox" checked={draft.featured} onChange={(event) => setDraft({ ...draft, featured: event.target.checked })} /> Mark as featured</label>

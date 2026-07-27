@@ -20,6 +20,7 @@ function parseInput(body: unknown): ContentInput | null {
     title: String(value.title).trim(),
     slug: String(value.slug).trim(),
     summary: String(value.summary).trim(),
+    body: typeof value.body === "string" && value.body.trim() ? value.body.trim() : String(value.summary).trim(),
     category: String(value.category).trim(),
     imageUrl: String(value.imageUrl).trim(),
     publishedAt: String(value.publishedAt),

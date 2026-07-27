@@ -44,7 +44,7 @@ export default function AboutPage() {
           <img className="brand-logo" src="/logo.png" alt="Sunnyland" />
         </a>
         <nav aria-label="Main navigation">
-          <a href="/#products">Products</a>
+          <a href="/products">Products</a>
           <a href="/about" aria-current="page">About</a>
           <a href="#factory">Factory tour</a>
           <a href="/#contact">Contact</a>
@@ -288,7 +288,7 @@ export default function AboutPage() {
           </a>
           <p>Novel sports and games, made in Ningbo and played around the world.</p>
         </div>
-        <div><strong>Explore</strong><a href="/#products">Products</a><a href="/about">About us</a><a href="#factory">Factory tour</a></div>
+        <div><strong>Explore</strong><a href="/products">Products</a><a href="/about">About us</a><a href="/news">News</a></div>
         <div><strong>Contact</strong><a href="tel:+8613003751301">+86 130 0375 1301</a><a href="mailto:info@chinasunnyland.com">Email us</a><span>King Intl Mansion, Haishu District,<br />Ningbo, China</span></div>
         <div className="footer-bottom"><span>© {new Date().getFullYear()} Sunnyland. All rights reserved.</span><a href="/admin">Content manager</a></div>
       </footer>

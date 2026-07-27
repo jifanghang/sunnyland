@@ -6,6 +6,7 @@ export const contentItems = sqliteTable("content_items", {
   title: text("title").notNull(),
   slug: text("slug").notNull(),
   summary: text("summary").notNull(),
+  body: text("body").notNull().default(""),
   category: text("category").notNull(),
   imageUrl: text("image_url").notNull(),
   publishedAt: text("published_at").notNull(),

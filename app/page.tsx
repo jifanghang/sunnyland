@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import { getContentItems } from "../db/content";
 import CurlingCarousel from "./CurlingCarousel";
+import HeroCarousel from "./HeroCarousel";
+import { SiteFooter, SiteHeader } from "./SiteChrome";
 
 export const dynamic = "force-dynamic";
 
@@ -21,65 +23,14 @@ const categories = [
 
 export default async function Home() {
   const items = await getContentItems();
-  const products = items.filter((item) => item.type === "product").slice(0, 6);
+  const products = items.filter((item) => item.type === "product").slice(0, 3);
   const news = items.filter((item) => item.type === "news").slice(0, 3);
+  const topNews = news.find((item) => item.featured) || news[0];
 
   return (
     <main>
-      <div className="announcement">
-        <span>Designing fun since 2008</span>
-        <span className="announcement-detail">OEM &amp; ODM · Global supply · Fast response</span>
-      </div>
-
-      <header className="site-header">
-        <a className="brand" href="#top" aria-label="Sunnyland home">
-          <img className="brand-logo" src="/logo.png" alt="Sunnyland" />
-        </a>
-        <nav aria-label="Main navigation">
-          <a href="#products">Products</a>
-          <a href="/about">About</a>
-          <a href="#news">News</a>
-          <a href="#contact">Contact</a>
-        </nav>
-        <a className="button button-small" href="mailto:info@chinasunnyland.com?subject=Sunnyland%20product%20inquiry">
-          Start an inquiry <span aria-hidden="true">↗</span>
-        </a>
-      </header>
-
-      <section className="hero" id="top">
-        <div className="hero-copy">
-          <div className="eyebrow"><span /> Sports &amp; games manufacturer</div>
-          <h1>Bring curling<br /><em>anywhere.</em></h1>
-          <p>
-            Sunnyland’s signature curling sets bring the strategy of the ice to
-            any smooth floor—alongside a full range of original games made for global brands.
-          </p>
-          <div className="hero-actions">
-            <a className="button" href="#curling-title">Explore curling <span aria-hidden="true">↓</span></a>
-            <a className="text-link" href="/about">Meet Sunnyland <span aria-hidden="true">↗</span></a>
-          </div>
-          <div className="hero-proof" aria-label="Company highlights">
-            <div><strong>16+</strong><span>years making play</span></div>
-            <div><strong>30+</strong><span>markets supplied</span></div>
-            <div><strong>24h</strong><span>inquiry response</span></div>
-          </div>
-        </div>
-        <div className="hero-visual" aria-label="Sunnyland products">
-          <div className="hero-burst" />
-          <div className="sticker sticker-one">PLAY<br />MORE</div>
-          <div className="sticker sticker-two">ICE<br />OPTIONAL!</div>
-          <figure className="product-shot shot-main">
-            <img src="/curling-2in1.jpg" alt="Sunnyland curling and shuffleboard two-in-one set" />
-          </figure>
-          <figure className="product-shot shot-top">
-            <img src="/curling-air.jpg" alt="Sunnyland air-cushioned curling stone set" />
-          </figure>
-          <figure className="product-shot shot-bottom">
-            <img src="/curling-floor.jpg" alt="Sunnyland portable floor curling stone set" />
-          </figure>
-          <span className="scribble">OUR SIGNATURE GAME →</span>
-        </div>
-      </section>
+      <SiteHeader />
+      {topNews && <HeroCarousel topNews={topNews} />}
 
       <section className="category-strip" aria-label="Product categories">
         {categories.map((category, index) => (
@@ -103,11 +54,11 @@ export default async function Home() {
         <div className="product-grid">
           {products.map((product, index) => (
             <article className={`product-card product-card-${index + 1}`} key={product.id}>
-              <div className="product-image">
+              <a className="product-image" href="/products">
                 <img src={product.imageUrl} alt={product.title} />
                 {product.featured && <span className="card-badge">Popular pick</span>}
                 <span className="card-arrow" aria-hidden="true">↗</span>
-              </div>
+              </a>
               <div className="product-meta">
                 <span>{product.category}</span>
                 <span>{product.slug.toUpperCase()}</span>
@@ -117,9 +68,12 @@ export default async function Home() {
             </article>
           ))}
         </div>
-        <a className="outline-button" href="mailto:info@chinasunnyland.com?subject=Sunnyland%20catalogue%20request">
-          Request the full catalogue <span aria-hidden="true">↗</span>
-        </a>
+        <div className="product-actions">
+          <a className="button" href="/products">View all products <span aria-hidden="true">↗</span></a>
+          <a className="outline-button" href="mailto:info@chinasunnyland.com?subject=Sunnyland%20catalogue%20request">
+            Request the full catalogue <span aria-hidden="true">↗</span>
+          </a>
+        </div>
       </section>
 
       <section className="about-section" id="about">
@@ -147,25 +101,36 @@ export default async function Home() {
         </div>
       </section>
 
-      <section className="section process-section">
-        <div className="section-heading compact-heading">
-          <div>
-            <span className="kicker">From sketch to shelf</span>
-            <h2>Your idea.<br />Our playground.</h2>
+      <section className="partnership-section">
+        <div className="partnership-visual">
+          <img src="/about-production.jpg" alt="Sunnyland team preparing products in the Ningbo factory" />
+          <div className="partnership-stamp"><strong>OEM</strong><span>+ ODM</span></div>
+          <div className="partnership-proof">
+            <span>Product engineering</span>
+            <span>Sampling</span>
+            <span>Quality control</span>
+            <span>Export coordination</span>
           </div>
-          <p>A practical, collaborative path from the first conversation to repeat orders.</p>
         </div>
-        <div className="process-grid">
+        <div className="partnership-copy">
+          <span className="kicker kicker-light">A clearer way to create</span>
+          <h2>Bring the spark.<br /><em>We’ll build the play.</em></h2>
+          <p className="partnership-lead">
+            Start with a finished brief, a rough sketch or simply the experience
+            you want customers to have. We turn it into a product ready for the shelf.
+          </p>
+          <div className="partnership-path">
           {[
-            ["01", "Share the idea", "Tell us the market, price point and play experience you have in mind."],
-            ["02", "Shape the product", "We refine materials, mechanics, packaging and samples with your team."],
-            ["03", "Make it reliable", "Production and quality checks keep every order consistent."],
-            ["04", "Ship with confidence", "Export-ready coordination from Ningbo to your destination."],
+            ["01", "Define the win", "Market, target price, players and the moment of fun."],
+            ["02", "Make it tangible", "Materials, mechanics and packaging become a working sample."],
+            ["03", "Scale with confidence", "Approved details move into controlled production and export."],
           ].map(([number, title, copy]) => (
             <article key={number}>
-              <span>{number}</span><h3>{title}</h3><p>{copy}</p>
+              <span>{number}</span><div><h3>{title}</h3><p>{copy}</p></div>
             </article>
           ))}
+          </div>
+          <a className="button button-cream" href="#contact">Start a product brief <span aria-hidden="true">→</span></a>
         </div>
       </section>
 
@@ -188,13 +153,14 @@ export default async function Home() {
                 <time>{new Date(article.publishedAt).toLocaleDateString("en-GB", { day: "2-digit", month: "short", year: "numeric" })}</time>
                 <h3>{article.title}</h3>
                 <p>{article.summary}</p>
-                <a href={`mailto:info@chinasunnyland.com?subject=${encodeURIComponent(article.title)}`}>
+                <a href={`/news/${encodeURIComponent(article.slug)}`}>
                   Read the story <span aria-hidden="true">↗</span>
                 </a>
               </div>
             </article>
           ))}
         </div>
+        <a className="news-more-link" href="/news">View all news <span aria-hidden="true">↗</span></a>
       </section>
 
       <section className="contact-section" id="contact">
@@ -265,17 +231,7 @@ export default async function Home() {
         </form>
       </section>
 
-      <footer>
-        <div className="footer-brand">
-          <a className="brand brand-light" href="#top">
-            <img className="brand-logo" src="/logo.png" alt="Sunnyland" />
-          </a>
-          <p>Novel sports and games, made in Ningbo and played around the world.</p>
-        </div>
-        <div><strong>Explore</strong><a href="#products">Products</a><a href="/about">About us</a><a href="#news">News</a></div>
-        <div><strong>Contact</strong><a href="tel:+8613003751301">+86 130 0375 1301</a><a href="mailto:info@chinasunnyland.com">Email us</a><span>King Intl Mansion, Haishu District,<br />Ningbo, China</span></div>
-        <div className="footer-bottom"><span>© {new Date().getFullYear()} Sunnyland. All rights reserved.</span><a href="/admin">Content manager</a></div>
-      </footer>
+      <SiteFooter />
     </main>
   );
 }

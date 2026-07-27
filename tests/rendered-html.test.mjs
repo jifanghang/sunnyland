@@ -3,15 +3,43 @@ import { readFile } from "node:fs/promises";
 import test from "node:test";
 
 test("defines the complete Sunnyland landing page", async () => {
-  const page = await readFile(new URL("../app/page.tsx", import.meta.url), "utf8");
+  const [page, hero] = await Promise.all([
+    readFile(new URL("../app/page.tsx", import.meta.url), "utf8"),
+    readFile(new URL("../app/HeroCarousel.tsx", import.meta.url), "utf8"),
+  ]);
   assert.match(page, /Sunnyland/);
-  assert.match(page, /Bring curling/);
+  assert.match(hero, /Bring curling/);
+  assert.match(page, /HeroCarousel/);
   assert.match(page, /CurlingCarousel/);
   assert.match(page, /Products worth/);
+  assert.match(page, /View all products/);
+  assert.match(page, /Bring the spark/);
+  assert.match(page, /\/news\/\$\{encodeURIComponent\(article\.slug\)\}/);
   assert.match(page, /Ready<br \/>to play/);
   assert.match(page, /formsubmit\.co\/info@chinasunnyland\.com/);
   assert.match(page, /King Intl Mansion/);
   assert.doesNotMatch(page, /codex-preview|react-loading-skeleton|Starter Project/);
+});
+
+test("provides catalogue, news index and managed article pages", async () => {
+  const [products, news, article, content, admin, migration] = await Promise.all([
+    readFile(new URL("../app/products/page.tsx", import.meta.url), "utf8"),
+    readFile(new URL("../app/news/page.tsx", import.meta.url), "utf8"),
+    readFile(new URL("../app/news/[slug]/page.tsx", import.meta.url), "utf8"),
+    readFile(new URL("../db/content.ts", import.meta.url), "utf8"),
+    readFile(new URL("../app/admin/AdminManager.tsx", import.meta.url), "utf8"),
+    readFile(new URL("../drizzle/0001_add_content_body.sql", import.meta.url), "utf8"),
+  ]);
+
+  assert.match(products, /The Sunnyland range/);
+  assert.match(products, /curlingProducts/);
+  assert.match(products, /Request the full catalogue/);
+  assert.match(news, /Ideas in play/);
+  assert.match(article, /article\.body/);
+  assert.match(article, /More from Sunnyland/);
+  assert.match(content, /body: string/);
+  assert.match(admin, /Page content/);
+  assert.match(migration, /ADD COLUMN body/);
 });
 
 test("includes the content manager and durable database binding", async () => {
