@@ -15,9 +15,8 @@
   background: var(--ink);
   color: white;
 }
-.admin-brand { display: flex; align-items: center; gap: 10px; padding: 0 8px 38px; font-size: 20px; font-weight: 950; letter-spacing: -.05em; }
-.admin-brand .sun-mark { width: 26px; height: 26px; }
-.admin-brand .sun-mark i { width: 8px; height: 8px; top: 9px; left: 9px; }
+.admin-brand { display: flex; align-items: center; padding: 0 8px 38px; }
+.admin-brand-logo { display: block; width: 100%; max-width: 174px; height: auto; }
 .admin-sidebar nav { display: flex; flex-direction: column; gap: 7px; }
 .admin-sidebar nav button {
   width: 100%;
@@ -138,8 +137,9 @@
 @media (max-width: 950px) {
   .admin-shell { grid-template-columns: 78px minmax(0, 1fr); }
   .admin-sidebar { padding: 28px 12px 20px; }
-  .admin-brand > span:last-child, .admin-sidebar nav button:not(.active) b, .admin-sidebar nav button { font-size: 0; }
+  .admin-sidebar nav button:not(.active) b, .admin-sidebar nav button { font-size: 0; }
   .admin-brand { justify-content: center; padding-left: 0; padding-right: 0; }
+  .admin-brand-logo { width: 58px; }
   .admin-sidebar nav button { display: flex; justify-content: center; }
   .admin-sidebar nav button span { font-size: 18px; }
   .admin-sidebar nav button b { display: none; }
@@ -153,6 +153,7 @@
   .admin-shell { display: block; }
   .admin-sidebar { min-height: 64px; height: 64px; padding: 0 16px; position: static; flex-direction: row; align-items: center; }
   .admin-brand { padding: 0; }
+  .admin-brand-logo { width: 110px; }
   .admin-sidebar nav { margin-left: auto; flex-direction: row; }
   .view-site { margin: 0 0 0 8px; padding: 0; border: 0; }
   .admin-main { padding-left: 14px; padding-right: 14px; }

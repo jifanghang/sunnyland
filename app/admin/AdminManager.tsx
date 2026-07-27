@@ -81,8 +81,7 @@ export default function AdminManager({ initialItems, userName }: { initialItems:
     <main className="admin-shell">
       <aside className="admin-sidebar">
         <a className="admin-brand" href="/">
-          <span className="sun-mark" aria-hidden="true"><i /></span>
-          <span>SUNNYLAND</span>
+          <img className="admin-brand-logo" src="/logo.png" alt="Sunnyland" />
         </a>
         <nav>
           <button className={filter === "product" ? "active" : ""} onClick={() => setFilter("product")}>

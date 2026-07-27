@@ -53,28 +53,8 @@ button, input, textarea, select { font: inherit; }
 .brand {
   display: inline-flex;
   align-items: center;
-  gap: 11px;
-  font-size: clamp(20px, 2vw, 28px);
-  font-weight: 950;
-  letter-spacing: -.06em;
 }
-.sun-mark {
-  position: relative;
-  width: 32px;
-  height: 32px;
-  border-radius: 50%;
-  background: var(--sun);
-  box-shadow: -13px 0 0 -10px var(--sun), 13px 0 0 -10px var(--sun), 0 -13px 0 -10px var(--sun), 0 13px 0 -10px var(--sun);
-}
-.sun-mark i {
-  position: absolute;
-  width: 10px;
-  height: 10px;
-  border-radius: 50%;
-  background: var(--ink);
-  top: 11px;
-  left: 11px;
-}
+.brand-logo { display: block; width: auto; height: 57px; object-fit: contain; }
 .site-header nav { display: flex; align-items: center; gap: clamp(20px, 3vw, 42px); }
 .site-header nav a {
   font-size: 13px;
@@ -580,8 +560,7 @@ footer {
   grid-template-columns: 2fr 1fr 1fr;
   gap: 56px;
 }
-.brand-light .sun-mark { background: var(--sun); }
-.brand-light .sun-mark i { background: var(--ink); }
+.brand-light .brand-logo { height: 64px; }
 .footer-brand p { max-width: 350px; color: #aeb1a8; font-size: 13px; line-height: 1.6; }
 footer > div:not(.footer-brand):not(.footer-bottom) { display: flex; flex-direction: column; gap: 12px; font-size: 13px; color: #b4b7ae; }
 footer strong { margin-bottom: 8px; color: var(--sun); font-size: 10px; letter-spacing: .1em; text-transform: uppercase; }
@@ -605,6 +584,7 @@ footer strong { margin-bottom: 8px; color: var(--sun); font-size: 10px; letter-s
   .announcement { justify-content: center; }
   .announcement-detail { display: none; }
   .site-header { height: 72px; }
+  .brand-logo { height: 46px; }
   .site-header .button { display: none; }
   .hero { grid-template-columns: 1fr; }
   .hero-copy { padding: 74px 22px 50px; min-height: 650px; }

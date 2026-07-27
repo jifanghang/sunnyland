@@ -32,8 +32,7 @@ export default function AboutPage() {
 
       <header className="site-header">
         <a className="brand" href="/" aria-label="Sunnyland home">
-          <span className="sun-mark" aria-hidden="true"><i /></span>
-          <span>SUNNYLAND</span>
+          <img className="brand-logo" src="/logo.png" alt="Sunnyland" />
         </a>
         <nav aria-label="Main navigation">
           <a href="/#products">Products</a>
@@ -269,7 +268,7 @@ export default function AboutPage() {
       <footer>
         <div className="footer-brand">
           <a className="brand brand-light" href="/">
-            <span className="sun-mark" aria-hidden="true"><i /></span><span>SUNNYLAND</span>
+            <img className="brand-logo" src="/logo.png" alt="Sunnyland" />
           </a>
           <p>Novel sports and games, made in Ningbo and played around the world.</p>
         </div>

@@ -33,8 +33,7 @@ export default async function Home() {
 
       <header className="site-header">
         <a className="brand" href="#top" aria-label="Sunnyland home">
-          <span className="sun-mark" aria-hidden="true"><i /></span>
-          <span>SUNNYLAND</span>
+          <img className="brand-logo" src="/logo.png" alt="Sunnyland" />
         </a>
         <nav aria-label="Main navigation">
           <a href="#products">Products</a>
@@ -269,7 +268,7 @@ export default async function Home() {
       <footer>
         <div className="footer-brand">
           <a className="brand brand-light" href="#top">
-            <span className="sun-mark" aria-hidden="true"><i /></span><span>SUNNYLAND</span>
+            <img className="brand-logo" src="/logo.png" alt="Sunnyland" />
           </a>
           <p>Novel sports and games, made in Ningbo and played around the world.</p>
         </div>
