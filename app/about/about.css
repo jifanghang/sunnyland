@@ -214,9 +214,13 @@
 .global-heading h2 { font-size: clamp(52px, 6.2vw, 95px); }
 .global-heading p { max-width: 570px; color: #63675e; font-size: 15px; line-height: 1.7; }
 .partner-names { display: grid; grid-template-columns: 1fr 1fr; align-content: start; border-top: 1px solid var(--ink); }
-.partner-names span { min-height: 112px; padding: 23px; display: flex; align-items: flex-end; gap: 17px; border-bottom: 1px solid var(--ink); font-size: clamp(23px, 3vw, 40px); font-weight: 950; letter-spacing: -.05em; }
-.partner-names span:nth-child(even) { border-left: 1px solid var(--ink); }
-.partner-names i { color: var(--orange); font-size: 9px; font-style: normal; letter-spacing: 0; }
+.partner-card { min-height: 142px; padding: 30px 26px; position: relative; display: grid; place-items: center; border-bottom: 1px solid var(--ink); }
+.partner-card:nth-child(even) { border-left: 1px solid var(--ink); }
+.partner-card i { position: absolute; top: 18px; left: 19px; color: var(--orange); font-size: 9px; font-style: normal; letter-spacing: 0; }
+.partner-logo { display: block; width: auto; max-width: 78%; height: auto; max-height: 72px; object-fit: contain; }
+.partner-logo-target, .partner-logo-lidl { max-width: 70px; max-height: 70px; }
+.partner-logo-disney { max-height: 66px; }
+.partner-logo-nanu-nana { max-width: 86%; }
 
 .exhibition-section { display: grid; grid-template-columns: .7fr 1.3fr; background: var(--orange); color: white; }
 .exhibition-copy { padding: clamp(80px, 9vw, 140px) clamp(35px, 6vw, 92px); }
@@ -303,7 +307,8 @@
   .custom-section { grid-template-columns: 1fr; }
   .custom-image { min-height: 520px; }
   .custom-copy { padding: 75px 22px; }
-  .partner-names span { min-height: 95px; padding: 17px; font-size: 23px; }
+  .partner-card { min-height: 116px; padding: 24px 18px; }
+  .partner-logo { max-height: 62px; }
   .exhibition-section { grid-template-columns: 1fr; }
   .exhibition-copy { padding: 80px 22px; }
   .exhibition-gallery { min-height: 620px; }
@@ -315,7 +320,7 @@
 
 @media (max-width: 480px) {
   .partner-names { grid-template-columns: 1fr; }
-  .partner-names span:nth-child(even) { border-left: 0; }
+  .partner-card:nth-child(even) { border-left: 0; }
   .exhibition-gallery { min-height: 760px; grid-template-columns: 1fr; grid-template-rows: repeat(3, 1fr); }
   .exhibition-gallery img:first-child { grid-row: auto; }
   .innovation-grid article { grid-template-columns: 1fr; }

@@ -22,6 +22,15 @@ const standards = [
   ["ASTM F963", "US toy safety", "Materials and finished products are prepared for applicable US market standards."],
 ];
 
+const partners = [
+  { name: "Target", logo: "/partners/target.svg", slug: "target" },
+  { name: "Disney", logo: "/partners/disney.svg", slug: "disney" },
+  { name: "Lidl", logo: "/partners/lidl.svg", slug: "lidl" },
+  { name: "myToys", logo: "/partners/mytoys.svg", slug: "mytoys" },
+  { name: "Nanu-Nana", logo: "/partners/nanu-nana.svg", slug: "nanu-nana" },
+  { name: "Smyths Toys", logo: "/partners/smyths.svg", slug: "smyths" },
+];
+
 export default function AboutPage() {
   return (
     <main className="about-page">
@@ -214,8 +223,15 @@ export default function AboutPage() {
           </p>
         </div>
         <div className="partner-names" aria-label="Selected Sunnyland customers">
-          {["Target", "Disney", "Lidl", "MyToys", "Nanu-Nana", "Smyths"].map((partner, index) => (
-            <span key={partner}><i>{String(index + 1).padStart(2, "0")}</i>{partner}</span>
+          {partners.map((partner, index) => (
+            <div className="partner-card" key={partner.name}>
+              <i>{String(index + 1).padStart(2, "0")}</i>
+              <img
+                className={`partner-logo partner-logo-${partner.slug}`}
+                src={partner.logo}
+                alt={partner.name}
+              />
+            </div>
           ))}
         </div>
       </section>
