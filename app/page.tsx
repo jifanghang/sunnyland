@@ -76,61 +76,49 @@ export default async function Home() {
         </div>
       </section>
 
-      <section className="about-section" id="about">
-        <div className="about-image">
-          <img src="/about.jpg" alt="Sunnyland sports products displayed in a showroom" />
-          <div className="about-seal"><strong>2008</strong><span>NINGBO<br />CHINA</span></div>
+      <section className="company-build-section" id="about">
+        <div className="company-build-visual">
+          <img src="/about.jpg" alt="Sunnyland sports products displayed in the Ningbo showroom" />
+          <figure>
+            <img src="/about-production.jpg" alt="Sunnyland team preparing products in the factory" />
+            <figcaption>From sample to production</figcaption>
+          </figure>
+          <div className="company-build-seal"><strong>2008</strong><span>NINGBO<br />CHINA</span></div>
+          <div className="company-build-proof">
+            <span>Product engineering</span>
+            <span>OEM &amp; ODM</span>
+            <span>Quality control</span>
+            <span>Global logistics</span>
+          </div>
         </div>
-        <div className="about-copy">
-          <span className="kicker kicker-light">The people behind play</span>
-          <h2>Built here.<br /><em>Played everywhere.</em></h2>
-          <p className="about-lead">
+        <div className="company-build-copy">
+          <span className="kicker kicker-light">The people and process behind play</span>
+          <h2>Built here.<br /><em>Ready everywhere.</em></h2>
+          <p className="company-build-lead">
             Sunnyland is a Ningbo-based team making novel sports and games for
             retailers, importers and playful brands around the world.
           </p>
           <p>
-            Close to Ningbo and Shanghai ports, we pair responsive product
-            development with dependable manufacturing and export experience.
+            Bring us a finished brief, a rough sketch or simply the experience
+            you want customers to have. We combine responsive development,
+            dependable manufacturing and export experience to make it shelf-ready.
           </p>
-          <div className="capabilities">
-            <span>Product design</span><span>OEM / ODM</span>
-            <span>Quality control</span><span>Global logistics</span>
+          <div className="company-build-path">
+            {[
+              ["01", "Define the win", "Market, target price, players and the moment of fun."],
+              ["02", "Make it tangible", "Materials, mechanics and packaging become a working sample."],
+              ["03", "Scale with confidence", "Approved details move into controlled production and export."],
+            ].map(([number, title, copy]) => (
+              <article key={number}>
+                <span>{number}</span>
+                <div><h3>{title}</h3><p>{copy}</p></div>
+              </article>
+            ))}
           </div>
-          <a className="button button-cream" href="#contact">Build with us <span aria-hidden="true">→</span></a>
-          <a className="about-more-link" href="/about">Discover our full story <span aria-hidden="true">↗</span></a>
-        </div>
-      </section>
-
-      <section className="partnership-section">
-        <div className="partnership-visual">
-          <img src="/about-production.jpg" alt="Sunnyland team preparing products in the Ningbo factory" />
-          <div className="partnership-stamp"><strong>OEM</strong><span>+ ODM</span></div>
-          <div className="partnership-proof">
-            <span>Product engineering</span>
-            <span>Sampling</span>
-            <span>Quality control</span>
-            <span>Export coordination</span>
+          <div className="company-build-actions">
+            <a className="button button-cream" href="#contact">Start a product brief <span aria-hidden="true">→</span></a>
+            <a className="about-more-link" href="/about">Discover our full story <span aria-hidden="true">↗</span></a>
           </div>
-        </div>
-        <div className="partnership-copy">
-          <span className="kicker kicker-light">A clearer way to create</span>
-          <h2>Bring the spark.<br /><em>We’ll build the play.</em></h2>
-          <p className="partnership-lead">
-            Start with a finished brief, a rough sketch or simply the experience
-            you want customers to have. We turn it into a product ready for the shelf.
-          </p>
-          <div className="partnership-path">
-          {[
-            ["01", "Define the win", "Market, target price, players and the moment of fun."],
-            ["02", "Make it tangible", "Materials, mechanics and packaging become a working sample."],
-            ["03", "Scale with confidence", "Approved details move into controlled production and export."],
-          ].map(([number, title, copy]) => (
-            <article key={number}>
-              <span>{number}</span><div><h3>{title}</h3><p>{copy}</p></div>
-            </article>
-          ))}
-          </div>
-          <a className="button button-cream" href="#contact">Start a product brief <span aria-hidden="true">→</span></a>
         </div>
       </section>
 

@@ -13,7 +13,10 @@ test("defines the complete Sunnyland landing page", async () => {
   assert.match(page, /CurlingCarousel/);
   assert.match(page, /Products worth/);
   assert.match(page, /View all products/);
-  assert.match(page, /Bring the spark/);
+  assert.match(page, /Built here/);
+  assert.match(page, /Ready everywhere/);
+  assert.match(page, /company-build-section/);
+  assert.doesNotMatch(page, /about-section|partnership-section/);
   assert.match(page, /\/news\/\$\{encodeURIComponent\(article\.slug\)\}/);
   assert.match(page, /Ready<br \/>to play/);
   assert.match(page, /formsubmit\.co\/info@chinasunnyland\.com/);
