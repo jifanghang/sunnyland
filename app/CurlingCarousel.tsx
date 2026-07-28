@@ -35,7 +35,7 @@ export default function CurlingCarousel() {
       </div>
       <div className="curling-track" ref={track} tabIndex={0} aria-label="Sunnyland curling products">
         {curlingProducts.map((product, index) => (
-          <article className="curling-card" key={product.code}>
+          <a className="curling-card" href="/products#curling" key={product.code}>
             <div className="curling-image">
               <img src={product.image} alt={product.title} />
               <span>{product.badge}</span>
@@ -46,10 +46,15 @@ export default function CurlingCarousel() {
               <h3>{product.title}</h3>
               <p>{product.copy}</p>
             </div>
-          </article>
+          </a>
         ))}
       </div>
-      <div className="carousel-hint"><span /> Drag or use the arrows to explore the range</div>
+      <div className="curling-footer">
+        <div className="carousel-hint"><span /> Drag or use the arrows to explore the range</div>
+        <a className="curling-more-link" href="/products#curling">
+          View all curling products <span aria-hidden="true">↗</span>
+        </a>
+      </div>
     </section>
   );
 }

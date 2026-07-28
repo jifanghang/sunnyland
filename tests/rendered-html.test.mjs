@@ -9,6 +9,7 @@ test("defines the complete Sunnyland landing page", async () => {
   ]);
   assert.match(page, /Sunnyland/);
   assert.match(hero, /Bring curling/);
+  assert.match(hero, /\/products#curling/);
   assert.match(page, /HeroCarousel/);
   assert.match(page, /CurlingCarousel/);
   assert.match(page, /Products worth/);
@@ -41,13 +42,16 @@ test("provides catalogue, news index and managed article pages", async () => {
   assert.match(article, /article\.body/);
   assert.match(article, /More from Sunnyland/);
   assert.match(content, /body: string/);
+  assert.match(content, /sunnyland-hk-toy-fair-2027/);
+  assert.match(content, /WHERE NOT EXISTS/);
   assert.match(admin, /Page content/);
   assert.match(migration, /ADD COLUMN body/);
 });
 
-test("lets the active jumbotron slide define the carousel height", async () => {
+test("uses one shared height for every jumbotron slide", async () => {
   const css = await readFile(new URL("../app/globals.css", import.meta.url), "utf8");
-  assert.match(css, /\.hero-slide\.is-active\s*\{[^}]*position:\s*relative/s);
+  assert.match(css, /\.hero-carousel\s*\{[^}]*display:\s*grid/s);
+  assert.match(css, /\.hero-slide\s*\{[^}]*grid-area:\s*1\s*\/\s*1/s);
   assert.match(css, /grid-template-rows:\s*minmax\(650px,\s*auto\)\s+560px/);
 });
 

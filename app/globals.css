@@ -221,14 +221,16 @@ button, input, textarea, select { font: inherit; }
 .hero-carousel {
   min-height: 700px;
   position: relative;
+  display: grid;
   overflow: hidden;
   border-bottom: 1px solid var(--ink);
   background: var(--paper);
 }
 .hero-slide {
   min-height: 700px;
-  position: absolute;
-  inset: 0;
+  position: relative;
+  grid-area: 1 / 1;
+  width: 100%;
   display: grid;
   grid-template-columns: minmax(0, 1fr) minmax(480px, .95fr);
   opacity: 0;
@@ -238,8 +240,6 @@ button, input, textarea, select { font: inherit; }
   transition: opacity .55s ease, transform .55s ease, visibility .55s;
 }
 .hero-slide.is-active {
-  position: relative;
-  inset: auto;
   opacity: 1;
   visibility: visible;
   pointer-events: auto;
@@ -346,6 +346,7 @@ button, input, textarea, select { font: inherit; }
 }
 .curling-track:focus-visible { outline: 3px solid var(--orange); outline-offset: -3px; }
 .curling-card { min-width: 0; scroll-snap-align: start; border: 1px solid var(--ink); background: var(--cream); }
+.curling-card:focus-visible { outline: 3px solid var(--orange); outline-offset: -3px; }
 .curling-image { position: relative; aspect-ratio: 1/1; overflow: hidden; border-bottom: 1px solid var(--ink); background: white; }
 .curling-image img { height: 100%; object-fit: cover; transition: transform .45s ease; }
 .curling-card:hover .curling-image img { transform: scale(1.035); }
@@ -374,7 +375,6 @@ button, input, textarea, select { font: inherit; }
 .curling-card h3 { margin: 14px 0 10px; font-size: clamp(24px, 2.5vw, 34px); line-height: 1; letter-spacing: -.045em; }
 .curling-card p { margin: 0; color: #666a61; font-size: 13px; line-height: 1.55; }
 .carousel-hint {
-  margin: 23px clamp(20px, 6vw, 96px) 0;
   display: flex;
   align-items: center;
   gap: 10px;
@@ -384,6 +384,21 @@ button, input, textarea, select { font: inherit; }
   text-transform: uppercase;
 }
 .carousel-hint span { width: 46px; height: 2px; background: var(--ink); }
+.curling-footer {
+  margin: 23px clamp(20px, 6vw, 96px) 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+}
+.curling-more-link {
+  padding-bottom: 5px;
+  border-bottom: 2px solid var(--ink);
+  font-size: 10px;
+  font-weight: 900;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+}
 
 .section { padding: clamp(90px, 11vw, 160px) clamp(20px, 6vw, 96px); }
 .products-section { background: var(--cream); }

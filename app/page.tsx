@@ -80,7 +80,7 @@ export default async function Home() {
         <div className="company-build-visual">
           <img src="/about.jpg" alt="Sunnyland sports products displayed in the Ningbo showroom" />
           <figure>
-            <img src="/about-production.jpg" alt="Sunnyland team preparing products in the factory" />
+            <img src="/about-assembly.jpg" alt="Sunnyland production team assembling sports and game products" />
             <figcaption>From sample to production</figcaption>
           </figure>
           <div className="company-build-seal"><strong>2008</strong><span>NINGBO<br />CHINA</span></div>
