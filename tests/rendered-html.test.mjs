@@ -56,10 +56,17 @@ test("provides catalogue, news index and managed article pages", async () => {
 test("uses one shared height for every jumbotron slide", async () => {
   const css = await readFile(new URL("../app/globals.css", import.meta.url), "utf8");
   assert.match(css, /\.hero-carousel\s*\{[^}]*display:\s*grid/s);
-  assert.match(css, /\.hero-carousel\s*\{[^}]*min-height:\s*820px/s);
+  assert.match(css, /\.hero-carousel\s*\{[^}]*min-height:\s*clamp\(660px,\s*calc\(100svh\s*-\s*104px\),\s*740px\)/s);
   assert.match(css, /\.hero-slide\s*\{[^}]*grid-area:\s*1\s*\/\s*1/s);
-  assert.match(css, /grid-template-rows:\s*minmax\(680px,\s*auto\)\s+600px/);
+  assert.match(css, /grid-template-rows:\s*minmax\(650px,\s*auto\)\s+560px/);
   assert.match(css, /\.hero-news-title\s*\{[^}]*overflow-wrap:\s*break-word/s);
+});
+
+test("uses the generated Sunnyland favicon", async () => {
+  const layout = await readFile(new URL("../app/layout.tsx", import.meta.url), "utf8");
+  const favicon = await readFile(new URL("../public/favicon.png", import.meta.url));
+  assert.match(layout, /icon:\s*"\/favicon\.png"/);
+  assert.ok(favicon.length > 10_000);
 });
 
 test("gives the FAQ a contrasting animated treatment", async () => {
