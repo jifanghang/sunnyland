@@ -219,11 +219,13 @@ button, input, textarea, select { font: inherit; }
 }
 
 .hero-carousel {
+  width: min(calc(100% - clamp(32px, 5vw, 88px)), 1500px);
   min-height: clamp(660px, calc(100svh - 104px), 740px);
+  margin: clamp(18px, 2vw, 30px) auto;
   position: relative;
   display: grid;
   overflow: hidden;
-  border-bottom: 1px solid var(--ink);
+  border: 1px solid var(--ink);
   background: var(--paper);
 }
 .hero-slide {
@@ -635,7 +637,7 @@ footer strong { margin-bottom: 8px; color: var(--sun); font-size: 10px; letter-s
   .hero-proof { gap: 8px; }
   .hero-proof strong { font-size: 23px; }
   .hero-proof span { font-size: 8px; }
-  .hero-carousel { min-height: 0; }
+  .hero-carousel { width: calc(100% - 16px); min-height: 0; margin: 8px auto; }
   .hero-slide { min-height: 0; grid-template-columns: 1fr; grid-template-rows: minmax(650px, auto) 560px; }
   .hero-slide .hero-copy { min-height: 650px; }
   .hero-slide .hero-visual, .range-visual, .hero-news-image { min-height: 560px; border-left: 0; border-right: 0; border-top: 1px solid var(--ink); }

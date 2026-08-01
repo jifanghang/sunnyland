@@ -10,8 +10,9 @@ export const metadata: Metadata = {
   description:
     "Signature floor curling sets and original sports and games from an experienced Ningbo manufacturer.",
   icons: {
-    icon: "/favicon.png",
-    shortcut: "/favicon.png",
+    icon: "/sunnyland-favicon-v2.png",
+    shortcut: "/sunnyland-favicon-v2.png",
+    apple: "/sunnyland-favicon-v2.png",
   },
   openGraph: {
     type: "website",
