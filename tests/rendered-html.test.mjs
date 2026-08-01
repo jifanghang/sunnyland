@@ -45,6 +45,7 @@ test("provides catalogue, news index and managed article pages", async () => {
   assert.match(content, /body: string/);
   assert.match(content, /sunnyland-hk-toy-fair-2027/);
   assert.match(content, /5E-G18/);
+  assert.match(content, /imageUrl: "\/exhibition\.jpg"/);
   assert.match(content, /20cm-iceless-curling-stone/);
   assert.match(content, /new-iceless-curling-stone\.jpg/);
   assert.match(content, /WHERE NOT EXISTS/);
@@ -55,8 +56,17 @@ test("provides catalogue, news index and managed article pages", async () => {
 test("uses one shared height for every jumbotron slide", async () => {
   const css = await readFile(new URL("../app/globals.css", import.meta.url), "utf8");
   assert.match(css, /\.hero-carousel\s*\{[^}]*display:\s*grid/s);
+  assert.match(css, /\.hero-carousel\s*\{[^}]*min-height:\s*820px/s);
   assert.match(css, /\.hero-slide\s*\{[^}]*grid-area:\s*1\s*\/\s*1/s);
-  assert.match(css, /grid-template-rows:\s*minmax\(650px,\s*auto\)\s+560px/);
+  assert.match(css, /grid-template-rows:\s*minmax\(680px,\s*auto\)\s+600px/);
+  assert.match(css, /\.hero-news-title\s*\{[^}]*overflow-wrap:\s*break-word/s);
+});
+
+test("gives the FAQ a contrasting animated treatment", async () => {
+  const css = await readFile(new URL("../app/globals.css", import.meta.url), "utf8");
+  assert.match(css, /\.faq-section\s*\{[^}]*background:\s*var\(--ink\)/s);
+  assert.match(css, /details::details-content\s*\{[^}]*transition:/s);
+  assert.match(css, /details\[open\]::details-content\s*\{[^}]*block-size:\s*auto/s);
 });
 
 test("includes the content manager and durable database binding", async () => {

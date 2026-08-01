@@ -84,7 +84,7 @@ export default async function Home() {
             The practical details buyers ask before placing an order—from
             samples and lead times to documentation and delivery.
           </p>
-          <a className="button" href="#contact">Ask us anything <span aria-hidden="true">↗</span></a>
+          <a className="button button-cream" href="#contact">Ask us anything <span aria-hidden="true">↗</span></a>
         </div>
         <div className="faq-list">
           {[
