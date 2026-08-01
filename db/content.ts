@@ -28,7 +28,8 @@ export const defaultContent: ContentItem[] = [
   { id: 7, type: "news", title: "Two ways to play: shuffleboard meets curling", slug: "shuffleboard-curling", summary: "Our two-in-one set brings the tactics of floor curling and the pace of shuffleboard to one portable rink.", body: "Why choose one target game when the same playing surface can deliver two? Sunnyland’s two-in-one set combines floor curling and shuffleboard with scoring zones at both ends of a portable rink.\n\nThe format is simple to introduce, quick to reset and flexible enough for families, schools, clubs and activity spaces. Players can focus on curling-style placement in one round, then switch to the faster scoring rhythm of shuffleboard in the next.\n\nFor buyers, the combined format gives one retail box a broader play story and encourages repeat use across different age groups.", category: "New product", imageUrl: "/curling-2in1.jpg", publishedAt: "2026-06-21", featured: true, sortOrder: 1 },
   { id: 8, type: "news", title: "Why floor curling keeps everyone moving", slug: "floor-curling-guide", summary: "A simple guide to setup, scoring and the small details that make the game so inclusive.", body: "Floor curling keeps the strategy of the ice while removing the need for skates, cold conditions or a specialist rink. A smooth indoor floor is enough to begin.\n\nPlayers take turns sending stones towards a target, balancing accuracy, weight and teamwork. Because the motion is controlled and the rules are easy to explain, the game works well across ages and ability levels.\n\nStart with short rounds, clear scoring zones and teams of two to four. Once everyone understands the pace, introduce blocking shots and tactical placement.", category: "How to play", imageUrl: "/curling-floor.jpg", publishedAt: "2026-05-30", featured: false, sortOrder: 2 },
   { id: 9, type: "news", title: "From Ningbo to game night", slug: "made-in-ningbo", summary: "A look at how our team develops, checks and prepares new games for markets around the world.", body: "Every product begins with a play experience: what should people do, feel and want to repeat? From there, our Ningbo team turns the idea into materials, mechanisms, samples and packaging.\n\nApproved designs move through production and quality checks before export preparation. Close access to Ningbo and Shanghai ports helps us coordinate programmes for retailers and importers around the world.\n\nThat combination of playful thinking and practical manufacturing is what carries an idea from the first sketch to game night.", category: "Inside Sunnyland", imageUrl: "/about-production.jpg", publishedAt: "2026-04-16", featured: false, sortOrder: 3 },
-  { id: 10, type: "news", title: "Sunnyland is heading to the Hong Kong Toys & Games Fair", slug: "sunnyland-hk-toy-fair-2027", summary: "Meet the Sunnyland team in Hong Kong as we bring new sports and games to Asia’s flagship toy fair.", body: "Sunnyland is heading to the HKTDC Hong Kong Toys & Games Fair from 11–14 January 2027 at the Hong Kong Convention and Exhibition Centre in Wan Chai.\n\nWe’re looking forward to meeting retailers, importers and product partners, sharing our latest curling, lawn, board and party-game ideas, and discussing OEM and ODM opportunities.\n\nIf you’re attending, get in touch with our team before the fair to arrange a conversation. Booth details will be added as soon as they are confirmed.", category: "Events", imageUrl: "/about-exhibition-1.jpg", publishedAt: "2026-07-28", featured: true, sortOrder: 0 },
+  { id: 10, type: "news", title: "Exhibition announcement: Hong Kong Toys & Games Fair", slug: "sunnyland-hk-toy-fair-2027", summary: "Visit Sunnyland at booth 5E-G18 in Hong Kong from 11–14 January 2027.", body: "You are cordially invited to visit Sunnyland at the Hong Kong Toys & Games Fair.\n\nDate: 11–14 January 2027\nVenue: Hong Kong Convention and Exhibition Centre, Wan Chai\nBooth number: 5E-G18\n\nWe look forward to welcoming customers, partners and new friends to our booth and sharing the latest additions to the Sunnyland range.", category: "Events", imageUrl: "/about-exhibition-1.jpg", publishedAt: "2026-08-01", featured: true, sortOrder: 0 },
+  { id: 11, type: "news", title: "New arrival: 20 cm iceless curling stone", slug: "20cm-iceless-curling-stone", summary: "Our largest curling stone yet brings size, weight and glide closer to the feel of the real game.", body: "Meet this month’s featured launch: Sunnyland’s new 20 cm diameter iceless curling stone. It is the largest model in our curling stone line-up.\n\nIts generous size, considered weight and smooth glide create a playing feel that is much closer to a real curling stone—without requiring ice.\n\nThe complete set includes eight curling stones and a 4.8 ft × 4.8 ft scoring mat, ready for competitive play in homes, schools, clubs and activity spaces.", category: "New product", imageUrl: "/new-iceless-curling-stone.jpg", publishedAt: "2026-08-01", featured: false, sortOrder: 1 },
 ];
 
 function db() {
@@ -75,6 +76,20 @@ async function ensureDatabase() {
   const fairNews = defaultContent.find((item) => item.slug === "sunnyland-hk-toy-fair-2027");
   if (fairNews) {
     await database.prepare(
+      `UPDATE content_items SET title=?,summary=?,body=?,category=?,image_url=?,published_at=?,featured=?,sort_order=?
+       WHERE type='news' AND slug=? AND body LIKE '%Booth details will be added%'`
+    ).bind(
+      fairNews.title,
+      fairNews.summary,
+      fairNews.body,
+      fairNews.category,
+      fairNews.imageUrl,
+      fairNews.publishedAt,
+      fairNews.featured ? 1 : 0,
+      fairNews.sortOrder,
+      fairNews.slug,
+    ).run();
+    await database.prepare(
       `INSERT INTO content_items (type,title,slug,summary,body,category,image_url,published_at,featured,sort_order)
        SELECT ?,?,?,?,?,?,?,?,?,?
        WHERE NOT EXISTS (SELECT 1 FROM content_items WHERE type='news' AND slug=?)`
@@ -90,6 +105,27 @@ async function ensureDatabase() {
       fairNews.featured ? 1 : 0,
       fairNews.sortOrder,
       fairNews.slug,
+    ).run();
+  }
+
+  const newCurlingNews = defaultContent.find((item) => item.slug === "20cm-iceless-curling-stone");
+  if (newCurlingNews) {
+    await database.prepare(
+      `INSERT INTO content_items (type,title,slug,summary,body,category,image_url,published_at,featured,sort_order)
+       SELECT ?,?,?,?,?,?,?,?,?,?
+       WHERE NOT EXISTS (SELECT 1 FROM content_items WHERE type='news' AND slug=?)`
+    ).bind(
+      newCurlingNews.type,
+      newCurlingNews.title,
+      newCurlingNews.slug,
+      newCurlingNews.summary,
+      newCurlingNews.body,
+      newCurlingNews.category,
+      newCurlingNews.imageUrl,
+      newCurlingNews.publishedAt,
+      newCurlingNews.featured ? 1 : 0,
+      newCurlingNews.sortOrder,
+      newCurlingNews.slug,
     ).run();
   }
 }

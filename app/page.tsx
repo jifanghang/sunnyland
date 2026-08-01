@@ -76,49 +76,32 @@ export default async function Home() {
         </div>
       </section>
 
-      <section className="company-build-section" id="about">
-        <div className="company-build-visual">
-          <img src="/about.jpg" alt="Sunnyland sports products displayed in the Ningbo showroom" />
-          <figure>
-            <img src="/about-assembly.jpg" alt="Sunnyland production team assembling sports and game products" />
-            <figcaption>From sample to production</figcaption>
-          </figure>
-          <div className="company-build-seal"><strong>2008</strong><span>NINGBO<br />CHINA</span></div>
-          <div className="company-build-proof">
-            <span>Product engineering</span>
-            <span>OEM &amp; ODM</span>
-            <span>Quality control</span>
-            <span>Global logistics</span>
-          </div>
-        </div>
-        <div className="company-build-copy">
-          <span className="kicker kicker-light">The people and process behind play</span>
-          <h2>Built here.<br /><em>Ready everywhere.</em></h2>
-          <p className="company-build-lead">
-            Sunnyland is a Ningbo-based team making novel sports and games for
-            retailers, importers and playful brands around the world.
-          </p>
+      <section className="faq-section" id="about" aria-labelledby="faq-title">
+        <div className="faq-intro">
+          <span className="kicker">Before we make it</span>
+          <h2 id="faq-title">Questions,<br /><em>answered.</em></h2>
           <p>
-            Bring us a finished brief, a rough sketch or simply the experience
-            you want customers to have. We combine responsive development,
-            dependable manufacturing and export experience to make it shelf-ready.
+            The practical details buyers ask before placing an order—from
+            samples and lead times to documentation and delivery.
           </p>
-          <div className="company-build-path">
-            {[
-              ["01", "Define the win", "Market, target price, players and the moment of fun."],
-              ["02", "Make it tangible", "Materials, mechanics and packaging become a working sample."],
-              ["03", "Scale with confidence", "Approved details move into controlled production and export."],
-            ].map(([number, title, copy]) => (
-              <article key={number}>
-                <span>{number}</span>
-                <div><h3>{title}</h3><p>{copy}</p></div>
-              </article>
-            ))}
-          </div>
-          <div className="company-build-actions">
-            <a className="button button-cream" href="#contact">Start a product brief <span aria-hidden="true">→</span></a>
-            <a className="about-more-link" href="/about">Discover our full story <span aria-hidden="true">↗</span></a>
-          </div>
+          <a className="button" href="#contact">Ask us anything <span aria-hidden="true">↗</span></a>
+        </div>
+        <div className="faq-list">
+          {[
+            ["01", "What are your prices?", "Pricing changes with materials, specifications and market conditions. Send us your requirements and we’ll prepare an up-to-date quotation."],
+            ["02", "Do you have a minimum order quantity?", "Yes. International orders have minimum quantities that vary by product and customisation. Contact us for the MOQ that applies to your range."],
+            ["03", "Can you supply the relevant documentation?", "Yes. We can provide Certificates of Analysis or Conformance, origin documents, insurance information and other export documentation where required."],
+            ["04", "What is the average lead time?", "Samples usually take about 7 days. Mass production normally takes 20–30 days after deposit and final product approval; we’ll always discuss your deadline before confirming."],
+            ["05", "Which payment methods do you accept?", "Payment can be made by bank transfer, Western Union or PayPal. Standard terms are a 30% deposit, with the 70% balance paid against the copy of the bill of lading."],
+            ["06", "What is the product warranty?", "We stand behind our materials and workmanship. If an issue arises, our team will work with you to reach a practical and satisfactory resolution."],
+            ["07", "Do you guarantee safe delivery?", "Yes. We use export-quality packaging, with specialised packing available when required. Non-standard or specialist packaging may carry an additional charge."],
+            ["08", "How are shipping fees calculated?", "Freight depends on quantity, weight and delivery method. Sea freight is usually best for larger orders, while express is faster. We’ll quote the exact cost once we know your shipment details."],
+          ].map(([number, question, answer], index) => (
+            <details key={number} open={index === 0}>
+              <summary><span>{number}</span><strong>{question}</strong><i aria-hidden="true">+</i></summary>
+              <p>{answer}</p>
+            </details>
+          ))}
         </div>
       </section>
 

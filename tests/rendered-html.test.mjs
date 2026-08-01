@@ -14,10 +14,11 @@ test("defines the complete Sunnyland landing page", async () => {
   assert.match(page, /CurlingCarousel/);
   assert.match(page, /Products worth/);
   assert.match(page, /View all products/);
-  assert.match(page, /Built here/);
-  assert.match(page, /Ready everywhere/);
-  assert.match(page, /company-build-section/);
-  assert.doesNotMatch(page, /about-section|partnership-section/);
+  assert.match(page, /Questions,/);
+  assert.match(page, /minimum order quantity/);
+  assert.match(page, /average lead time/);
+  assert.match(page, /faq-section/);
+  assert.doesNotMatch(page, /Built here|Ready everywhere|company-build-section/);
   assert.match(page, /\/news\/\$\{encodeURIComponent\(article\.slug\)\}/);
   assert.match(page, /Ready<br \/>to play/);
   assert.match(page, /formsubmit\.co\/info@chinasunnyland\.com/);
@@ -43,6 +44,9 @@ test("provides catalogue, news index and managed article pages", async () => {
   assert.match(article, /More from Sunnyland/);
   assert.match(content, /body: string/);
   assert.match(content, /sunnyland-hk-toy-fair-2027/);
+  assert.match(content, /5E-G18/);
+  assert.match(content, /20cm-iceless-curling-stone/);
+  assert.match(content, /new-iceless-curling-stone\.jpg/);
   assert.match(content, /WHERE NOT EXISTS/);
   assert.match(admin, /Page content/);
   assert.match(migration, /ADD COLUMN body/);
