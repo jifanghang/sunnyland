@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://sunnyland-sports.openai.app"),
+  metadataBase: new URL("https://sunnyland-sports.ji-fanghang.chatgpt.site"),
   title: {
     default: "Sunnyland Sports — Play, made better",
     template: "%s · Sunnyland Sports",
@@ -10,9 +10,9 @@ export const metadata: Metadata = {
   description:
     "Signature floor curling sets and original sports and games from an experienced Ningbo manufacturer.",
   icons: {
-    icon: "/sunnyland-favicon-v2.png",
-    shortcut: "/sunnyland-favicon-v2.png",
-    apple: "/sunnyland-favicon-v2.png",
+    icon: "/sunnyland-favicon-v3.png",
+    shortcut: "/sunnyland-favicon-v3.png",
+    apple: "/sunnyland-favicon-v3.png",
   },
   openGraph: {
     type: "website",

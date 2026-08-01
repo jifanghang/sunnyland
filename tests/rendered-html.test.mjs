@@ -57,7 +57,7 @@ test("uses one shared height for every jumbotron slide", async () => {
   const css = await readFile(new URL("../app/globals.css", import.meta.url), "utf8");
   assert.match(css, /\.hero-carousel\s*\{[^}]*display:\s*grid/s);
   assert.match(css, /\.hero-carousel\s*\{[^}]*width:\s*min\(calc\(100%\s*-\s*clamp\(32px,\s*5vw,\s*88px\)\),\s*1500px\)/s);
-  assert.match(css, /\.hero-carousel\s*\{[^}]*min-height:\s*clamp\(660px,\s*calc\(100svh\s*-\s*104px\),\s*740px\)/s);
+  assert.match(css, /\.hero-carousel\s*\{[^}]*min-height:\s*clamp\(620px,\s*calc\(100svh\s*-\s*160px\),\s*680px\)/s);
   assert.match(css, /\.hero-slide\s*\{[^}]*grid-area:\s*1\s*\/\s*1/s);
   assert.match(css, /grid-template-rows:\s*minmax\(650px,\s*auto\)\s+560px/);
   assert.match(css, /\.hero-news-title\s*\{[^}]*overflow-wrap:\s*break-word/s);
@@ -65,9 +65,10 @@ test("uses one shared height for every jumbotron slide", async () => {
 
 test("uses the generated Sunnyland favicon", async () => {
   const layout = await readFile(new URL("../app/layout.tsx", import.meta.url), "utf8");
-  const favicon = await readFile(new URL("../public/sunnyland-favicon-v2.png", import.meta.url));
-  assert.match(layout, /icon:\s*"\/sunnyland-favicon-v2\.png"/);
-  assert.match(layout, /apple:\s*"\/sunnyland-favicon-v2\.png"/);
+  const favicon = await readFile(new URL("../public/sunnyland-favicon-v3.png", import.meta.url));
+  assert.match(layout, /metadataBase: new URL\("https:\/\/sunnyland-sports\.ji-fanghang\.chatgpt\.site"\)/);
+  assert.match(layout, /icon:\s*"\/sunnyland-favicon-v3\.png"/);
+  assert.match(layout, /apple:\s*"\/sunnyland-favicon-v3\.png"/);
   assert.ok(favicon.length > 10_000);
 });
 
