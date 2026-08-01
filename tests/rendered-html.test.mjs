@@ -57,11 +57,13 @@ test("uses one shared height for every jumbotron slide", async () => {
   const css = await readFile(new URL("../app/globals.css", import.meta.url), "utf8");
   assert.match(css, /\.hero-carousel\s*\{[^}]*display:\s*grid/s);
   assert.match(css, /\.hero-carousel\s*\{[^}]*width:\s*100%/s);
-  assert.match(css, /\.hero-carousel\s*\{[^}]*min-height:\s*clamp\(560px,\s*calc\(100svh\s*-\s*180px\),\s*660px\)/s);
+  assert.match(css, /\.hero-carousel\s*\{[^}]*min-height:\s*clamp\(500px,\s*calc\(100svh\s*-\s*240px\),\s*560px\)/s);
   assert.match(css, /\.hero-carousel\s*\{[^}]*margin:\s*0/s);
   assert.match(css, /\.hero-slide\s*\{[^}]*grid-area:\s*1\s*\/\s*1/s);
-  assert.match(css, /grid-template-rows:\s*minmax\(560px,\s*auto\)\s+460px/);
+  assert.match(css, /grid-template-rows:\s*minmax\(520px,\s*auto\)\s+420px/);
   assert.match(css, /\.hero-news-title\s*\{[^}]*overflow-wrap:\s*break-word/s);
+  assert.match(css, /\.hero-slide-range \.hero-copy\s*\{[^}]*background:\s*var\(--ink\)/s);
+  assert.match(css, /\.range-visual\s*\{[^}]*background:\s*var\(--blue\)/s);
 });
 
 test("uses the generated Sunnyland favicon", async () => {
