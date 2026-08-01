@@ -57,10 +57,10 @@ test("uses one shared height for every jumbotron slide", async () => {
   const css = await readFile(new URL("../app/globals.css", import.meta.url), "utf8");
   assert.match(css, /\.hero-carousel\s*\{[^}]*display:\s*grid/s);
   assert.match(css, /\.hero-carousel\s*\{[^}]*width:\s*100%/s);
-  assert.match(css, /\.hero-carousel\s*\{[^}]*min-height:\s*max\(640px,\s*calc\(100svh\s*-\s*120px\)\)/s);
+  assert.match(css, /\.hero-carousel\s*\{[^}]*min-height:\s*clamp\(560px,\s*calc\(100svh\s*-\s*180px\),\s*660px\)/s);
   assert.match(css, /\.hero-carousel\s*\{[^}]*margin:\s*0/s);
   assert.match(css, /\.hero-slide\s*\{[^}]*grid-area:\s*1\s*\/\s*1/s);
-  assert.match(css, /grid-template-rows:\s*minmax\(650px,\s*auto\)\s+560px/);
+  assert.match(css, /grid-template-rows:\s*minmax\(560px,\s*auto\)\s+460px/);
   assert.match(css, /\.hero-news-title\s*\{[^}]*overflow-wrap:\s*break-word/s);
 });
 
