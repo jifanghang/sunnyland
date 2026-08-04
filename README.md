@@ -1,98 +1,63 @@
-# vinext-starter
+# Sunnyland
 
-A clean full-stack starter running on
-[vinext](https://github.com/cloudflare/vinext), with optional Cloudflare D1 and
-Drizzle support.
+Sunnyland's public company website, product catalogue, news pages and protected
+content manager. The application runs on Cloudflare Workers and stores editable
+content in Cloudflare D1.
 
-## Prerequisites
+## Local development
 
-- Node.js `>=22.13.0`
-
-## Quick Start
+Node.js 22.13 or newer is required.
 
 ```bash
 npm install
 npm run dev
-npm run build
+npm test
 ```
 
-This starter does not use `wrangler.jsonc`.
+Local development uses a local D1 database and allows access to `/admin`
+without Cloudflare Access.
 
-## Included Shape
+## Cloudflare resources
 
-- edit site code under `app/`
-- `.openai/hosting.json` declares optional Sites D1 and R2 bindings
-- `vite.config.ts` simulates declared bindings for local development
-- `db/schema.ts` starts intentionally empty
-- `examples/d1/` contains an optional D1 example surface
-- `drizzle.config.ts` supports local migration generation when needed
+Production requires:
 
-## Workspace Auth Headers
+- a Worker named `sunnyland`;
+- a D1 database named `sunnyland-content`, bound as `DB`;
+- a Cloudflare Access application protecting `/admin*`, `/api/content` and
+  `/api/content/*`;
+- the following build variables:
+  - `CLOUDFLARE_D1_DATABASE_ID`
+  - `CF_ACCESS_TEAM_DOMAIN`
+  - `CF_ACCESS_AUD`
 
-OpenAI workspace sites can read the current user's email from
-`oai-authenticated-user-email`.
+`CF_ACCESS_TEAM_DOMAIN` is the Access team domain, such as
+`sunnyland.cloudflareaccess.com`. `CF_ACCESS_AUD` is the Application Audience
+tag shown in the Access application's overview.
 
-SIWC-authenticated workspace sites may also receive
-`oai-authenticated-user-full-name` when the user's SIWC profile has a non-empty
-`name` claim. The full-name value is percent-encoded UTF-8 and is accompanied by
-`oai-authenticated-user-full-name-encoding: percent-encoded-utf-8`.
+The application verifies the Access JWT and its email claim before permitting
+content changes. A missing or invalid token is denied even if a request tries to
+forge Cloudflare's email header.
 
-Treat the full name as optional and fall back to email when it is absent:
+## Cloudflare Builds
 
-```tsx
-import { headers } from "next/headers";
+Connect the GitHub repository and use:
 
-export default async function Home() {
-  const requestHeaders = await headers();
-  const email = requestHeaders.get("oai-authenticated-user-email");
-  const encodedFullName = requestHeaders.get("oai-authenticated-user-full-name");
-  const fullName =
-    encodedFullName &&
-    requestHeaders.get("oai-authenticated-user-full-name-encoding") ===
-      "percent-encoded-utf-8"
-      ? decodeURIComponent(encodedFullName)
-      : null;
-
-  const displayName = fullName ?? email;
-  // ...
-}
+```text
+Build command:  npm run build:cloudflare
+Deploy command: npx wrangler deploy
 ```
 
-## Optional Dispatch-Owned ChatGPT Sign-In
+The production branch is `main`. The Cloudflare build check deliberately fails
+if the D1 or Access settings are absent, preventing an incomplete deployment.
 
-Import the ready-to-use helpers from `app/chatgpt-auth.ts` when the site needs
-optional or required ChatGPT sign-in:
+The application initializes the D1 schema and seeds the current catalogue on
+the first request to an empty database. D1 also retains all changes made through
+the content manager.
 
-- Use `getChatGPTUser()` for optional signed-in UI.
-- Use `requireChatGPTUser(returnTo)` for server-rendered pages that should send
-  anonymous visitors through Sign in with ChatGPT.
-- Use `chatGPTSignInPath(returnTo)` and `chatGPTSignOutPath(returnTo)` for
-  browser links or actions.
-- Pass a same-origin relative `returnTo` path for the destination after sign-in
-  or sign-out. The helper validates and safely encodes it.
-- Mark protected pages with `export const dynamic = "force-dynamic"` because
-  they depend on per-request identity headers.
+## Manual deployment
 
-Dispatch owns `/signin-with-chatgpt`, `/signout-with-chatgpt`, `/callback`, the
-OAuth cookies, and identity header injection. Do not implement app routes for
-those reserved paths. Routes that do not import and call the helper remain
-anonymous-compatible.
+After authenticating Wrangler and exporting the same three variables:
 
-SIWC establishes identity only; it does not prove workspace membership. Use the
-Sites hosting platform's access policy controls for workspace-wide restrictions,
-or enforce explicit server-side membership or allowlist checks.
-
-Use SIWC for account pages, user-specific dashboards, saved records, and write
-actions tied to the current ChatGPT user. Leave public content anonymous.
-
-## Useful Commands
-
-- `npm run dev`: start local development
-- `npm run build`: verify the vinext build output
-- `npm test`: build the starter and verify its rendered loading skeleton
-- `npm run db:generate`: generate Drizzle migrations after schema changes
-
-## Learn More
-
-- [vinext Documentation](https://github.com/cloudflare/vinext)
-- [Drizzle D1 Guide](https://orm.drizzle.team/docs/get-started/d1-new)
+```bash
+npm run deploy:cloudflare
+```

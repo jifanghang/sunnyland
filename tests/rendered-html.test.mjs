@@ -71,7 +71,7 @@ test("uses one shared height for every jumbotron slide", async () => {
 test("uses the generated Sunnyland favicon", async () => {
   const layout = await readFile(new URL("../app/layout.tsx", import.meta.url), "utf8");
   const favicon = await readFile(new URL("../public/sunnyland-favicon-v3.png", import.meta.url));
-  assert.match(layout, /metadataBase: new URL\("https:\/\/sunnyland-sports\.ji-fanghang\.chatgpt\.site"\)/);
+  assert.match(layout, /metadataBase: new URL\("https:\/\/www\.sunnylandsports\.com"\)/);
   assert.match(layout, /icon:\s*"\/sunnyland-favicon-v3\.png"/);
   assert.match(layout, /apple:\s*"\/sunnyland-favicon-v3\.png"/);
   assert.ok(favicon.length > 10_000);
@@ -85,19 +85,27 @@ test("gives the FAQ a contrasting animated treatment", async () => {
 });
 
 test("includes the content manager and durable database binding", async () => {
-  const [page, layout, admin, hosting, packageJson] = await Promise.all([
+  const [page, layout, admin, auth, hosting, packageJson, viteConfig, deployCheck] = await Promise.all([
     readFile(new URL("../app/page.tsx", import.meta.url), "utf8"),
     readFile(new URL("../app/layout.tsx", import.meta.url), "utf8"),
     readFile(new URL("../app/admin/AdminManager.tsx", import.meta.url), "utf8"),
+    readFile(new URL("../app/admin-auth.ts", import.meta.url), "utf8"),
     readFile(new URL("../.openai/hosting.json", import.meta.url), "utf8"),
     readFile(new URL("../package.json", import.meta.url), "utf8"),
+    readFile(new URL("../vite.config.ts", import.meta.url), "utf8"),
+    readFile(new URL("../scripts/validate-cloudflare-env.mjs", import.meta.url), "utf8"),
   ]);
 
   assert.match(page, /getContentItems/);
   assert.match(layout, /Sunnyland Sports/);
   assert.match(layout, /og\.png/);
   assert.match(admin, /Publish item/);
+  assert.match(auth, /jwtVerify/);
+  assert.match(auth, /cf-access-jwt-assertion/);
   assert.match(hosting, /"d1": "DB"/);
+  assert.match(packageJson, /build:cloudflare/);
+  assert.match(viteConfig, /database_name: "sunnyland-content"/);
+  assert.match(deployCheck, /CLOUDFLARE_D1_DATABASE_ID/);
   assert.doesNotMatch(packageJson, /react-loading-skeleton/);
 });
 

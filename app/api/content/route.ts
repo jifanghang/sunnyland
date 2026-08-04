@@ -1,12 +1,11 @@
 import { NextResponse } from "next/server";
 import { createContentItem, getContentItems, type ContentInput } from "../../../db/content";
-import { getChatGPTUser } from "../../chatgpt-auth";
+import { getAdminUser } from "../../admin-auth";
 
 export const dynamic = "force-dynamic";
 
 async function canManage() {
-  if (process.env.NODE_ENV !== "production") return true;
-  return Boolean(await getChatGPTUser());
+  return Boolean(await getAdminUser());
 }
 
 function parseInput(body: unknown): ContentInput | null {

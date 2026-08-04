@@ -57,7 +57,7 @@ async function ensureDatabase() {
   ]);
 
   const columns = await database.prepare("PRAGMA table_info(content_items)").all<{ name: string }>();
-  if (!columns.results.some((column) => column.name === "body")) {
+  if (!columns.results.some((column: { name: string }) => column.name === "body")) {
     await database.prepare("ALTER TABLE content_items ADD COLUMN body TEXT NOT NULL DEFAULT ''").run();
   }
   await database.batch(defaultContent

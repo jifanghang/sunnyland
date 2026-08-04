@@ -53,16 +53,21 @@ export default function AdminManager({ initialItems, userName }: { initialItems:
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(draft),
     });
-    const result = await response.json();
+    const result: unknown = await response.json();
     if (response.ok) {
+      const savedItem = result as ContentItem;
       setItems((current) => editingId
-        ? current.map((item) => item.id === editingId ? result : item)
-        : [...current, result]);
+        ? current.map((item) => item.id === editingId ? savedItem : item)
+        : [...current, savedItem]);
       setMessage(editingId ? "Changes published." : "New item published.");
       setEditingId(null);
       setDraft({ ...blankItem, type: filter, imageUrl: filter === "product" ? "/golf.jpg" : "/about.jpg" });
     } else {
-      setMessage(result.error || "Something went wrong.");
+      const error =
+        result && typeof result === "object" && "error" in result
+          ? String(result.error)
+          : "Something went wrong.";
+      setMessage(error);
     }
     setSaving(false);
   }

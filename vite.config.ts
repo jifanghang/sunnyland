@@ -10,16 +10,26 @@ const { d1, r2 } = hostingConfig;
 
 // macOS Seatbelt blocks FSEvents, so Codex previews need polling for HMR.
 const isCodexSeatbeltSandbox = process.env.CODEX_SANDBOX === "seatbelt";
+const cloudflareDatabaseId =
+  process.env.CLOUDFLARE_D1_DATABASE_ID ??
+  SITE_CREATOR_PLACEHOLDER_DATABASE_ID;
 
 const localBindingConfig = {
+  name: "sunnyland",
   main: "./worker/index.ts",
+  compatibility_date: "2026-08-04",
   compatibility_flags: ["nodejs_compat"],
+  observability: { enabled: true },
+  vars: {
+    CF_ACCESS_AUD: process.env.CF_ACCESS_AUD ?? "",
+    CF_ACCESS_TEAM_DOMAIN: process.env.CF_ACCESS_TEAM_DOMAIN ?? "",
+  },
   d1_databases: d1
     ? [
         {
           binding: d1,
-          database_name: "site-creator-d1",
-          database_id: SITE_CREATOR_PLACEHOLDER_DATABASE_ID,
+          database_name: "sunnyland-content",
+          database_id: cloudflareDatabaseId,
         },
       ]
     : [],
