@@ -25,8 +25,8 @@ Production requires:
 - a D1 database named `sunnyland-content`, bound as `DB`;
 - a Cloudflare Access application protecting `/admin*`, `/api/content` and
   `/api/content/*`;
-- the following build variables:
-  - `CLOUDFLARE_D1_DATABASE_ID`
+- the `CLOUDFLARE_D1_DATABASE_ID` build variable for the first deployment;
+- two additional build variables after the Access application is created:
   - `CF_ACCESS_TEAM_DOMAIN`
   - `CF_ACCESS_AUD`
 
@@ -48,7 +48,9 @@ Deploy command: npx wrangler deploy
 ```
 
 The production branch is `main`. The Cloudflare build check deliberately fails
-if the D1 or Access settings are absent, preventing an incomplete deployment.
+if the D1 setting is absent. The first deployment may omit the two Access values
+so the Worker and custom domain can be created; the content manager stays locked
+until both Access values are added and a second deployment completes.
 
 The application initializes the D1 schema and seeds the current catalogue on
 the first request to an empty database. D1 also retains all changes made through
