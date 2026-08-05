@@ -420,14 +420,16 @@ section[id] { scroll-margin-top: 118px; }
   letter-spacing: .1em;
   text-transform: uppercase;
 }
-.category-track { display: flex; width: max-content; animation: marquee 30s linear infinite; }
+.category-track { display: flex; width: max-content; animation: marquee 120s linear infinite; }
 .category-strip:hover .category-track { animation-play-state: paused; }
 .category-run {
-  min-width: 100vw;
   flex-shrink: 0;
   display: flex;
   align-items: center;
-  justify-content: space-around;
+}
+.category-sequence {
+  display: flex;
+  align-items: center;
   gap: 22px;
   padding-right: 22px;
 }

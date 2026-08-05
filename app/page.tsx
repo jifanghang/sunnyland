@@ -36,8 +36,12 @@ export default async function Home() {
         <div className="category-track">
           {[0, 1].map((copy) => (
             <div className="category-run" key={copy} aria-hidden={copy === 1 || undefined}>
-              {categories.map((category, index) => (
-                <span key={category}>{category}<i>{index % 2 ? "✦" : "●"}</i></span>
+              {[0, 1, 2, 3].map((sequence) => (
+                <div className="category-sequence" key={sequence} aria-hidden={copy === 1 || sequence > 0 || undefined}>
+                  {categories.map((category, index) => (
+                    <span key={category}>{category}<i>{index % 2 ? "✦" : "●"}</i></span>
+                  ))}
+                </div>
               ))}
             </div>
           ))}
