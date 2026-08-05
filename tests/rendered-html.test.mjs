@@ -58,11 +58,13 @@ test("uses one shared height for every jumbotron slide", async () => {
   assert.match(css, /\.hero-carousel\s*\{[^}]*display:\s*grid/s);
   assert.match(css, /\.hero-carousel\s*\{[^}]*width:\s*100%/s);
   assert.match(css, /\.hero-carousel\s*\{[^}]*height:\s*auto/s);
-  assert.match(css, /\.hero-carousel\s*\{[^}]*min-height:\s*clamp\(640px,\s*calc\(100svh\s*-\s*180px\),\s*660px\)/s);
+  assert.match(css, /\.hero-carousel\s*\{[^}]*--home-hero-height:\s*clamp\(600px,\s*calc\(100svh\s*-\s*210px\),\s*620px\)/s);
+  assert.match(css, /\.hero-carousel\s*\{[^}]*min-height:\s*var\(--home-hero-height\)/s);
+  assert.match(css, /\.hero-slide\s*\{[^}]*min-height:\s*var\(--home-hero-height\)/s);
   assert.match(css, /\.hero-carousel \.hero-visual\s*\{[^}]*min-height:\s*0/s);
   assert.match(css, /\.hero-carousel\s*\{[^}]*margin:\s*0/s);
   assert.match(css, /\.hero-slide\s*\{[^}]*grid-area:\s*1\s*\/\s*1/s);
-  assert.match(css, /grid-template-rows:\s*minmax\(560px,\s*auto\)\s+460px/);
+  assert.match(css, /grid-template-rows:\s*minmax\(520px,\s*auto\)\s+420px/);
   assert.match(css, /\.hero-news-title\s*\{[^}]*overflow-wrap:\s*break-word/s);
   assert.match(css, /\.hero-slide-range \.hero-copy\s*\{[^}]*background:\s*var\(--ink\)/s);
   assert.match(css, /\.range-visual\s*\{[^}]*background:\s*var\(--blue\)/s);
