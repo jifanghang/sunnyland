@@ -12,6 +12,7 @@
   align-items: flex-start;
   justify-content: center;
   background: var(--sun);
+  color: var(--white);
 }
 .catalog-hero h1 {
   margin: 23px 0 28px;
@@ -51,13 +52,13 @@
 .catalog-card > a { margin-top: auto; padding-bottom: 5px; border-bottom: 2px solid var(--ink); font-size: 9px; font-weight: 900; letter-spacing: .09em; text-transform: uppercase; }
 .catalog-groups { background: var(--paper); }
 .catalog-group { border-top: 1px solid var(--ink); }
-.catalog-group-1 { background: #e7f4f6; }
-.catalog-group-2 { background: #f6e8df; }
+.catalog-group-1 { background: var(--sheet); }
+.catalog-group-2 { background: var(--cream); }
 .catalog-group-heading { margin-bottom: 48px; display: grid; grid-template-columns: 55px 1fr auto; align-items: end; gap: 20px; }
 .catalog-group-heading > span { color: var(--orange); font-size: 11px; font-weight: 900; }
 .catalog-group-heading h2 { margin: 0; font-size: clamp(43px, 5vw, 76px); letter-spacing: -.065em; text-transform: uppercase; }
 .catalog-group-heading p { margin: 0 0 7px; color: #72766e; font-size: 10px; font-weight: 900; letter-spacing: .08em; text-transform: uppercase; }
-.catalog-cta { padding: clamp(90px, 10vw, 150px) clamp(20px, 6vw, 96px); display: grid; grid-template-columns: 1.2fr .8fr; gap: 9vw; align-items: end; background: var(--sun); }
+.catalog-cta { padding: clamp(90px, 10vw, 150px) clamp(20px, 6vw, 96px); display: grid; grid-template-columns: 1.2fr .8fr; gap: 9vw; align-items: end; background: var(--sun); color: var(--white); }
 .catalog-cta > span { grid-column: 1/-1; }
 .catalog-cta h2 { margin: 10px 0 0; font-size: clamp(60px, 7vw, 108px); line-height: .82; letter-spacing: -.075em; text-transform: uppercase; }
 .catalog-cta > div p { max-width: 520px; margin: 0 0 32px; font-size: 16px; line-height: 1.65; }

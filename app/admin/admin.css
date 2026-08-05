@@ -1,6 +1,6 @@
 .admin-shell {
   min-height: 100vh;
-  background: #f4f1e9;
+  background: var(--sheet);
   display: grid;
   grid-template-columns: 245px minmax(0, 1fr);
 }
@@ -34,7 +34,7 @@
   font-weight: 700;
   cursor: pointer;
 }
-.admin-sidebar nav button.active { background: var(--sun); color: var(--ink); }
+.admin-sidebar nav button.active { background: var(--red); color: var(--white); }
 .admin-sidebar nav b { font-size: 10px; }
 .view-site { margin-top: auto; padding: 13px 11px 0; border-top: 1px solid #363a32; display: flex; justify-content: space-between; color: #c0c4ba; font-size: 12px; font-weight: 700; }
 .admin-main { min-width: 0; padding: 0 clamp(24px, 4vw, 62px) 80px; }
@@ -66,15 +66,15 @@
   padding: 13px 17px;
   border: 1px solid var(--ink);
   border-radius: 3px;
-  background: var(--sun);
-  color: var(--ink);
+  background: var(--red);
+  color: var(--white);
   font-size: 11px;
   font-weight: 900;
   text-transform: uppercase;
   cursor: pointer;
   box-shadow: 3px 3px 0 var(--ink);
 }
-.content-table { border: 1px solid #cecbc2; background: #fffdf9; }
+.content-table { border: 1px solid rgba(22,48,92,.2); background: var(--white); }
 .table-row {
   min-height: 78px;
   padding: 10px 16px;
@@ -86,7 +86,7 @@
   color: #5e615a;
   font-size: 11px;
 }
-.table-head { min-height: 42px; border-top: 0; background: #eeebe3; color: #85877f; font-size: 8px; font-weight: 900; letter-spacing: .1em; text-transform: uppercase; }
+.table-head { min-height: 42px; border-top: 0; background: #e8ebf0; color: rgba(22,48,92,.62); font-size: 8px; font-weight: 900; letter-spacing: .1em; text-transform: uppercase; }
 .item-cell { min-width: 0; display: flex; align-items: center; gap: 13px; }
 .item-cell img { width: 52px; height: 52px; flex: 0 0 auto; object-fit: cover; border: 1px solid #dad7cf; }
 .item-cell strong, .item-cell small { display: block; }
@@ -104,8 +104,8 @@
   text-underline-offset: 3px;
   cursor: pointer;
 }
-.row-actions .delete-button { color: #b84828; }
-.editor-card { margin-top: 32px; padding: clamp(24px, 3vw, 42px); border: 1px solid #cecbc2; background: #fffdf9; }
+.row-actions .delete-button { color: var(--red); }
+.editor-card { margin-top: 32px; padding: clamp(24px, 3vw, 42px); border: 1px solid rgba(22,48,92,.2); background: var(--white); }
 .editor-heading { padding-bottom: 24px; display: flex; align-items: flex-start; justify-content: space-between; border-bottom: 1px solid #dedbd2; }
 .editor-heading h2 { margin: 0; font-size: 26px; letter-spacing: -.045em; }
 .editor-card form { padding-top: 27px; }
@@ -126,7 +126,7 @@
   text-transform: none;
 }
 .form-grid textarea { resize: vertical; line-height: 1.5; }
-.form-grid input:focus, .form-grid select:focus, .form-grid textarea:focus { border-color: var(--ink); box-shadow: 0 0 0 2px rgba(246,201,21,.45); }
+.form-grid input:focus, .form-grid select:focus, .form-grid textarea:focus { border-color: var(--red); box-shadow: 0 0 0 2px rgba(168,28,36,.22); }
 .form-grid .checkbox-label { min-height: 42px; flex-direction: row; align-items: center; align-self: end; }
 .checkbox-label input { width: 16px; height: 16px; accent-color: var(--ink); }
 .form-footer { min-height: 75px; margin-top: 24px; padding-top: 22px; border-top: 1px solid #dedbd2; display: flex; align-items: center; justify-content: space-between; gap: 18px; }

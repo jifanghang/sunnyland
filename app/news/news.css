@@ -1,8 +1,8 @@
 .news-index-page, .article-page { background: var(--paper); }
-.news-index-hero { padding: clamp(95px, 11vw, 165px) clamp(20px, 7vw, 110px); background: var(--blue); border-bottom: 1px solid var(--ink); }
+.news-index-hero { padding: clamp(95px, 11vw, 165px) clamp(20px, 7vw, 110px); background: var(--blue); color: var(--white); border-bottom: 1px solid var(--ink); }
 .news-index-hero h1 { margin: 22px 0 30px; max-width: 1050px; font-size: clamp(70px, 9vw, 140px); line-height: .8; letter-spacing: -.08em; text-transform: uppercase; }
-.news-index-hero h1 em { color: var(--sun); font-family: Georgia, "Times New Roman", serif; font-weight: 500; text-transform: none; }
-.news-index-hero p { max-width: 680px; margin: 0; color: #28444d; font-size: 18px; line-height: 1.65; }
+.news-index-hero h1 em { color: #e8b8bb; font-family: Georgia, "Times New Roman", serif; font-weight: 500; text-transform: none; }
+.news-index-hero p { max-width: 680px; margin: 0; color: rgba(255,255,255,.74); font-size: 18px; line-height: 1.65; }
 .news-index-grid { padding: clamp(75px, 9vw, 135px) clamp(20px, 6vw, 96px); display: grid; grid-template-columns: repeat(2, 1fr); gap: 24px; background: var(--cream); }
 .news-index-card { min-width: 0; display: grid; grid-template-columns: .9fr 1.1fr; border: 1px solid var(--ink); background: var(--paper); }
 .news-index-featured { grid-column: 1/-1; grid-template-columns: 1.2fr .8fr; }
@@ -29,7 +29,7 @@
 .article-content aside strong { max-width: 240px; font-size: 20px; line-height: 1.25; letter-spacing: -.03em; }
 .article-content > div > p { max-width: 780px; margin: 0 0 28px; color: #494d46; font-family: Georgia, "Times New Roman", serif; font-size: clamp(19px, 2vw, 24px); line-height: 1.75; }
 .article-content > div > p:first-child::first-letter { float: left; margin: 4px 10px 0 0; color: var(--orange); font-family: Arial, sans-serif; font-size: 72px; font-weight: 950; line-height: .78; }
-.article-inquiry { margin-top: 65px; padding: clamp(30px, 5vw, 60px); background: var(--blue); border: 1px solid var(--ink); box-shadow: 9px 10px 0 var(--ink); }
+.article-inquiry { margin-top: 65px; padding: clamp(30px, 5vw, 60px); background: var(--blue); color: var(--white); border: 1px solid var(--ink); box-shadow: 9px 10px 0 var(--red); }
 .article-inquiry > span { font-size: 9px; font-weight: 900; letter-spacing: .1em; text-transform: uppercase; }
 .article-inquiry h2 { margin: 13px 0 28px; font-size: clamp(32px, 4vw, 58px); line-height: .95; letter-spacing: -.055em; }
 .related-stories { padding: clamp(80px, 9vw, 130px) clamp(20px, 6vw, 96px); background: var(--cream); border-top: 1px solid var(--ink); }
