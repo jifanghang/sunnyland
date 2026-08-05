@@ -422,7 +422,15 @@ section[id] { scroll-margin-top: 118px; }
 }
 .category-track { display: flex; width: max-content; animation: marquee 30s linear infinite; }
 .category-strip:hover .category-track { animation-play-state: paused; }
-.category-run { display: flex; align-items: center; gap: 22px; padding-right: 22px; }
+.category-run {
+  min-width: 100vw;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  gap: 22px;
+  padding-right: 22px;
+}
 .category-strip span { display: inline-flex; gap: 22px; align-items: center; }
 .category-strip i { font-style: normal; color: var(--sheet); }
 @keyframes marquee { to { transform: translateX(-50%); } }
