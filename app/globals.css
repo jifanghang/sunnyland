@@ -420,9 +420,19 @@ section[id] { scroll-margin-top: 118px; }
   letter-spacing: .1em;
   text-transform: uppercase;
 }
-.category-track { display: flex; width: max-content; animation: marquee 30s linear infinite; }
+.category-track { display: flex; width: max-content; animation: marquee 120s linear infinite; }
 .category-strip:hover .category-track { animation-play-state: paused; }
-.category-run { display: flex; align-items: center; gap: 22px; padding-right: 22px; }
+.category-run {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+}
+.category-sequence {
+  display: flex;
+  align-items: center;
+  gap: 22px;
+  padding-right: 22px;
+}
 .category-strip span { display: inline-flex; gap: 22px; align-items: center; }
 .category-strip i { font-style: normal; color: var(--sheet); }
 @keyframes marquee { to { transform: translateX(-50%); } }
