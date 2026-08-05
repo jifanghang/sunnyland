@@ -109,7 +109,7 @@ export default async function Home() {
         <div className="section-heading news-heading">
           <div>
             <span className="kicker">Fresh from Sunnyland</span>
-            <h2>Notes from<br />the field.</h2>
+            <h2>News from<br />the field.</h2>
           </div>
           <p>New products, play guides and a closer look at the games inspiring our team.</p>
         </div>
