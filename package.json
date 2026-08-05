@@ -39,7 +39,20 @@
     "typescript": "5.9.3",
     "vinext": "0.0.50",
     "vite": "8.0.13",
+    "workerd": "1.20260804.1",
     "wrangler": "4.92.0"
   },
-  "type": "module"
+  "type": "module",
+  "overrides": {
+    "workerd": "1.20260804.1"
+  },
+  "allowScripts": {
+    "workerd@1.20260804.1": true,
+    "esbuild@0.28.0": true,
+    "esbuild@0.25.12": true,
+    "esbuild@0.18.20": true,
+    "esbuild@0.27.3": true,
+    "sharp@0.34.5": true,
+    "unrs-resolver@1.11.1": true
+  }
 }

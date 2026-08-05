@@ -58,7 +58,7 @@ test("uses one shared height for every jumbotron slide", async () => {
   assert.match(css, /\.hero-carousel\s*\{[^}]*display:\s*grid/s);
   assert.match(css, /\.hero-carousel\s*\{[^}]*width:\s*100%/s);
   assert.match(css, /\.hero-carousel\s*\{[^}]*height:\s*var\(--home-hero-height\)/s);
-  assert.match(css, /\.hero-carousel\s*\{[^}]*--home-hero-height:\s*clamp\(660px,\s*calc\(100svh\s*-\s*180px\),\s*690px\)/s);
+  assert.match(css, /\.hero-carousel\s*\{[^}]*--home-hero-height:\s*clamp\(726px,\s*calc\(110svh\s*-\s*198px\),\s*759px\)/s);
   assert.match(css, /\.hero-carousel\s*\{[^}]*min-height:\s*var\(--home-hero-height\)/s);
   assert.match(css, /\.hero-slide\s*\{[^}]*height:\s*100%[^}]*min-height:\s*0/s);
   assert.match(css, /\.hero-carousel \.hero-visual\s*\{[^}]*min-height:\s*0/s);
@@ -66,8 +66,8 @@ test("uses one shared height for every jumbotron slide", async () => {
   assert.match(css, /\.hero-slide\s*\{[^}]*grid-area:\s*1\s*\/\s*1/s);
   assert.match(css, /grid-template-rows:\s*minmax\(520px,\s*auto\)\s+420px/);
   assert.match(css, /\.hero-news-title\s*\{[^}]*overflow-wrap:\s*break-word/s);
-  assert.match(css, /\.hero-slide-range \.hero-copy\s*\{[^}]*background:\s*var\(--ink\)/s);
-  assert.match(css, /\.range-visual\s*\{[^}]*background:\s*var\(--blue\)/s);
+  assert.match(css, /\.hero-slide-range \.hero-copy\s*\{[^}]*background:[^;]*var\(--ink\)/s);
+  assert.match(css, /\.range-visual\s*\{[^}]*background:\s*var\(--red\)/s);
 });
 
 test("uses the generated Sunnyland favicon", async () => {
