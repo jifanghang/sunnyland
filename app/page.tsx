@@ -33,9 +33,15 @@ export default async function Home() {
       {topNews && <HeroCarousel topNews={topNews} />}
 
       <section className="category-strip" aria-label="Product categories">
-        {categories.map((category, index) => (
-          <span key={category}>{category}<i>{index % 2 ? "✦" : "●"}</i></span>
-        ))}
+        <div className="category-track">
+          {[0, 1].map((copy) => (
+            <div className="category-run" key={copy} aria-hidden={copy === 1 || undefined}>
+              {categories.map((category, index) => (
+                <span key={category}>{category}<i>{index % 2 ? "✦" : "●"}</i></span>
+              ))}
+            </div>
+          ))}
+        </div>
       </section>
 
       <CurlingCarousel />
