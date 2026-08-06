@@ -1,4 +1,6 @@
 import type { Metadata } from "next";
+import { SiteFooter, SiteHeader } from "../SiteChrome";
+import AboutStats from "./AboutStats";
 import "./about.css";
 
 export const metadata: Metadata = {
@@ -34,25 +36,7 @@ const partners = [
 export default function AboutPage() {
   return (
     <main className="about-page">
-      <div className="announcement">
-        <span>Designing fun since 2008</span>
-        <span className="announcement-detail">Ningbo · China · Global supply</span>
-      </div>
-
-      <header className="site-header">
-        <a className="brand" href="/" aria-label="Sunnyland home">
-          <img className="brand-logo" src="/logo.png" alt="Sunnyland" />
-        </a>
-        <nav aria-label="Main navigation">
-          <a href="/products">Products</a>
-          <a href="/about" aria-current="page">About</a>
-          <a href="#factory">Factory tour</a>
-          <a href="/#contact">Contact</a>
-        </nav>
-        <a className="button button-small" href="/#contact">
-          Start an inquiry <span aria-hidden="true">↗</span>
-        </a>
-      </header>
+      <SiteHeader active="about" />
 
       <section className="about-hero">
         <div className="about-hero-copy">
@@ -63,7 +47,10 @@ export default function AboutPage() {
             specialists turning playful ideas into dependable products for
             customers around the world.
           </p>
-          <a className="text-link" href="#story">Our story <span aria-hidden="true">↓</span></a>
+          <div className="about-hero-actions">
+            <a className="text-link" href="#story">Our story <span aria-hidden="true">↓</span></a>
+            <a className="text-link" href="#factory">Factory tour <span aria-hidden="true">↓</span></a>
+          </div>
         </div>
         <div className="about-hero-media">
           <img src="/about-production.jpg" alt="Sunnyland production base in Ningbo" />
@@ -101,10 +88,30 @@ export default function AboutPage() {
         </div>
       </section>
 
-      <section className="capacity-strip" aria-label="Sunnyland production capacity">
-        {capabilities.map(([number, label]) => (
-          <div key={label}><strong>{number}</strong><span>{label}</span></div>
-        ))}
+      <AboutStats stats={capabilities} />
+
+      <section className="global-section">
+        <div className="global-heading">
+          <span className="kicker">Global relationships</span>
+          <h2>From Ningbo<br />to the <em>world.</em></h2>
+          <p>
+            Sunnyland products are sold primarily across Europe, the United
+            States, Canada, Japan and South Korea. Our company has supplied
+            customers including:
+          </p>
+        </div>
+        <div className="partner-names" aria-label="Selected Sunnyland customers">
+          {partners.map((partner, index) => (
+            <div className="partner-card" key={partner.name}>
+              <i>{String(index + 1).padStart(2, "0")}</i>
+              <img
+                className={`partner-logo partner-logo-${partner.slug}`}
+                src={partner.logo}
+                alt={partner.name}
+              />
+            </div>
+          ))}
+        </div>
       </section>
 
       <section className="about-video-section">
@@ -212,30 +219,6 @@ export default function AboutPage() {
         </div>
       </section>
 
-      <section className="global-section">
-        <div className="global-heading">
-          <span className="kicker">Global relationships</span>
-          <h2>From Ningbo<br />to the <em>world.</em></h2>
-          <p>
-            Sunnyland products are sold primarily across Europe, the United
-            States, Canada, Japan and South Korea. Our company has supplied
-            customers including:
-          </p>
-        </div>
-        <div className="partner-names" aria-label="Selected Sunnyland customers">
-          {partners.map((partner, index) => (
-            <div className="partner-card" key={partner.name}>
-              <i>{String(index + 1).padStart(2, "0")}</i>
-              <img
-                className={`partner-logo partner-logo-${partner.slug}`}
-                src={partner.logo}
-                alt={partner.name}
-              />
-            </div>
-          ))}
-        </div>
-      </section>
-
       <section className="exhibition-section">
         <div className="exhibition-copy">
           <span className="kicker kicker-light">Meet us in person</span>
@@ -281,17 +264,7 @@ export default function AboutPage() {
         <a className="button button-dark" href="/#contact">Start a conversation <span aria-hidden="true">↗</span></a>
       </section>
 
-      <footer>
-        <div className="footer-brand">
-          <a className="brand brand-light" href="/">
-            <img className="brand-logo" src="/logo.png" alt="Sunnyland" />
-          </a>
-          <p>Novel sports and games, made in Ningbo and played around the world.</p>
-        </div>
-        <div><strong>Explore</strong><a href="/products">Products</a><a href="/about">About us</a><a href="/news">News</a></div>
-        <div><strong>Contact</strong><a href="tel:+8613003751301">+86 130 0375 1301</a><a href="mailto:info@chinasunnyland.com">Email us</a><span>King Intl Mansion, Haishu District,<br />Ningbo, China</span></div>
-        <div className="footer-bottom"><span>© {new Date().getFullYear()} Sunnyland. All rights reserved.</span><a href="/admin">Content manager</a></div>
-      </footer>
+      <SiteFooter />
     </main>
   );
 }
