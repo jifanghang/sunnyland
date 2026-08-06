@@ -135,15 +135,15 @@ export default function AboutPage() {
             <video controls preload="metadata" poster="/about-production.jpg">
               <source src="/about-company.mp4" type="video/mp4" />
             </video>
-            <div><span>01 · Company</span><h3>Meet Sunnyland</h3><p>A concise introduction to our team and the games we bring to market.</p></div>
+            <div className="video-card-copy"><span>01 · Company</span><h3>Meet Sunnyland</h3><p>A concise introduction to our team and the games we bring to market.</p></div>
           </article>
           <article className="video-card">
             <PhotoSlideshow slides={officeSlides} label="Sunnyland office" />
-            <div><span>02 · Office</span><h3>Where we work</h3><p>Step inside our Ningbo office and meet the environment where ideas become products.</p></div>
+            <div className="video-card-copy"><span>02 · Office</span><h3>Where we work</h3><p>Step inside our Ningbo office and meet the environment where ideas become products.</p></div>
           </article>
           <article className="video-card">
             <PhotoSlideshow slides={showroomSlides} label="Sunnyland showroom" />
-            <div><span>03 · Showroom</span><h3>Ready to discover</h3><p>A look inside the product showroom where customers explore the Sunnyland range.</p></div>
+            <div className="video-card-copy"><span>03 · Showroom</span><h3>Ready to discover</h3><p>A look inside the product showroom where customers explore the Sunnyland range.</p></div>
           </article>
         </div>
       </section>
