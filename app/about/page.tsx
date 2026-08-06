@@ -221,16 +221,17 @@ export default function AboutPage() {
 
       <section className="exhibition-section">
         <div className="exhibition-copy">
-          <span className="kicker kicker-light">Meet us in person</span>
-          <h2>Showing up<br /><em>for play.</em></h2>
-          <p>
-            We regularly attend international fairs to share new products,
-            learn from buyers and build lasting relationships.
-          </p>
-          <div className="show-list">
-            <span>Canton Fair</span><span>Hong Kong Toy Fair</span>
-            <span>Tokyo Toy Fair</span><span>Nuremberg Toy Fair</span>
-            <span>ISPO Munich</span>
+          <h2>Meet us<br />in person.</h2>
+          <div className="exhibition-details">
+            <p>
+              We regularly attend international fairs to share new products,
+              learn from buyers and build lasting relationships.
+            </p>
+            <div className="show-list" aria-label="Trade fairs attended by Sunnyland">
+              <span>Canton Fair</span><span>Hong Kong Toy Fair</span>
+              <span>Tokyo Toy Fair</span><span>Nuremberg Toy Fair</span>
+              <span>ISPO Munich</span>
+            </div>
           </div>
         </div>
         <div className="exhibition-gallery">
