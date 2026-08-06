@@ -2,13 +2,14 @@ import type { Metadata } from "next";
 import { getContentItems } from "../../db/content";
 import { curlingProducts } from "../data/curling";
 import { SiteFooter, SiteHeader } from "../SiteChrome";
+import { productCategories } from "../../lib/product-categories";
 import "./products.css";
 
 export const dynamic = "force-dynamic";
 
 export const metadata: Metadata = {
   title: "Products",
-  description: "Explore Sunnyland curling, golf, lawn, board and party games for retail, private-label and OEM programmes.",
+  description: "Explore Sunnyland curling games, indoor sports, outdoor leisure sports and indoor games for retail, private-label and OEM programmes.",
 };
 
 function sectionId(category: string) {
@@ -18,7 +19,7 @@ function sectionId(category: string) {
 export default async function ProductsPage() {
   const items = await getContentItems();
   const products = items.filter((item) => item.type === "product");
-  const groups = Array.from(new Set(products.map((product) => product.category))).map((category) => ({
+  const groups = productCategories.slice(1).map((category) => ({
     category,
     products: products.filter((product) => product.category === category),
   }));
@@ -32,7 +33,7 @@ export default async function ProductsPage() {
           <span className="kicker">The Sunnyland range</span>
           <h1>Games made<br />to move.</h1>
           <p>
-            Signature curling, outdoor favourites and game-night originals—built
+            Curling games, indoor sports, outdoor favourites and game-night originals—built
             for retailers, importers and brands that want play people return to.
           </p>
           <a className="button" href="/#contact">Discuss your range <span aria-hidden="true">↗</span></a>
@@ -41,16 +42,16 @@ export default async function ProductsPage() {
           <img src="/curling-2in1.jpg" alt="Curling and shuffleboard set" />
           <img src="/golf.jpg" alt="Pop-up golf game" />
           <img src="/checkers.jpg" alt="Giant checkers set" />
-          <span>7 categories<br /><strong>One playful partner</strong></span>
+          <span>4 categories<br /><strong>One playful partner</strong></span>
         </div>
       </section>
 
       <nav className="catalog-categories" aria-label="Product categories">
-        <a href="#curling">Curling &amp; shuffleboard</a>
+        <a href="#curling-game">Curling game</a>
         {groups.map(({ category }) => <a href={`#${sectionId(category)}`} key={category}>{category}</a>)}
       </nav>
 
-      <section className="catalog-signature" id="curling">
+      <section className="catalog-signature" id="curling-game">
         <div className="catalog-section-heading">
           <div><span className="kicker">Signature collection</span><h2>Curling,<br /><em>off the ice.</em></h2></div>
           <p>Portable formats for schools, clubs, activity spaces, families and every smooth floor between.</p>
@@ -62,7 +63,7 @@ export default async function ProductsPage() {
                 <img src={product.image} alt={product.title} />
                 <span>{product.badge}</span>
               </div>
-              <div className="catalog-card-meta"><span>Curling collection</span><span>{product.code}</span></div>
+              <div className="catalog-card-meta"><span>Curling game</span><span>{product.code}</span></div>
               <h3>{product.title}</h3>
               <p>{product.copy}</p>
               <a href={`mailto:info@chinasunnyland.com?subject=${encodeURIComponent(`Inquiry about ${product.code} ${product.title}`)}`}>

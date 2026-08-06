@@ -27,13 +27,16 @@ test("defines the complete Sunnyland landing page", async () => {
 });
 
 test("provides catalogue, news index and managed article pages", async () => {
-  const [products, news, article, content, admin, migration] = await Promise.all([
+  const [products, news, article, content, admin, migration, categories, home, hero] = await Promise.all([
     readFile(new URL("../app/products/page.tsx", import.meta.url), "utf8"),
     readFile(new URL("../app/news/page.tsx", import.meta.url), "utf8"),
     readFile(new URL("../app/news/[slug]/page.tsx", import.meta.url), "utf8"),
     readFile(new URL("../db/content.ts", import.meta.url), "utf8"),
     readFile(new URL("../app/admin/AdminManager.tsx", import.meta.url), "utf8"),
     readFile(new URL("../drizzle/0001_add_content_body.sql", import.meta.url), "utf8"),
+    readFile(new URL("../lib/product-categories.ts", import.meta.url), "utf8"),
+    readFile(new URL("../app/page.tsx", import.meta.url), "utf8"),
+    readFile(new URL("../app/HeroCarousel.tsx", import.meta.url), "utf8"),
   ]);
 
   assert.match(products, /The Sunnyland range/);
@@ -50,7 +53,14 @@ test("provides catalogue, news index and managed article pages", async () => {
   assert.match(content, /new-iceless-curling-stone\.jpg/);
   assert.match(content, /WHERE NOT EXISTS/);
   assert.match(admin, /Page content/);
+  assert.match(admin, /productCategories/);
   assert.match(migration, /ADD COLUMN body/);
+  for (const category of ["Curling game", "Other indoor sports", "Outdoor leisure sports", "Indoor game"]) {
+    assert.match(categories, new RegExp(category));
+  }
+  assert.match(home, /productCategories/);
+  assert.match(hero, /<strong>4<\/strong>/);
+  assert.match(products, /4 categories/);
 });
 
 test("uses one shared height for every jumbotron slide", async () => {

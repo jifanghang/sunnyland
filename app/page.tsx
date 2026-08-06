@@ -3,6 +3,7 @@ import { getContentItems } from "../db/content";
 import CurlingCarousel from "./CurlingCarousel";
 import HeroCarousel from "./HeroCarousel";
 import { SiteFooter, SiteHeader } from "./SiteChrome";
+import { productCategories } from "../lib/product-categories";
 
 export const dynamic = "force-dynamic";
 
@@ -12,18 +13,15 @@ export const metadata: Metadata = {
     "Signature floor curling sets and original sports and games from an experienced Ningbo manufacturer.",
 };
 
-const categories = [
-  "Curling & shuffleboard",
-  "Golf",
-  "Lawn games",
-  "Board games",
-  "Party games",
-  "Darts",
-];
+const categories = [...productCategories];
 
 export default async function Home() {
   const items = await getContentItems();
-  const products = items.filter((item) => item.type === "product").slice(0, 3);
+  const productItems = items.filter((item) => item.type === "product");
+  const products = productCategories
+    .slice(1)
+    .map((category) => productItems.find((item) => item.category === category))
+    .filter((product): product is (typeof productItems)[number] => Boolean(product));
   const news = items.filter((item) => item.type === "news").slice(0, 3);
   const topNews = news.find((item) => item.featured) || news[0];
 
@@ -194,9 +192,7 @@ export default async function Home() {
             I’m interested in
             <select name="interest" defaultValue="">
               <option value="" disabled>Select a product or service</option>
-              <option>Curling &amp; shuffleboard sets</option>
-              <option>Golf and lawn games</option>
-              <option>Board and party games</option>
+              {productCategories.map((category) => <option key={category}>{category}</option>)}
               <option>OEM / ODM development</option>
               <option>Full product catalogue</option>
             </select>

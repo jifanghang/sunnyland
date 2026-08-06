@@ -75,22 +75,22 @@ export default function HeroCarousel({ topNews }: { topNews: HeroNews }) {
           <div className="eyebrow"><span /> More ways to play</div>
           <h1>One maker.<br /><em>Every game night.</em></h1>
           <p>
-            Golf, lawn games, board games, party games and custom concepts—all
-            developed for easy setup, satisfying play and retail-ready ranges.
+            Four focused collections—curling games, indoor sports, outdoor leisure
+            sports and indoor games—developed for easy setup and satisfying play.
           </p>
           <div className="hero-actions">
             <a className="button" href="/products">View all products <span aria-hidden="true">↗</span></a>
             <a className="text-link" href="/#contact">Develop your own <span aria-hidden="true">↗</span></a>
           </div>
           <div className="hero-range-tags" aria-label="Popular product categories">
-            <span>Golf</span><span>Lawn games</span><span>Board games</span><span>Party games</span>
+            <span>Curling game</span><span>Other indoor sports</span><span>Outdoor leisure sports</span><span>Indoor game</span>
           </div>
         </div>
         <div className="range-visual" aria-label="Selection of Sunnyland products">
           <figure className="range-shot range-shot-main"><img src="/golf.jpg" alt="Pop-up golf chipping net" /></figure>
           <figure className="range-shot range-shot-left"><img src="/checkers.jpg" alt="Three-in-one giant checkers" /></figure>
           <figure className="range-shot range-shot-right"><img src="/ladder-ball.jpg" alt="Ladder ball toss game" /></figure>
-          <div className="range-callout"><strong>7</strong><span>product<br />categories</span></div>
+          <div className="range-callout"><strong>4</strong><span>product<br />categories</span></div>
         </div>
       </div>
 
