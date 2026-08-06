@@ -95,10 +95,24 @@
 .catalog-group-heading > span { color: var(--orange); font-size: 11px; font-weight: 900; }
 .catalog-group-heading h2 { margin: 0; font-size: clamp(43px, 5vw, 76px); letter-spacing: -.065em; text-transform: uppercase; }
 .catalog-group-heading p { margin: 0 0 7px; color: rgba(22,48,92,.58); font-size: 10px; font-weight: 900; letter-spacing: .08em; text-transform: uppercase; }
-.catalog-cta { padding: clamp(90px, 10vw, 150px) clamp(20px, 6vw, 96px); display: grid; grid-template-columns: 1.2fr .8fr; gap: 9vw; align-items: end; background: var(--sun); color: var(--white); }
+.catalog-cta { min-height: 700px; padding: clamp(90px, 10vw, 150px) clamp(20px, 6vw, 96px); position: relative; isolation: isolate; overflow: hidden; display: grid; grid-template-columns: 1.2fr .8fr; gap: 9vw; align-items: end; background: var(--sun); color: var(--white); }
+.catalog-cta::after { content: ""; position: absolute; inset: 0; z-index: -1; background: linear-gradient(90deg, rgba(174,22,34,.98) 0%, rgba(174,22,34,.91) 43%, rgba(174,22,34,.44) 71%, rgba(174,22,34,.66) 100%); pointer-events: none; }
+.catalog-cta > span, .catalog-cta > h2, .catalog-cta-copy { position: relative; z-index: 2; }
 .catalog-cta > span { grid-column: 1/-1; }
-.catalog-cta h2 { margin: 10px 0 0; font-size: clamp(60px, 7vw, 108px); line-height: .82; letter-spacing: -.075em; text-transform: uppercase; }
-.catalog-cta > div p { max-width: 520px; margin: 0 0 32px; font-size: 16px; line-height: 1.65; }
+.catalog-cta h2 { margin: 10px 0 0; max-width: 760px; font-size: clamp(60px, 7vw, 108px); line-height: .82; letter-spacing: -.075em; text-transform: uppercase; text-shadow: 0 2px 18px rgba(84,5,16,.16); }
+.catalog-cta-copy p { max-width: 520px; margin: 0 0 32px; font-size: 16px; line-height: 1.65; text-shadow: 0 1px 9px rgba(84,5,16,.25); }
+.catalog-cta-comics { position: absolute; width: min(780px, 56vw); height: 150%; right: -3vw; top: -25%; z-index: -2; display: grid; grid-template-columns: repeat(3, 1fr); gap: clamp(10px, 1.4vw, 22px); transform: rotate(-9deg); opacity: .88; pointer-events: none; }
+.catalog-comic-strip { min-width: 0; overflow: hidden; border: 3px solid var(--ink); background: var(--ink); box-shadow: 12px 14px 0 rgba(57,5,14,.23); }
+.catalog-comic-strip-1 { transform: translateY(-4%); }
+.catalog-comic-strip-2 { transform: translateY(3%); }
+.catalog-comic-strip-3 { transform: translateY(-8%); }
+.catalog-comic-track { display: flex; flex-direction: column; gap: 10px; animation: catalogue-comic-roll 30s linear infinite; }
+.catalog-comic-strip-2 .catalog-comic-track { animation-duration: 36s; animation-direction: reverse; }
+.catalog-comic-strip-3 .catalog-comic-track { animation-duration: 26s; }
+.catalog-comic-track figure { flex: none; height: clamp(190px, 17vw, 260px); margin: 0; position: relative; overflow: hidden; background: white; border: 3px solid white; }
+.catalog-comic-track img { width: 100%; height: 100%; display: block; object-fit: cover; filter: saturate(1.14) contrast(1.04); }
+.catalog-comic-track figcaption { position: absolute; left: 8px; bottom: 8px; padding: 6px 9px 5px; color: var(--white); background: var(--ink); border: 2px solid var(--white); box-shadow: 3px 3px 0 var(--orange); font-size: 9px; font-weight: 950; letter-spacing: .11em; line-height: 1; }
+@keyframes catalogue-comic-roll { to { transform: translateY(calc(-50% - 5px)); } }
 
 @media (max-width: 1000px) {
   .catalog-grid { grid-template-columns: repeat(2, 1fr); }
@@ -115,6 +129,12 @@
   .expandable-products.collapsed .product-grid-window::after { height: 180px; }
   .catalog-group-heading { grid-template-columns: 36px 1fr; gap: 13px; }
   .catalog-cta > span { grid-column: auto; }
+  .catalog-cta { min-height: 720px; }
+  .catalog-cta::after { background: linear-gradient(180deg, rgba(174,22,34,.93) 0%, rgba(174,22,34,.8) 50%, rgba(174,22,34,.94) 100%); }
+  .catalog-cta-comics { width: 118vw; height: 135%; right: -40vw; top: -18%; grid-template-columns: repeat(3, minmax(150px, 1fr)); opacity: .55; }
+  .catalog-comic-track figure { height: 190px; }
+  .catalog-comic-strip-1 { transform: translateY(-1%); }
+  .catalog-comic-strip-3 { display: none; }
   .product-modal-backdrop { padding: 0; align-items: end; }
   .product-modal { width: 100%; max-height: 95svh; grid-template-columns: 1fr; border-width: 1px 0 0; box-shadow: none; }
   .product-modal-gallery { padding: 14px; border-right: 0; border-bottom: 1px solid var(--ink); }
@@ -124,4 +144,5 @@
 }
 @media (prefers-reduced-motion: reduce) {
   .product-modal-backdrop, .product-modal { animation: none; }
+  .catalog-comic-track { animation: none; }
 }

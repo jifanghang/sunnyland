@@ -27,8 +27,9 @@ test("defines the complete Sunnyland landing page", async () => {
 });
 
 test("provides catalogue, news index and managed article pages", async () => {
-  const [products, news, article, content, admin, migration, categories, home, hero, curling, productCard, galleries, expandableGrid] = await Promise.all([
+  const [products, productsCss, news, article, content, admin, migration, categories, home, hero, curling, productCard, galleries, expandableGrid] = await Promise.all([
     readFile(new URL("../app/products/page.tsx", import.meta.url), "utf8"),
+    readFile(new URL("../app/products/products.css", import.meta.url), "utf8"),
     readFile(new URL("../app/news/page.tsx", import.meta.url), "utf8"),
     readFile(new URL("../app/news/[slug]/page.tsx", import.meta.url), "utf8"),
     readFile(new URL("../db/content.ts", import.meta.url), "utf8"),
@@ -46,6 +47,10 @@ test("provides catalogue, news index and managed article pages", async () => {
   assert.match(products, /The Sunnyland range/);
   assert.match(products, /curlingProducts/);
   assert.match(products, /Request the full catalogue/);
+  assert.match(products, /catalog-cta-comics/);
+  assert.match(products, /catalog-comic-track/);
+  assert.match(productsCss, /@keyframes catalogue-comic-roll/);
+  assert.match(productsCss, /prefers-reduced-motion[\s\S]*\.catalog-comic-track \{ animation: none; \}/);
   assert.match(news, /Ideas in play/);
   assert.match(article, /article\.body/);
   assert.match(article, /More from Sunnyland/);

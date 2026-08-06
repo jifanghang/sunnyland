@@ -19,6 +19,27 @@ function sectionId(category: string) {
   return category.toLowerCase().replace(/&/g, "and").replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "");
 }
 
+const catalogueComicStrips = [
+  [
+    { src: "/curling-ssc001-a.jpg", code: "SSC001-A" },
+    { src: "/product-sso014.jpg", code: "SSO014" },
+    { src: "/product-ssl008.jpg", code: "SSL008" },
+    { src: "/product-ssd002.jpg", code: "SSD002" },
+  ],
+  [
+    { src: "/product-ssg011.jpg", code: "SSG011" },
+    { src: "/product-sso020.jpg", code: "SSO020" },
+    { src: "/product-ssb001.jpg", code: "SSB001" },
+    { src: "/product-ssl003.jpg", code: "SSL003" },
+  ],
+  [
+    { src: "/curling-ssc001-f.jpg", code: "SSC001-F" },
+    { src: "/product-sso009.jpg", code: "SSO009" },
+    { src: "/product-ssl001.jpg", code: "SSL001" },
+    { src: "/product-ssd007.jpg", code: "SSD007" },
+  ],
+] as const;
+
 export default async function ProductsPage() {
   const items = await getContentItems();
   const products = items.filter((item) => item.type === "product");
@@ -100,9 +121,23 @@ export default async function ProductsPage() {
       </section>
 
       <section className="catalog-cta">
+        <div className="catalog-cta-comics" aria-hidden="true">
+          {catalogueComicStrips.map((strip, stripIndex) => (
+            <div className={`catalog-comic-strip catalog-comic-strip-${stripIndex + 1}`} key={stripIndex}>
+              <div className="catalog-comic-track">
+                {[0, 1].flatMap((copy) => strip.map((product) => (
+                  <figure key={`${copy}-${product.code}`}>
+                    <img src={product.src} alt="" loading="lazy" />
+                    <figcaption>{product.code}</figcaption>
+                  </figure>
+                )))}
+              </div>
+            </div>
+          ))}
+        </div>
         <span className="kicker">Need the complete range?</span>
         <h2>There’s more<br />in the catalogue.</h2>
-        <div>
+        <div className="catalog-cta-copy">
           <p>Ask for current product options, specifications and private-label possibilities.</p>
           <a className="button button-dark" href="mailto:info@chinasunnyland.com?subject=Sunnyland%20catalogue%20request">
             Request the full catalogue <span aria-hidden="true">↗</span>
