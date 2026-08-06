@@ -2,18 +2,18 @@
 
 import { useEffect, useState } from "react";
 
-const slides = [
-  {
-    src: "/about-showroom-1.jpg",
-    alt: "Sunnyland showroom shelves displaying curling, bowling and tabletop games",
-  },
-  {
-    src: "/about-showroom-2.jpg",
-    alt: "Sunnyland sample room with sports and games arranged on display shelving",
-  },
-];
+type Slide = {
+  src: string;
+  alt: string;
+};
 
-export default function ShowroomSlideshow() {
+export default function PhotoSlideshow({
+  slides,
+  label,
+}: {
+  slides: readonly Slide[];
+  label: string;
+}) {
   const [activeSlide, setActiveSlide] = useState(0);
   const [paused, setPaused] = useState(false);
   const [hovered, setHovered] = useState(false);
@@ -27,7 +27,7 @@ export default function ShowroomSlideshow() {
       5000,
     );
     return () => window.clearInterval(timer);
-  }, [hovered, paused]);
+  }, [hovered, paused, slides.length]);
 
   const showPrevious = () => {
     setActiveSlide((current) => (current - 1 + slides.length) % slides.length);
@@ -39,10 +39,10 @@ export default function ShowroomSlideshow() {
 
   return (
     <div
-      className="showroom-slideshow"
+      className="photo-slideshow"
       role="region"
       aria-roledescription="carousel"
-      aria-label="Sunnyland showroom"
+      aria-label={label}
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
       onFocus={() => setHovered(true)}
@@ -50,7 +50,7 @@ export default function ShowroomSlideshow() {
         if (!event.currentTarget.contains(event.relatedTarget)) setHovered(false);
       }}
     >
-      <div className="showroom-slides" aria-live="polite">
+      <div className="photo-slides" aria-live="polite">
         {slides.map((slide, index) => (
           <img
             key={slide.src}
@@ -61,13 +61,13 @@ export default function ShowroomSlideshow() {
           />
         ))}
       </div>
-      <div className="showroom-controls">
-        <button type="button" onClick={showPrevious} aria-label="Previous showroom photo">←</button>
+      <div className="photo-controls">
+        <button type="button" onClick={showPrevious} aria-label={`Previous ${label.toLowerCase()} photo`}>←</button>
         <span aria-hidden="true">{activeSlide + 1} / {slides.length}</span>
-        <button type="button" onClick={() => setPaused((current) => !current)} aria-label={paused ? "Play showroom slideshow" : "Pause showroom slideshow"}>
+        <button type="button" onClick={() => setPaused((current) => !current)} aria-label={paused ? `Play ${label.toLowerCase()} slideshow` : `Pause ${label.toLowerCase()} slideshow`}>
           {paused ? "Play" : "Pause"}
         </button>
-        <button type="button" onClick={showNext} aria-label="Next showroom photo">→</button>
+        <button type="button" onClick={showNext} aria-label={`Next ${label.toLowerCase()} photo`}>→</button>
       </div>
     </div>
   );

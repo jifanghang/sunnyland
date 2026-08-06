@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { SiteFooter, SiteHeader } from "../SiteChrome";
 import AboutStats from "./AboutStats";
-import ShowroomSlideshow from "./ShowroomSlideshow";
+import PhotoSlideshow from "./PhotoSlideshow";
 import "./about.css";
 
 export const metadata: Metadata = {
@@ -32,6 +32,16 @@ const partners = [
   { name: "myToys", logo: "/partners/mytoys.svg", slug: "mytoys" },
   { name: "Nanu-Nana", logo: "/partners/nanu-nana.svg", slug: "nanu-nana" },
   { name: "Smyths Toys", logo: "/partners/smyths.svg", slug: "smyths" },
+];
+
+const officeSlides = [
+  { src: "/about-office-1.jpg", alt: "Exterior of Sunnyland's Ningbo office building" },
+  { src: "/about-office-2.jpg", alt: "Sunnyland team working inside the Ningbo office" },
+];
+
+const showroomSlides = [
+  { src: "/about-showroom-1.jpg", alt: "Sunnyland showroom shelves displaying curling, bowling and tabletop games" },
+  { src: "/about-showroom-2.jpg", alt: "Sunnyland sample room with sports and games arranged on display shelving" },
 ];
 
 export default function AboutPage() {
@@ -128,13 +138,11 @@ export default function AboutPage() {
             <div><span>01 · Company</span><h3>Meet Sunnyland</h3><p>A concise introduction to our team and the games we bring to market.</p></div>
           </article>
           <article className="video-card">
-            <video controls preload="metadata" poster="/curling-ssc001-f.jpg">
-              <source src="/about-products.mp4" type="video/mp4" />
-            </video>
-            <div><span>02 · Products</span><h3>Play in action</h3><p>A closer look at Sunnyland sports and game concepts.</p></div>
+            <PhotoSlideshow slides={officeSlides} label="Sunnyland office" />
+            <div><span>02 · Office</span><h3>Where we work</h3><p>Step inside our Ningbo office and meet the environment where ideas become products.</p></div>
           </article>
           <article className="video-card">
-            <ShowroomSlideshow />
+            <PhotoSlideshow slides={showroomSlides} label="Sunnyland showroom" />
             <div><span>03 · Showroom</span><h3>Ready to discover</h3><p>A look inside the product showroom where customers explore the Sunnyland range.</p></div>
           </article>
         </div>

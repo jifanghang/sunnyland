@@ -146,9 +146,9 @@
 .video-card span { color: var(--blush); font-size: 8px; font-weight: 900; letter-spacing: .1em; text-transform: uppercase; }
 .video-card h3 { margin: 10px 0 9px; font-size: clamp(20px, 2vw, 29px); letter-spacing: -.04em; }
 .video-card p { margin: 0; color: rgba(255,255,255,.68); font-size: 12px; line-height: 1.55; }
-.showroom-slideshow { position: relative; aspect-ratio: 4/3; overflow: hidden; background: #0b1c35; }
-.showroom-slides { position: absolute; inset: 0; }
-.showroom-slides img {
+.photo-slideshow { position: relative; aspect-ratio: 4/3; overflow: hidden; background: #0b1c35; }
+.photo-slides { position: absolute; inset: 0; }
+.photo-slides img {
   position: absolute;
   inset: 0;
   height: 100%;
@@ -157,8 +157,8 @@
   transform: scale(1.025);
   transition: opacity .55s ease, transform 5s ease;
 }
-.showroom-slides img.is-active { opacity: 1; transform: scale(1); }
-.showroom-controls {
+.photo-slides img.is-active { opacity: 1; transform: scale(1); }
+.photo-controls {
   position: absolute;
   right: 10px;
   bottom: 10px;
@@ -169,8 +169,8 @@
   background: rgba(11,28,53,.88);
   backdrop-filter: blur(8px);
 }
-.showroom-controls button,
-.showroom-controls span {
+.photo-controls button,
+.photo-controls span {
   min-width: 34px;
   min-height: 32px;
   padding: 0 9px;
@@ -186,9 +186,9 @@
   letter-spacing: .06em;
   text-transform: uppercase;
 }
-.showroom-controls button:first-child { border-left: 0; }
-.showroom-controls button { cursor: pointer; }
-.showroom-controls button:hover { background: var(--orange); }
+.photo-controls button:first-child { border-left: 0; }
+.photo-controls button { cursor: pointer; }
+.photo-controls button:hover { background: var(--orange); }
 
 .factory-section { padding: clamp(100px, 11vw, 165px) clamp(20px, 6vw, 96px); background: var(--cream); }
 .factory-intro {
@@ -432,5 +432,5 @@
 
 @media (prefers-reduced-motion: reduce) {
   .capacity-strip div { opacity: 1; transform: none; transition: none; }
-  .showroom-slides img { transform: none; transition: none; }
+  .photo-slides img { transform: none; transition: none; }
 }
