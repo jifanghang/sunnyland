@@ -27,7 +27,7 @@ test("defines the complete Sunnyland landing page", async () => {
 });
 
 test("provides catalogue, news index and managed article pages", async () => {
-  const [products, news, article, content, admin, migration, categories, home, hero, curling] = await Promise.all([
+  const [products, news, article, content, admin, migration, categories, home, hero, curling, productCard, galleries] = await Promise.all([
     readFile(new URL("../app/products/page.tsx", import.meta.url), "utf8"),
     readFile(new URL("../app/news/page.tsx", import.meta.url), "utf8"),
     readFile(new URL("../app/news/[slug]/page.tsx", import.meta.url), "utf8"),
@@ -38,6 +38,8 @@ test("provides catalogue, news index and managed article pages", async () => {
     readFile(new URL("../app/page.tsx", import.meta.url), "utf8"),
     readFile(new URL("../app/HeroCarousel.tsx", import.meta.url), "utf8"),
     readFile(new URL("../app/data/curling.ts", import.meta.url), "utf8"),
+    readFile(new URL("../app/products/ProductCard.tsx", import.meta.url), "utf8"),
+    readFile(new URL("../app/data/product-galleries.ts", import.meta.url), "utf8"),
   ]);
 
   assert.match(products, /The Sunnyland range/);
@@ -80,6 +82,13 @@ test("provides catalogue, news index and managed article pages", async () => {
     assert.match(content, new RegExp(`imageUrl: "/product-${code.toLowerCase()}\\.jpg"`));
   }
   assert.equal((content.match(/type: "product"/g) || []).length, 22);
+  assert.match(products, /ProductCard/);
+  assert.match(productCard, /role="dialog"/);
+  assert.match(productCard, /aria-modal="true"/);
+  assert.match(productCard, /createPortal/);
+  assert.match(productCard, /Previous product photo/);
+  assert.match(galleries, /product-ssg001-4\.jpg/);
+  assert.match(galleries, /product-ssd002-3\.jpg/);
 });
 
 test("uses one shared height for every jumbotron slide", async () => {

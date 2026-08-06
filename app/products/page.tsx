@@ -3,6 +3,8 @@ import { getContentItems } from "../../db/content";
 import { curlingProducts } from "../data/curling";
 import { SiteFooter, SiteHeader } from "../SiteChrome";
 import { productCategories } from "../../lib/product-categories";
+import { galleryFor } from "../data/product-galleries";
+import ProductCard from "./ProductCard";
 import "./products.css";
 
 export const dynamic = "force-dynamic";
@@ -58,18 +60,15 @@ export default async function ProductsPage() {
         </div>
         <div className="catalog-grid">
           {curlingProducts.map((product) => (
-            <article className="catalog-card" key={product.code}>
-              <div className="catalog-card-image">
-                <img src={product.image} alt={product.title} />
-                <span>{product.badge}</span>
-              </div>
-              <div className="catalog-card-meta"><span>Curling game</span><span>{product.code}</span></div>
-              <h3>{product.title}</h3>
-              <p>{product.copy}</p>
-              <a href={`mailto:info@chinasunnyland.com?subject=${encodeURIComponent(`Inquiry about ${product.code} ${product.title}`)}`}>
-                Enquire about this set <span aria-hidden="true">↗</span>
-              </a>
-            </article>
+            <ProductCard product={{
+              code: product.code,
+              title: product.title,
+              summary: product.copy,
+              body: product.details,
+              category: "Curling game",
+              images: [product.image],
+              badge: product.badge,
+            }} key={product.code} />
           ))}
         </div>
       </section>
@@ -84,18 +83,15 @@ export default async function ProductsPage() {
             </div>
             <div className="catalog-grid">
               {categoryProducts.map((product) => (
-                <article className="catalog-card" key={product.id}>
-                  <div className="catalog-card-image">
-                    <img src={product.imageUrl} alt={product.title} />
-                    {product.featured && <span>Featured</span>}
-                  </div>
-                  <div className="catalog-card-meta"><span>{product.category}</span><span>{product.slug.toUpperCase()}</span></div>
-                  <h3>{product.title}</h3>
-                  <p>{product.summary}</p>
-                  <a href={`mailto:info@chinasunnyland.com?subject=${encodeURIComponent(`Inquiry about ${product.slug} ${product.title}`)}`}>
-                    Product inquiry <span aria-hidden="true">↗</span>
-                  </a>
-                </article>
+                <ProductCard product={{
+                  code: product.slug.toUpperCase(),
+                  title: product.title,
+                  summary: product.summary,
+                  body: product.body,
+                  category: product.category,
+                  images: galleryFor(product.slug, product.imageUrl),
+                  featured: product.featured,
+                }} key={product.id} />
               ))}
             </div>
           </div>
