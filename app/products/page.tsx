@@ -39,7 +39,7 @@ export default async function ProductsPage() {
           <a className="button" href="/#contact">Discuss your range <span aria-hidden="true">↗</span></a>
         </div>
         <div className="catalog-hero-collage">
-          <img src="/curling-2in1.jpg" alt="Curling and shuffleboard set" />
+          <img src="/curling-ssc001-a.jpg" alt="SSC001-A floor curling stone set" />
           <img src="/golf.jpg" alt="Pop-up golf game" />
           <img src="/checkers.jpg" alt="Giant checkers set" />
           <span>4 categories<br /><strong>One playful partner</strong></span>

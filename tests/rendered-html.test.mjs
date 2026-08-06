@@ -27,7 +27,7 @@ test("defines the complete Sunnyland landing page", async () => {
 });
 
 test("provides catalogue, news index and managed article pages", async () => {
-  const [products, news, article, content, admin, migration, categories, home, hero] = await Promise.all([
+  const [products, news, article, content, admin, migration, categories, home, hero, curling] = await Promise.all([
     readFile(new URL("../app/products/page.tsx", import.meta.url), "utf8"),
     readFile(new URL("../app/news/page.tsx", import.meta.url), "utf8"),
     readFile(new URL("../app/news/[slug]/page.tsx", import.meta.url), "utf8"),
@@ -37,6 +37,7 @@ test("provides catalogue, news index and managed article pages", async () => {
     readFile(new URL("../lib/product-categories.ts", import.meta.url), "utf8"),
     readFile(new URL("../app/page.tsx", import.meta.url), "utf8"),
     readFile(new URL("../app/HeroCarousel.tsx", import.meta.url), "utf8"),
+    readFile(new URL("../app/data/curling.ts", import.meta.url), "utf8"),
   ]);
 
   assert.match(products, /The Sunnyland range/);
@@ -61,6 +62,14 @@ test("provides catalogue, news index and managed article pages", async () => {
   assert.match(home, /productCategories/);
   assert.match(hero, /<strong>4<\/strong>/);
   assert.match(products, /4 categories/);
+  for (const code of ["SSC001-A", "SSC001-B", "SSC001-C", "SSC001-D", "SSC001-E", "SSC001-F"]) {
+    assert.match(curling, new RegExp(code));
+  }
+  assert.doesNotMatch(curling, /SSC003B|SSC010|SSC007|SSC003A|SSC002/);
+  assert.match(curling, /150 × 520 cm/);
+  assert.match(content, /SSC001-F: our 20 cm floor curling set/);
+  assert.match(content, /Six floor curling sets, one focused range/);
+  assert.doesNotMatch(content, /Two ways to play: shuffleboard meets curling/);
 });
 
 test("uses one shared height for every jumbotron slide", async () => {

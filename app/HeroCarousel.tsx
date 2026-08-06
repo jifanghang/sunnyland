@@ -58,13 +58,13 @@ export default function HeroCarousel({ topNews }: { topNews: HeroNews }) {
           <div className="sticker sticker-one">PLAY<br />MORE</div>
           <div className="sticker sticker-two">ICE<br />OPTIONAL!</div>
           <figure className="product-shot shot-main">
-            <img src="/curling-2in1.jpg" alt="Curling and shuffleboard two-in-one set" />
+            <img src="/curling-ssc001-a.jpg" alt="SSC001-A floor curling stone set with 17 cm stones" />
           </figure>
           <figure className="product-shot shot-top">
-            <img src="/curling-air.jpg" alt="Air-cushioned curling stone set" />
+            <img src="/curling-ssc001-d.jpg" alt="SSC001-D mini floor curling set with 8 cm stones" />
           </figure>
           <figure className="product-shot shot-bottom">
-            <img src="/curling-floor.jpg" alt="Portable floor curling stone set" />
+            <img src="/curling-ssc001-f.jpg" alt="SSC001-F floor curling stone set with 20 cm stones" />
           </figure>
           <span className="scribble">OUR SIGNATURE GAME →</span>
         </div>
