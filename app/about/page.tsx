@@ -1,4 +1,7 @@
 import type { Metadata } from "next";
+import { SiteFooter, SiteHeader } from "../SiteChrome";
+import AboutStats from "./AboutStats";
+import PhotoSlideshow from "./PhotoSlideshow";
 import "./about.css";
 
 export const metadata: Metadata = {
@@ -8,11 +11,11 @@ export const metadata: Metadata = {
 };
 
 const capabilities = [
-  ["5,000 m²", "Production base"],
-  ["100+", "Team members"],
-  ["8", "Injection machines"],
-  ["5", "Assembly lines"],
-  ["1", "UV printing line"],
+  { value: 5000, suffix: " m²", label: "Production base" },
+  { value: 100, suffix: "+", label: "Team members" },
+  { value: 8, suffix: "", label: "Injection machines" },
+  { value: 5, suffix: "", label: "Assembly lines" },
+  { value: 1, suffix: "", label: "UV printing line" },
 ];
 
 const standards = [
@@ -31,28 +34,20 @@ const partners = [
   { name: "Smyths Toys", logo: "/partners/smyths.svg", slug: "smyths" },
 ];
 
+const officeSlides = [
+  { src: "/about-office-1.jpg", alt: "Exterior of Sunnyland's Ningbo office building" },
+  { src: "/about-office-2.jpg", alt: "Sunnyland team working inside the Ningbo office" },
+];
+
+const showroomSlides = [
+  { src: "/about-showroom-1.jpg", alt: "Sunnyland showroom shelves displaying curling, bowling and tabletop games" },
+  { src: "/about-showroom-2.jpg", alt: "Sunnyland sample room with sports and games arranged on display shelving" },
+];
+
 export default function AboutPage() {
   return (
     <main className="about-page">
-      <div className="announcement">
-        <span>Designing fun since 2008</span>
-        <span className="announcement-detail">Ningbo · China · Global supply</span>
-      </div>
-
-      <header className="site-header">
-        <a className="brand" href="/" aria-label="Sunnyland home">
-          <img className="brand-logo" src="/logo.png" alt="Sunnyland" />
-        </a>
-        <nav aria-label="Main navigation">
-          <a href="/products">Products</a>
-          <a href="/about" aria-current="page">About</a>
-          <a href="#factory">Factory tour</a>
-          <a href="/#contact">Contact</a>
-        </nav>
-        <a className="button button-small" href="/#contact">
-          Start an inquiry <span aria-hidden="true">↗</span>
-        </a>
-      </header>
+      <SiteHeader active="about" />
 
       <section className="about-hero">
         <div className="about-hero-copy">
@@ -63,7 +58,10 @@ export default function AboutPage() {
             specialists turning playful ideas into dependable products for
             customers around the world.
           </p>
-          <a className="text-link" href="#story">Our story <span aria-hidden="true">↓</span></a>
+          <div className="about-hero-actions">
+            <a className="text-link" href="#story">Our story <span aria-hidden="true">↓</span></a>
+            <a className="text-link" href="#factory">Factory tour <span aria-hidden="true">↓</span></a>
+          </div>
         </div>
         <div className="about-hero-media">
           <img src="/about-production.jpg" alt="Sunnyland production base in Ningbo" />
@@ -76,35 +74,56 @@ export default function AboutPage() {
       </section>
 
       <section className="about-story" id="story">
-        <div className="about-story-heading">
-          <span className="kicker">Who we are</span>
-          <h2>One team.<br />A world of <em>play.</em></h2>
+        <div className="about-story-content">
+          <div className="about-story-heading">
+            <h2>Who we are</h2>
+            <p className="story-subtitle">One team.<br />A world of <em>play.</em></p>
+          </div>
+          <div className="about-story-copy">
+            <p className="story-lead">
+              Ningbo Haishu Advancing &amp; Rising Trading Co., Ltd. was founded
+              in 2008, close to both Ningbo and Shanghai ports.
+            </p>
+            <p>
+              What began as a specialist supplier of novel sporting goods has
+              grown into an integrated product-development, manufacturing and
+              export business. Sunnyland now makes curling and shuffleboard sets,
+              golf products, darts, board games, lawn games and party games.
+            </p>
+            <p>
+              Our signature floor-curling range reflects the way we work: start
+              with an accessible idea, refine the mechanics and materials, then
+              build it reliably at scale. That focus has earned Sunnyland a
+              strong reputation with retailers and sporting-goods customers in
+              Europe, North America and Asia.
+            </p>
+          </div>
         </div>
-        <div className="about-story-copy">
-          <p className="story-lead">
-            Ningbo Haishu Advancing &amp; Rising Trading Co., Ltd. was founded
-            in 2008, close to both Ningbo and Shanghai ports.
-          </p>
-          <p>
-            What began as a specialist supplier of novel sporting goods has
-            grown into an integrated product-development, manufacturing and
-            export business. Sunnyland now makes curling and shuffleboard sets,
-            golf products, darts, board games, lawn games and party games.
-          </p>
-          <p>
-            Our signature floor-curling range reflects the way we work: start
-            with an accessible idea, refine the mechanics and materials, then
-            build it reliably at scale. That focus has earned Sunnyland a
-            strong reputation with retailers and sporting-goods customers in
-            Europe, North America and Asia.
-          </p>
-        </div>
+        <AboutStats stats={capabilities} />
       </section>
 
-      <section className="capacity-strip" aria-label="Sunnyland production capacity">
-        {capabilities.map(([number, label]) => (
-          <div key={label}><strong>{number}</strong><span>{label}</span></div>
-        ))}
+      <section className="global-section">
+        <div className="global-heading">
+          <span className="kicker">Global relationships</span>
+          <h2>From Ningbo<br />to the <em>world.</em></h2>
+          <p>
+            Sunnyland products are sold primarily across Europe, the United
+            States, Canada, Japan and South Korea. Our company has supplied
+            customers including:
+          </p>
+        </div>
+        <div className="partner-names" aria-label="Selected Sunnyland customers">
+          {partners.map((partner, index) => (
+            <div className="partner-card" key={partner.name}>
+              <i>{String(index + 1).padStart(2, "0")}</i>
+              <img
+                className={`partner-logo partner-logo-${partner.slug}`}
+                src={partner.logo}
+                alt={partner.name}
+              />
+            </div>
+          ))}
+        </div>
       </section>
 
       <section className="about-video-section">
@@ -117,19 +136,15 @@ export default function AboutPage() {
             <video controls preload="metadata" poster="/about-production.jpg">
               <source src="/about-company.mp4" type="video/mp4" />
             </video>
-            <div><span>01 · Company</span><h3>Meet Sunnyland</h3><p>A concise introduction to our team and the games we bring to market.</p></div>
+            <div className="video-card-copy"><span>01 · Company</span><h3>Meet Sunnyland</h3><p>A concise introduction to our team and the games we bring to market.</p></div>
           </article>
           <article className="video-card">
-            <video controls preload="metadata" poster="/curling-ssc001-f.jpg">
-              <source src="/about-products.mp4" type="video/mp4" />
-            </video>
-            <div><span>02 · Products</span><h3>Play in action</h3><p>A closer look at Sunnyland sports and game concepts.</p></div>
+            <PhotoSlideshow slides={officeSlides} label="Sunnyland office" />
+            <div className="video-card-copy"><span>02 · Office</span><h3>Where we work</h3><p>Step inside our Ningbo office and meet the environment where ideas become products.</p></div>
           </article>
           <article className="video-card">
-            <video controls preload="metadata" poster="/about-assembly.jpg">
-              <source src="/about-factory.mp4" type="video/mp4" />
-            </video>
-            <div><span>03 · Factory</span><h3>Where ideas are made</h3><p>A view inside our Ningbo manufacturing operation.</p></div>
+            <PhotoSlideshow slides={showroomSlides} label="Sunnyland showroom" />
+            <div className="video-card-copy"><span>03 · Showroom</span><h3>Ready to discover</h3><p>A look inside the product showroom where customers explore the Sunnyland range.</p></div>
           </article>
         </div>
       </section>
@@ -147,8 +162,10 @@ export default function AboutPage() {
         </div>
         <div className="factory-gallery">
           <figure className="factory-photo factory-photo-wide">
-            <img src="/about-production.jpg" alt="Exterior of the Sunnyland production base" />
-            <figcaption><span>01</span><strong>Production base</strong><small>Ningbo, China</small></figcaption>
+            <video controls preload="metadata" poster="/about-production.jpg">
+              <source src="/about-factory.mp4" type="video/mp4" />
+            </video>
+            <figcaption><span>01</span><strong>Factory video tour</strong><small>Watch now</small></figcaption>
           </figure>
           <figure className="factory-photo">
             <img src="/about-assembly.jpg" alt="Injection moulding equipment inside the Sunnyland factory" />
@@ -212,42 +229,19 @@ export default function AboutPage() {
         </div>
       </section>
 
-      <section className="global-section">
-        <div className="global-heading">
-          <span className="kicker">Global relationships</span>
-          <h2>From Ningbo<br />to the <em>world.</em></h2>
-          <p>
-            Sunnyland products are sold primarily across Europe, the United
-            States, Canada, Japan and South Korea. Our company has supplied
-            customers including:
-          </p>
-        </div>
-        <div className="partner-names" aria-label="Selected Sunnyland customers">
-          {partners.map((partner, index) => (
-            <div className="partner-card" key={partner.name}>
-              <i>{String(index + 1).padStart(2, "0")}</i>
-              <img
-                className={`partner-logo partner-logo-${partner.slug}`}
-                src={partner.logo}
-                alt={partner.name}
-              />
-            </div>
-          ))}
-        </div>
-      </section>
-
       <section className="exhibition-section">
         <div className="exhibition-copy">
-          <span className="kicker kicker-light">Meet us in person</span>
-          <h2>Showing up<br /><em>for play.</em></h2>
-          <p>
-            We regularly attend international fairs to share new products,
-            learn from buyers and build lasting relationships.
-          </p>
-          <div className="show-list">
-            <span>Canton Fair</span><span>Hong Kong Toy Fair</span>
-            <span>Tokyo Toy Fair</span><span>Nuremberg Toy Fair</span>
-            <span>ISPO Munich</span>
+          <h2>Meet us<br />in person.</h2>
+          <div className="exhibition-details">
+            <p>
+              We regularly attend international fairs to share new products,
+              learn from buyers and build lasting relationships.
+            </p>
+            <div className="show-list" aria-label="Trade fairs attended by Sunnyland">
+              <span>Canton Fair</span><span>Hong Kong Toy Fair</span>
+              <span>Tokyo Toy Fair</span><span>Nuremberg Toy Fair</span>
+              <span>ISPO Munich</span>
+            </div>
           </div>
         </div>
         <div className="exhibition-gallery">
@@ -281,17 +275,7 @@ export default function AboutPage() {
         <a className="button button-dark" href="/#contact">Start a conversation <span aria-hidden="true">↗</span></a>
       </section>
 
-      <footer>
-        <div className="footer-brand">
-          <a className="brand brand-light" href="/">
-            <img className="brand-logo" src="/logo.png" alt="Sunnyland" />
-          </a>
-          <p>Novel sports and games, made in Ningbo and played around the world.</p>
-        </div>
-        <div><strong>Explore</strong><a href="/products">Products</a><a href="/about">About us</a><a href="/news">News</a></div>
-        <div><strong>Contact</strong><a href="tel:+8613003751301">+86 130 0375 1301</a><a href="mailto:info@chinasunnyland.com">Email us</a><span>King Intl Mansion, Haishu District,<br />Ningbo, China</span></div>
-        <div className="footer-bottom"><span>© {new Date().getFullYear()} Sunnyland. All rights reserved.</span><a href="/admin">Content manager</a></div>
-      </footer>
+      <SiteFooter />
     </main>
   );
 }
