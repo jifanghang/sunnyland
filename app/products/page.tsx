@@ -5,6 +5,7 @@ import { SiteFooter, SiteHeader } from "../SiteChrome";
 import { productCategories } from "../../lib/product-categories";
 import { galleryFor } from "../data/product-galleries";
 import ProductCard from "./ProductCard";
+import ExpandableProductGrid from "./ExpandableProductGrid";
 import "./products.css";
 
 export const dynamic = "force-dynamic";
@@ -58,7 +59,7 @@ export default async function ProductsPage() {
           <div><span className="kicker">Signature collection</span><h2>Curling,<br /><em>off the ice.</em></h2></div>
           <p>Portable formats for schools, clubs, activity spaces, families and every smooth floor between.</p>
         </div>
-        <div className="catalog-grid">
+        <ExpandableProductGrid itemCount={curlingProducts.length} category="Curling game">
           {curlingProducts.map((product) => (
             <ProductCard product={{
               code: product.code,
@@ -70,7 +71,7 @@ export default async function ProductsPage() {
               badge: product.badge,
             }} key={product.code} />
           ))}
-        </div>
+        </ExpandableProductGrid>
       </section>
 
       <section className="catalog-groups">
@@ -81,7 +82,7 @@ export default async function ProductsPage() {
               <h2>{category}</h2>
               <p>{categoryProducts.length} products in this collection</p>
             </div>
-            <div className="catalog-grid">
+            <ExpandableProductGrid itemCount={categoryProducts.length} category={category}>
               {categoryProducts.map((product) => (
                 <ProductCard product={{
                   code: product.slug.toUpperCase(),
@@ -93,7 +94,7 @@ export default async function ProductsPage() {
                   featured: product.featured,
                 }} key={product.id} />
               ))}
-            </div>
+            </ExpandableProductGrid>
           </div>
         ))}
       </section>

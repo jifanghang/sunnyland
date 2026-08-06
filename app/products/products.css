@@ -35,12 +35,19 @@
 .catalog-categories a { flex: 0 0 auto; padding: 11px 15px; border: 1px solid rgba(255,255,255,.35); font-size: 9px; font-weight: 900; letter-spacing: .09em; text-transform: uppercase; transition: background .18s ease, border-color .18s ease; }
 .catalog-categories a:hover { background: var(--sun); color: var(--white); border-color: var(--white); }
 .catalog-signature, .catalog-group { padding: clamp(90px, 10vw, 150px) clamp(20px, 6vw, 96px); scroll-margin-top: 20px; }
-.catalog-signature { background: var(--cream); }
+.catalog-signature { --category-bg: var(--cream); background: var(--cream); }
 .catalog-section-heading { margin-bottom: 65px; display: grid; grid-template-columns: 1.15fr .85fr; gap: 10vw; align-items: end; }
 .catalog-section-heading h2 { margin: 18px 0 0; font-size: clamp(58px, 7vw, 108px); line-height: .82; letter-spacing: -.075em; font-weight: 950; text-transform: uppercase; }
 .catalog-section-heading h2 em { color: var(--orange); font-family: Georgia, "Times New Roman", serif; font-weight: 500; text-transform: none; }
 .catalog-section-heading > p { max-width: 520px; margin: 0 0 10px; color: rgba(22,48,92,.7); font-size: 17px; line-height: 1.65; }
 .catalog-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 58px 22px; }
+.expandable-products { width: 100%; scroll-margin-top: 20px; }
+.product-grid-window { position: relative; overflow: hidden; transition: max-height .55s cubic-bezier(.22,.75,.22,1); }
+.expandable-products.collapsed .product-grid-window::after { content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: min(240px, 28vw); pointer-events: none; background: linear-gradient(to bottom, transparent, var(--category-bg) 88%); }
+.show-all-products { min-width: 230px; margin: 30px auto 0; padding: 15px 18px; position: relative; z-index: 2; display: flex; justify-content: center; align-items: center; gap: 18px; color: white; background: var(--ink); border: 1px solid var(--ink); font: inherit; font-size: 10px; font-weight: 900; letter-spacing: .1em; text-transform: uppercase; cursor: pointer; transition: background .18s ease, color .18s ease, transform .18s ease; }
+.show-all-products:hover { color: var(--ink); background: var(--sun); transform: translateY(-2px); }
+.show-all-products:focus-visible { outline: 3px solid var(--orange); outline-offset: 4px; }
+.show-all-products i { font-style: normal; font-size: 16px; line-height: 1; }
 .catalog-card { min-width: 0; display: flex; flex-direction: column; align-items: flex-start; transition: transform .25s ease; }
 .catalog-card:hover { transform: translateY(-5px); }
 .catalog-card-open { width: 100%; height: 100%; padding: 0; display: flex; flex-direction: column; align-items: flex-start; color: inherit; font: inherit; text-align: left; background: transparent; border: 0; cursor: pointer; }
@@ -81,9 +88,9 @@
 @keyframes modal-fade { from { opacity: 0; } }
 @keyframes modal-rise { from { opacity: 0; transform: translateY(18px) scale(.985); } }
 .catalog-groups { background: var(--paper); }
-.catalog-group { border-top: 1px solid var(--ink); }
-.catalog-group-1 { background: var(--sheet); }
-.catalog-group-2 { background: var(--cream); }
+.catalog-group { --category-bg: var(--paper); border-top: 1px solid var(--ink); }
+.catalog-group-1 { --category-bg: var(--sheet); background: var(--sheet); }
+.catalog-group-2 { --category-bg: var(--cream); background: var(--cream); }
 .catalog-group-heading { margin-bottom: 48px; display: grid; grid-template-columns: 55px 1fr auto; align-items: end; gap: 20px; }
 .catalog-group-heading > span { color: var(--orange); font-size: 11px; font-weight: 900; }
 .catalog-group-heading h2 { margin: 0; font-size: clamp(43px, 5vw, 76px); letter-spacing: -.065em; text-transform: uppercase; }
@@ -105,6 +112,7 @@
   .catalog-hero-collage { min-height: 540px; border-left: 0; border-top: 1px solid var(--ink); }
   .catalog-section-heading, .catalog-cta { grid-template-columns: 1fr; gap: 30px; }
   .catalog-grid { grid-template-columns: 1fr; gap: 48px; }
+  .expandable-products.collapsed .product-grid-window::after { height: 180px; }
   .catalog-group-heading { grid-template-columns: 36px 1fr; gap: 13px; }
   .catalog-cta > span { grid-column: auto; }
   .product-modal-backdrop { padding: 0; align-items: end; }
