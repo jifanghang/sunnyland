@@ -35,14 +35,14 @@ export default function CurlingCarousel() {
       </div>
       <div className="curling-track" ref={track} tabIndex={0} aria-label="Sunnyland curling products">
         {curlingProducts.map((product, index) => (
-          <a className="curling-card" href="/products#curling" key={product.code}>
+          <a className="curling-card" href="/products#curling-game" key={product.code}>
             <div className="curling-image">
               <img src={product.image} alt={product.title} />
               <span>{product.badge}</span>
               <b>{String(index + 1).padStart(2, "0")}</b>
             </div>
             <div className="curling-card-copy">
-              <div><span>{product.code}</span><span>Curling collection</span></div>
+              <div><span>{product.code}</span><span>Curling game</span></div>
               <h3>{product.title}</h3>
               <p>{product.copy}</p>
             </div>
@@ -51,7 +51,7 @@ export default function CurlingCarousel() {
       </div>
       <div className="curling-footer">
         <div className="carousel-hint"><span /> Drag or use the arrows to explore the range</div>
-        <a className="curling-more-link" href="/products#curling">
+        <a className="curling-more-link" href="/products#curling-game">
           View all curling products <span aria-hidden="true">↗</span>
         </a>
       </div>

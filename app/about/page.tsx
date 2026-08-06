@@ -69,7 +69,7 @@ export default function AboutPage() {
           <img src="/about-production.jpg" alt="Sunnyland production base in Ningbo" />
           <div className="about-year"><strong>2008</strong><span>Founded in<br />Ningbo, China</span></div>
           <div className="about-photo-card">
-            <img src="/curling-2in1.jpg" alt="Sunnyland signature curling and shuffleboard set" />
+            <img src="/curling-ssc001-a.jpg" alt="Sunnyland SSC001-A floor curling stone set" />
             <span>Signature collection · Curling</span>
           </div>
         </div>
@@ -120,7 +120,7 @@ export default function AboutPage() {
             <div><span>01 · Company</span><h3>Meet Sunnyland</h3><p>A concise introduction to our team and the games we bring to market.</p></div>
           </article>
           <article className="video-card">
-            <video controls preload="metadata" poster="/curling-floor.jpg">
+            <video controls preload="metadata" poster="/curling-ssc001-f.jpg">
               <source src="/about-products.mp4" type="video/mp4" />
             </video>
             <div><span>02 · Products</span><h3>Play in action</h3><p>A closer look at Sunnyland sports and game concepts.</p></div>

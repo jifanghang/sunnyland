@@ -27,18 +27,30 @@ test("defines the complete Sunnyland landing page", async () => {
 });
 
 test("provides catalogue, news index and managed article pages", async () => {
-  const [products, news, article, content, admin, migration] = await Promise.all([
+  const [products, productsCss, news, article, content, admin, migration, categories, home, hero, curling, productCard, galleries, expandableGrid] = await Promise.all([
     readFile(new URL("../app/products/page.tsx", import.meta.url), "utf8"),
+    readFile(new URL("../app/products/products.css", import.meta.url), "utf8"),
     readFile(new URL("../app/news/page.tsx", import.meta.url), "utf8"),
     readFile(new URL("../app/news/[slug]/page.tsx", import.meta.url), "utf8"),
     readFile(new URL("../db/content.ts", import.meta.url), "utf8"),
     readFile(new URL("../app/admin/AdminManager.tsx", import.meta.url), "utf8"),
     readFile(new URL("../drizzle/0001_add_content_body.sql", import.meta.url), "utf8"),
+    readFile(new URL("../lib/product-categories.ts", import.meta.url), "utf8"),
+    readFile(new URL("../app/page.tsx", import.meta.url), "utf8"),
+    readFile(new URL("../app/HeroCarousel.tsx", import.meta.url), "utf8"),
+    readFile(new URL("../app/data/curling.ts", import.meta.url), "utf8"),
+    readFile(new URL("../app/products/ProductCard.tsx", import.meta.url), "utf8"),
+    readFile(new URL("../app/data/product-galleries.ts", import.meta.url), "utf8"),
+    readFile(new URL("../app/products/ExpandableProductGrid.tsx", import.meta.url), "utf8"),
   ]);
 
   assert.match(products, /The Sunnyland range/);
   assert.match(products, /curlingProducts/);
   assert.match(products, /Request the full catalogue/);
+  assert.match(products, /catalog-cta-comics/);
+  assert.match(products, /catalog-comic-track/);
+  assert.match(productsCss, /@keyframes catalogue-comic-roll/);
+  assert.match(productsCss, /prefers-reduced-motion[\s\S]*\.catalog-comic-track \{ animation: none; \}/);
   assert.match(news, /Ideas in play/);
   assert.match(article, /article\.body/);
   assert.match(article, /More from Sunnyland/);
@@ -50,7 +62,43 @@ test("provides catalogue, news index and managed article pages", async () => {
   assert.match(content, /new-iceless-curling-stone\.jpg/);
   assert.match(content, /WHERE NOT EXISTS/);
   assert.match(admin, /Page content/);
+  assert.match(admin, /productCategories/);
   assert.match(migration, /ADD COLUMN body/);
+  for (const category of ["Curling game", "Other indoor sports", "Outdoor leisure sports", "Indoor game"]) {
+    assert.match(categories, new RegExp(category));
+  }
+  assert.match(home, /productCategories/);
+  assert.match(hero, /<strong>4<\/strong>/);
+  assert.match(products, /4 categories/);
+  for (const code of ["SSC001-A", "SSC001-B", "SSC001-C", "SSC001-D", "SSC001-E", "SSC001-F"]) {
+    assert.match(curling, new RegExp(code));
+  }
+  assert.doesNotMatch(curling, /SSC003B|SSC010|SSC007|SSC003A|SSC002/);
+  assert.match(curling, /150 × 520 cm/);
+  assert.match(content, /SSC001-F: our 20 cm floor curling set/);
+  assert.match(content, /Six floor curling sets, one focused range/);
+  assert.doesNotMatch(content, /Two ways to play: shuffleboard meets curling/);
+  const migratedCodes = [
+    "SSG011", "SSB002", "SSB001", "SSO020", "SSO001", "SSO014", "SSO009", "SSO004", "SSDT005", "SSDT003",
+    "SSG001", "SSL008", "SSL006", "SSL001", "SSL002", "SSL003",
+    "SSD002", "SSD001", "SSD007", "SSD008", "SSD009", "SSO021",
+  ];
+  for (const code of migratedCodes) {
+    assert.match(content, new RegExp(`slug: "${code}"`));
+    assert.match(content, new RegExp(`imageUrl: "/product-${code.toLowerCase()}\\.jpg"`));
+  }
+  assert.equal((content.match(/type: "product"/g) || []).length, 22);
+  assert.match(products, /ProductCard/);
+  assert.match(productCard, /role="dialog"/);
+  assert.match(productCard, /aria-modal="true"/);
+  assert.match(productCard, /createPortal/);
+  assert.match(productCard, /Previous product photo/);
+  assert.match(galleries, /product-ssg001-4\.jpg/);
+  assert.match(galleries, /product-ssd002-3\.jpg/);
+  assert.match(products, /ExpandableProductGrid/);
+  assert.match(expandableGrid, /Show all \$\{itemCount\} products/);
+  assert.match(expandableGrid, /ResizeObserver/);
+  assert.match(expandableGrid, /aria-expanded/);
 });
 
 test("uses one shared height for every jumbotron slide", async () => {

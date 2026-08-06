@@ -2,6 +2,7 @@
 
 import { FormEvent, useMemo, useState } from "react";
 import type { ContentItem, ContentInput, ContentType } from "../../db/content";
+import { productCategories } from "../../lib/product-categories";
 import "./admin.css";
 
 const blankItem: ContentInput = {
@@ -11,7 +12,7 @@ const blankItem: ContentInput = {
   summary: "",
   body: "",
   category: "",
-  imageUrl: "/golf.jpg",
+  imageUrl: "/product-ssg011.jpg",
   publishedAt: new Date().toISOString().slice(0, 10),
   featured: false,
   sortOrder: 0,
@@ -30,7 +31,7 @@ export default function AdminManager({ initialItems, userName }: { initialItems:
   function beginNew(type: ContentType) {
     setFilter(type);
     setEditingId(null);
-    setDraft({ ...blankItem, type, imageUrl: type === "product" ? "/golf.jpg" : "/about.jpg" });
+    setDraft({ ...blankItem, type, imageUrl: type === "product" ? "/product-ssg011.jpg" : "/about.jpg" });
     setMessage("");
     document.getElementById("editor")?.scrollIntoView({ behavior: "smooth" });
   }
@@ -61,7 +62,7 @@ export default function AdminManager({ initialItems, userName }: { initialItems:
         : [...current, savedItem]);
       setMessage(editingId ? "Changes published." : "New item published.");
       setEditingId(null);
-      setDraft({ ...blankItem, type: filter, imageUrl: filter === "product" ? "/golf.jpg" : "/about.jpg" });
+      setDraft({ ...blankItem, type: filter, imageUrl: filter === "product" ? "/product-ssg011.jpg" : "/about.jpg" });
     } else {
       const error =
         result && typeof result === "object" && "error" in result
@@ -135,7 +136,14 @@ export default function AdminManager({ initialItems, userName }: { initialItems:
           <form onSubmit={save}>
             <div className="form-grid">
               <label>Content type<select value={draft.type} onChange={(event) => setDraft({ ...draft, type: event.target.value as ContentType })}><option value="product">Product</option><option value="news">News</option></select></label>
-              <label>Category<input required value={draft.category} onChange={(event) => setDraft({ ...draft, category: event.target.value })} placeholder="e.g. Lawn games" /></label>
+              <label>Category{draft.type === "product" ? (
+                <select required value={draft.category} onChange={(event) => setDraft({ ...draft, category: event.target.value })}>
+                  <option value="" disabled>Select a product category</option>
+                  {productCategories.map((category) => <option value={category} key={category}>{category}</option>)}
+                </select>
+              ) : (
+                <input required value={draft.category} onChange={(event) => setDraft({ ...draft, category: event.target.value })} placeholder="e.g. New product" />
+              )}</label>
               <label className="wide">Title<input required value={draft.title} onChange={(event) => setDraft({ ...draft, title: event.target.value })} placeholder="A clear, customer-friendly title" /></label>
               <label>Product code / slug<input required value={draft.slug} onChange={(event) => setDraft({ ...draft, slug: event.target.value })} placeholder="e.g. SSL004" /></label>
               <label>Publish date<input required type="date" value={draft.publishedAt} onChange={(event) => setDraft({ ...draft, publishedAt: event.target.value })} /></label>
