@@ -87,9 +87,9 @@ export default function HeroCarousel({ topNews }: { topNews: HeroNews }) {
           </div>
         </div>
         <div className="range-visual" aria-label="Selection of Sunnyland products">
-          <figure className="range-shot range-shot-main"><img src="/golf.jpg" alt="Pop-up golf chipping net" /></figure>
-          <figure className="range-shot range-shot-left"><img src="/checkers.jpg" alt="Three-in-one giant checkers" /></figure>
-          <figure className="range-shot range-shot-right"><img src="/ladder-ball.jpg" alt="Ladder ball toss game" /></figure>
+          <figure className="range-shot range-shot-main"><img src="/product-ssg011.jpg" alt="Golf pong game set" /></figure>
+          <figure className="range-shot range-shot-left"><img src="/product-ssb001.jpg" alt="Three-in-one giant checkers" /></figure>
+          <figure className="range-shot range-shot-right"><img src="/product-ssl002.jpg" alt="Ladder ball toss game" /></figure>
           <div className="range-callout"><strong>4</strong><span>product<br />categories</span></div>
         </div>
       </div>

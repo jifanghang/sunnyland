@@ -12,7 +12,7 @@ const blankItem: ContentInput = {
   summary: "",
   body: "",
   category: "",
-  imageUrl: "/golf.jpg",
+  imageUrl: "/product-ssg011.jpg",
   publishedAt: new Date().toISOString().slice(0, 10),
   featured: false,
   sortOrder: 0,
@@ -31,7 +31,7 @@ export default function AdminManager({ initialItems, userName }: { initialItems:
   function beginNew(type: ContentType) {
     setFilter(type);
     setEditingId(null);
-    setDraft({ ...blankItem, type, imageUrl: type === "product" ? "/golf.jpg" : "/about.jpg" });
+    setDraft({ ...blankItem, type, imageUrl: type === "product" ? "/product-ssg011.jpg" : "/about.jpg" });
     setMessage("");
     document.getElementById("editor")?.scrollIntoView({ behavior: "smooth" });
   }
@@ -62,7 +62,7 @@ export default function AdminManager({ initialItems, userName }: { initialItems:
         : [...current, savedItem]);
       setMessage(editingId ? "Changes published." : "New item published.");
       setEditingId(null);
-      setDraft({ ...blankItem, type: filter, imageUrl: filter === "product" ? "/golf.jpg" : "/about.jpg" });
+      setDraft({ ...blankItem, type: filter, imageUrl: filter === "product" ? "/product-ssg011.jpg" : "/about.jpg" });
     } else {
       const error =
         result && typeof result === "object" && "error" in result

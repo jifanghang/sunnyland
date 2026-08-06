@@ -40,8 +40,8 @@ export default async function ProductsPage() {
         </div>
         <div className="catalog-hero-collage">
           <img src="/curling-ssc001-a.jpg" alt="SSC001-A floor curling stone set" />
-          <img src="/golf.jpg" alt="Pop-up golf game" />
-          <img src="/checkers.jpg" alt="Giant checkers set" />
+          <img src="/product-ssg011.jpg" alt="Golf pong game set" />
+          <img src="/product-ssb001.jpg" alt="Giant checkers set" />
           <span>4 categories<br /><strong>One playful partner</strong></span>
         </div>
       </section>

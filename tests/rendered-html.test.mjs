@@ -70,6 +70,16 @@ test("provides catalogue, news index and managed article pages", async () => {
   assert.match(content, /SSC001-F: our 20 cm floor curling set/);
   assert.match(content, /Six floor curling sets, one focused range/);
   assert.doesNotMatch(content, /Two ways to play: shuffleboard meets curling/);
+  const migratedCodes = [
+    "SSG011", "SSB002", "SSB001", "SSO020", "SSO001", "SSO014", "SSO009", "SSO004", "SSDT005", "SSDT003",
+    "SSG001", "SSL008", "SSL006", "SSL001", "SSL002", "SSL003",
+    "SSD002", "SSD001", "SSD007", "SSD008", "SSD009", "SSO021",
+  ];
+  for (const code of migratedCodes) {
+    assert.match(content, new RegExp(`slug: "${code}"`));
+    assert.match(content, new RegExp(`imageUrl: "/product-${code.toLowerCase()}\\.jpg"`));
+  }
+  assert.equal((content.match(/type: "product"/g) || []).length, 22);
 });
 
 test("uses one shared height for every jumbotron slide", async () => {
