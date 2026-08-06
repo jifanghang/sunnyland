@@ -74,32 +74,33 @@ export default function AboutPage() {
       </section>
 
       <section className="about-story" id="story">
-        <div className="about-story-heading">
-          <h2>Who we are</h2>
-          <p className="story-subtitle">One team.<br />A world of <em>play.</em></p>
+        <div className="about-story-content">
+          <div className="about-story-heading">
+            <h2>Who we are</h2>
+            <p className="story-subtitle">One team.<br />A world of <em>play.</em></p>
+          </div>
+          <div className="about-story-copy">
+            <p className="story-lead">
+              Ningbo Haishu Advancing &amp; Rising Trading Co., Ltd. was founded
+              in 2008, close to both Ningbo and Shanghai ports.
+            </p>
+            <p>
+              What began as a specialist supplier of novel sporting goods has
+              grown into an integrated product-development, manufacturing and
+              export business. Sunnyland now makes curling and shuffleboard sets,
+              golf products, darts, board games, lawn games and party games.
+            </p>
+            <p>
+              Our signature floor-curling range reflects the way we work: start
+              with an accessible idea, refine the mechanics and materials, then
+              build it reliably at scale. That focus has earned Sunnyland a
+              strong reputation with retailers and sporting-goods customers in
+              Europe, North America and Asia.
+            </p>
+          </div>
         </div>
-        <div className="about-story-copy">
-          <p className="story-lead">
-            Ningbo Haishu Advancing &amp; Rising Trading Co., Ltd. was founded
-            in 2008, close to both Ningbo and Shanghai ports.
-          </p>
-          <p>
-            What began as a specialist supplier of novel sporting goods has
-            grown into an integrated product-development, manufacturing and
-            export business. Sunnyland now makes curling and shuffleboard sets,
-            golf products, darts, board games, lawn games and party games.
-          </p>
-          <p>
-            Our signature floor-curling range reflects the way we work: start
-            with an accessible idea, refine the mechanics and materials, then
-            build it reliably at scale. That focus has earned Sunnyland a
-            strong reputation with retailers and sporting-goods customers in
-            Europe, North America and Asia.
-          </p>
-        </div>
+        <AboutStats stats={capabilities} />
       </section>
-
-      <AboutStats stats={capabilities} />
 
       <section className="global-section">
         <div className="global-heading">

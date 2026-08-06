@@ -11,7 +11,7 @@ type Stat = {
 const numberFormatter = new Intl.NumberFormat("en-GB");
 
 export default function AboutStats({ stats }: { stats: Stat[] }) {
-  const sectionRef = useRef<HTMLElement>(null);
+  const sectionRef = useRef<HTMLDivElement>(null);
   const [isVisible, setIsVisible] = useState(false);
   const [counts, setCounts] = useState(() => stats.map(() => 0));
 
@@ -64,7 +64,7 @@ export default function AboutStats({ stats }: { stats: Stat[] }) {
   }, [isVisible, stats]);
 
   return (
-    <section
+    <div
       ref={sectionRef}
       className={`capacity-strip${isVisible ? " is-visible" : ""}`}
       aria-label="Sunnyland production capacity"
@@ -77,6 +77,6 @@ export default function AboutStats({ stats }: { stats: Stat[] }) {
           <span>{stat.label}</span>
         </div>
       ))}
-    </section>
+    </div>
   );
 }
