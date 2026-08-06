@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { SiteFooter, SiteHeader } from "../SiteChrome";
 import AboutStats from "./AboutStats";
+import ShowroomSlideshow from "./ShowroomSlideshow";
 import "./about.css";
 
 export const metadata: Metadata = {
@@ -133,10 +134,8 @@ export default function AboutPage() {
             <div><span>02 · Products</span><h3>Play in action</h3><p>A closer look at Sunnyland sports and game concepts.</p></div>
           </article>
           <article className="video-card">
-            <video controls preload="metadata" poster="/about-assembly.jpg">
-              <source src="/about-factory.mp4" type="video/mp4" />
-            </video>
-            <div><span>03 · Factory</span><h3>Where ideas are made</h3><p>A view inside our Ningbo manufacturing operation.</p></div>
+            <ShowroomSlideshow />
+            <div><span>03 · Showroom</span><h3>Ready to discover</h3><p>A look inside the product showroom where customers explore the Sunnyland range.</p></div>
           </article>
         </div>
       </section>
@@ -154,8 +153,10 @@ export default function AboutPage() {
         </div>
         <div className="factory-gallery">
           <figure className="factory-photo factory-photo-wide">
-            <img src="/about-production.jpg" alt="Exterior of the Sunnyland production base" />
-            <figcaption><span>01</span><strong>Production base</strong><small>Ningbo, China</small></figcaption>
+            <video controls preload="metadata" poster="/about-production.jpg">
+              <source src="/about-factory.mp4" type="video/mp4" />
+            </video>
+            <figcaption><span>01</span><strong>Factory video tour</strong><small>Watch now</small></figcaption>
           </figure>
           <figure className="factory-photo">
             <img src="/about-assembly.jpg" alt="Injection moulding equipment inside the Sunnyland factory" />
