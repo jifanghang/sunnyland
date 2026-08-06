@@ -98,24 +98,42 @@
   grid-template-columns: .9fr 1.1fr;
   gap: clamp(50px, 10vw, 170px);
   align-items: start;
+  background: var(--blue);
+  color: var(--white);
 }
-.about-story h2 { font-size: clamp(54px, 6.3vw, 96px); }
+.about-story h2 { margin-top: 0; font-size: clamp(58px, 6.8vw, 104px); }
+.story-subtitle {
+  margin: 0;
+  color: rgba(255,255,255,.82);
+  font-size: clamp(25px, 2.6vw, 40px);
+  font-weight: 900;
+  letter-spacing: -.045em;
+  line-height: 1;
+  text-transform: uppercase;
+}
+.story-subtitle em {
+  font-family: Georgia, "Times New Roman", serif;
+  font-weight: 500;
+  letter-spacing: -.04em;
+  text-transform: none;
+  color: var(--blush);
+}
 .about-story-copy { padding-top: 42px; }
-.about-story-copy p { max-width: 680px; margin: 0 0 24px; color: rgba(22,48,92,.7); font-size: 15px; line-height: 1.8; }
-.about-story-copy .story-lead { color: var(--ink); font-size: 23px; line-height: 1.45; letter-spacing: -.02em; }
+.about-story-copy p { max-width: 680px; margin: 0 0 24px; color: rgba(255,255,255,.7); font-size: 15px; line-height: 1.8; }
+.about-story-copy .story-lead { color: var(--white); font-size: 23px; line-height: 1.45; letter-spacing: -.02em; }
 
 .capacity-strip {
   display: grid;
   grid-template-columns: repeat(5, 1fr);
-  background: var(--ink);
+  background: var(--orange);
   color: var(--cream);
-  border-top: 1px solid var(--ink);
-  border-bottom: 1px solid var(--ink);
+  border-top: 1px solid rgba(255,255,255,.28);
+  border-bottom: 1px solid var(--orange);
 }
 .capacity-strip div { min-height: 170px; padding: 33px 24px; display: flex; flex-direction: column; justify-content: space-between; }
 .capacity-strip div + div { border-left: 1px solid rgba(255,255,255,.2); }
-.capacity-strip strong { color: var(--blush); font-size: clamp(34px, 4vw, 58px); letter-spacing: -.06em; }
-.capacity-strip span { color: rgba(255,255,255,.68); font-size: 9px; font-weight: 900; letter-spacing: .1em; text-transform: uppercase; }
+.capacity-strip strong { color: var(--white); font-size: clamp(34px, 4vw, 58px); letter-spacing: -.06em; }
+.capacity-strip div > span { color: rgba(255,255,255,.78); font-size: 9px; font-weight: 900; letter-spacing: .1em; text-transform: uppercase; }
 .capacity-strip div {
   opacity: 0;
   transform: translateY(18px);

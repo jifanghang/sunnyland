@@ -11,11 +11,11 @@ export const metadata: Metadata = {
 };
 
 const capabilities = [
-  ["5,000 m²", "Production base"],
-  ["100+", "Team members"],
-  ["8", "Injection machines"],
-  ["5", "Assembly lines"],
-  ["1", "UV printing line"],
+  { value: 5000, suffix: " m²", label: "Production base" },
+  { value: 100, suffix: "+", label: "Team members" },
+  { value: 8, suffix: "", label: "Injection machines" },
+  { value: 5, suffix: "", label: "Assembly lines" },
+  { value: 1, suffix: "", label: "UV printing line" },
 ];
 
 const standards = [
@@ -75,8 +75,8 @@ export default function AboutPage() {
 
       <section className="about-story" id="story">
         <div className="about-story-heading">
-          <span className="kicker">Who we are</span>
-          <h2>One team.<br />A world of <em>play.</em></h2>
+          <h2>Who we are</h2>
+          <p className="story-subtitle">One team.<br />A world of <em>play.</em></p>
         </div>
         <div className="about-story-copy">
           <p className="story-lead">

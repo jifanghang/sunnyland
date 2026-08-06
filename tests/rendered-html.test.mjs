@@ -160,13 +160,15 @@ test("includes the content manager and durable database binding", async () => {
 });
 
 test("includes a media-rich company and factory page", async () => {
-  const [about, aboutCss] = await Promise.all([
+  const [about, aboutCss, aboutStats] = await Promise.all([
     readFile(new URL("../app/about/page.tsx", import.meta.url), "utf8"),
     readFile(new URL("../app/about/about.css", import.meta.url), "utf8"),
+    readFile(new URL("../app/about/AboutStats.tsx", import.meta.url), "utf8"),
   ]);
 
   assert.match(about, /5,000 m²/);
-  assert.match(about, /100\+/);
+  assert.match(about, /value: 100, suffix: "\+"/);
+  assert.match(aboutStats, /requestAnimationFrame/);
   assert.match(about, /about-company\.mp4/);
   assert.match(about, /about-factory\.mp4/);
   assert.match(about, /BSCI/);
