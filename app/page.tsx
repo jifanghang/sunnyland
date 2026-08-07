@@ -51,12 +51,12 @@ export default async function Home() {
       <section className="section products-section" id="products">
         <div className="section-heading">
           <div>
-            <span className="kicker">Made to move</span>
+            <span className="kicker">Wide product range</span>
             <h2>Made for<br />real play.</h2>
           </div>
           <p>
-            From the garden to the games room, each collection is designed for
-            intuitive play, easy setup and one more round.
+            We have indoor sports, outdoor leisures, and indoor games.
+            Each collection is designed for easy setup and intuitive play.
           </p>
         </div>
         <div className="product-grid">

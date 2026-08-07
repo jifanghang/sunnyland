@@ -80,11 +80,11 @@ export default function CurlingCarousel() {
         <div className="company-proof-intro">
           <div>
             <span className="kicker">One partner, end to end</span>
-            <h2 id="company-proof-title">Made in Ningbo.<br /><em>Ready for your market.</em></h2>
+            <h2 id="company-proof-title">From Ningbo<br /><em>To your market.</em></h2>
           </div>
           <div className="company-proof-copy">
             <p>
-              Since 2008, Sunnyland has brought design, tooling, production,
+              Since 2008, Sunnyland has brought design, production,
               quality control and export coordination together for brands and
               distributors around the world.
             </p>
