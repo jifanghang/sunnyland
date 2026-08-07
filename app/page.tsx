@@ -117,7 +117,7 @@ export default async function Home() {
         </div>
       </section>
 
-      <section className="faq-section" id="about" aria-labelledby="faq-title">
+      <section className="faq-section" id="faq" aria-labelledby="faq-title">
         <div className="faq-intro">
           <span className="kicker">Before we make it</span>
           <h2 id="faq-title">Questions,<br /><em>answered.</em></h2>
@@ -206,7 +206,7 @@ export default async function Home() {
           <input type="hidden" name="_subject" value="New inquiry from the Sunnyland website" />
           <input type="hidden" name="_template" value="table" />
           <input type="hidden" name="_captcha" value="false" />
-          <div className="form-title"><span>Start an inquiry</span><b>01</b></div>
+          <div className="form-title"><span>Start an inquiry</span></div>
           <label>
             Your name
             <input type="text" name="name" autoComplete="name" required placeholder="Name or company" />

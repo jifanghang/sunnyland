@@ -70,9 +70,14 @@ export default function CurlingCarousel() {
         </div>
         <div className="curling-footer">
           <div className="carousel-hint"><span /> Drag or use the arrows to explore the range</div>
-          <a className="curling-more-link" href="/products#curling-game">
-            View all curling products <span aria-hidden="true">↗</span>
-          </a>
+          <div className="curling-footer-links">
+            <a className="curling-more-link" href="/products#curling-game">
+              View all curling products <span aria-hidden="true">↗</span>
+            </a>
+            <a className="curling-categories-button" href="#products">
+              Other product categories <span aria-hidden="true">↓</span>
+            </a>
+          </div>
         </div>
       </section>
 
@@ -86,9 +91,15 @@ export default function CurlingCarousel() {
             <p>
               Since 2008, Sunnyland has brought design, production,
               quality control and export coordination together for brands and
-              distributors around the world.
+              distributors around the world. From early product development to
+              final container loading, every stage is managed by one experienced
+              team in Ningbo. We help partners turn market ideas into dependable,
+              retail-ready ranges with clear communication at every step.
             </p>
-            <a className="button company-proof-button" href="/about">Meet Sunnyland <span aria-hidden="true">↗</span></a>
+            <div className="company-proof-actions">
+              <a className="button company-proof-button" href="/about">Meet Sunnyland <span aria-hidden="true">↗</span></a>
+              <a className="button company-proof-faq-button" href="#faq">Read our FAQs <span aria-hidden="true">↓</span></a>
+            </div>
           </div>
         </div>
 
