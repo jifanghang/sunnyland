@@ -73,13 +73,13 @@ export default function HeroCarousel({ topNews }: { topNews: HeroNews }) {
       <div className={`hero-slide hero-slide-range ${active === 1 ? "is-active" : ""}`} aria-hidden={active !== 1} inert={active !== 1 ? true : undefined}>
         <div className="hero-copy">
           <div className="eyebrow"><span /> For brands &amp; distributors</div>
-          <h1>Built for<br /><em>your market.</em></h1>
+          <h1>Your brand.<br /><em>Our production line.</em></h1>
           <p>
-            Source proven games, customise the details and scale from sample to
-            production with one experienced Ningbo team.
+            15 years making game products in Ningbo. Private label, custom pack-outs,
+            and orders that scale from a 500-unit sample run to full container loads.
           </p>
           <div className="hero-actions">
-            <a className="button" href="/products">Browse the range <span aria-hidden="true">↗</span></a>
+            <a className="button" href="/products">Browse products <span aria-hidden="true">↗</span></a>
             <a className="text-link" href="/#contact">Start an inquiry <span aria-hidden="true">↗</span></a>
           </div>
           <div className="hero-range-tags" aria-label="Buyer services">

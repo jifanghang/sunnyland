@@ -1,0 +1,11 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "sunnyland-dev",
+      "runtimeExecutable": "sh",
+      "runtimeArgs": ["-c", "PATH=/usr/local/opt/node/bin:$PATH npm run dev"],
+      "port": 3000
+    }
+  ]
+}

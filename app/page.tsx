@@ -89,7 +89,7 @@ export default async function Home() {
           <span className="kicker">Before we make it</span>
           <h2 id="faq-title">Questions,<br /><em>answered.</em></h2>
           <p>
-            The practical details buyers ask before placing an order—from
+            The practical details buyers ask before placing an order, from
             samples and lead times to documentation and delivery.
           </p>
           <a className="button button-cream" href="#contact">Ask us anything <span aria-hidden="true">↗</span></a>
