@@ -661,17 +661,16 @@ section[id] { scroll-margin-top: 118px; }
 .faq-intro h2 { margin: 22px 0 30px; font-size: clamp(58px, 7vw, 108px); line-height: .84; letter-spacing: -.045em; font-stretch: 118%; text-transform: uppercase; }
 .faq-intro h2 em { color: var(--blush); }
 .faq-intro p { max-width: 500px; margin: 0 0 36px; color: rgba(255,255,255,.7); font-size: 16px; line-height: 1.65; }
-.faq-list { border-top: 2px solid var(--cream); interpolate-size: allow-keywords; }
+.faq-list { border-top: 2px solid var(--cream); }
 .faq-list details { border-bottom: 1px solid rgba(255,255,255,.24); }
-.faq-list details::details-content { block-size: 0; opacity: 0; overflow: hidden; transition: block-size .32s ease, opacity .24s ease, content-visibility .32s allow-discrete; }
-.faq-list details[open]::details-content { block-size: auto; opacity: 1; }
 .faq-list summary { min-height: 96px; padding: 24px 2px; display: grid; grid-template-columns: 46px 1fr 32px; gap: 16px; align-items: center; cursor: pointer; list-style: none; }
 .faq-list summary::-webkit-details-marker { display: none; }
 .faq-list summary > span { color: var(--blush); font-size: 9px; font-weight: 950; letter-spacing: .1em; }
 .faq-list summary strong { font-size: clamp(20px, 2vw, 28px); line-height: 1.05; letter-spacing: -.035em; }
 .faq-list summary i { width: 30px; height: 30px; display: grid; place-items: center; border: 1px solid var(--cream); border-radius: 50%; font-size: 19px; font-style: normal; transition: transform .25s ease, background .25s ease, color .25s ease; }
 .faq-list details[open] summary i { transform: rotate(45deg); background: var(--red); color: var(--white); border-color: var(--white); }
-.faq-list details p { margin: -6px 48px 0 64px; padding: 0 0 30px; color: rgba(255,255,255,.7); font-size: 14px; line-height: 1.7; }
+.faq-list details p { display: none; margin: 0 48px 30px 64px; color: rgba(255,255,255,.7); font-size: 14px; line-height: 1.7; }
+.faq-list details[open] p { display: block; }
 
 .news-section { background: var(--sheet); }
 .news-heading { margin-bottom: 60px; }
