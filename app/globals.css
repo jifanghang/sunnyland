@@ -406,8 +406,9 @@ section[id] { scroll-margin-top: 118px; }
 .hero-range-tags { width: 100%; margin-top: 38px; padding-top: 0; display: grid; grid-template-columns: repeat(2, 1fr); }
 .hero-range-tags span { padding: 13px 0; border-top: 1px solid rgba(22,48,92,.26); font-size: 10px; font-weight: 900; letter-spacing: .08em; text-transform: uppercase; }
 .hero-range-tags span:nth-child(odd) { margin-right: 18px; }
-.range-visual { height: auto; min-height: 0; position: relative; overflow: hidden; background: var(--sheet); border-left: 1px solid var(--ink); }
+.range-visual { height: auto; min-height: 0; position: relative; overflow: hidden; background: var(--sheet); }
 .range-visual::before { content: ""; position: absolute; inset: 0; opacity: .14; background: radial-gradient(circle, var(--navy) 1.3px, transparent 1.5px) 0 0 / 11px 11px; }
+.range-visual::after { content: ""; position: absolute; inset: 0 auto 0 0; z-index: 4; width: clamp(110px, 13vw, 200px); pointer-events: none; background: linear-gradient(90deg, var(--blush) 0%, rgba(232,184,187,.82) 20%, rgba(232,184,187,0) 100%); }
 .comic-strips { position: absolute; inset: 24px -22px; z-index: 2; display: grid; grid-template-rows: repeat(7, minmax(0, 1fr)); gap: 8px; transform: rotate(-2.3deg) scale(1.035); }
 .comic-strip { min-height: 0; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 8px; }
 .comic-strip:nth-child(even) { transform: translateX(18px); }
@@ -928,6 +929,8 @@ footer a:hover { color: var(--white); }
   .range-callout { width: 72px; height: 72px; padding: 10px; box-shadow: 3px 3px 0 var(--red); }
   .range-callout strong { font-size: 27px; }
   .range-callout span { margin-top: 5px; font-size: 6px; }
+  .hero-slide-range .range-visual { border-top: 0; }
+  .range-visual::after { inset: 0 0 auto; width: auto; height: 76px; background: linear-gradient(180deg, var(--blush) 0%, rgba(232,184,187,.82) 20%, rgba(232,184,187,0) 100%); }
   .curling-heading { grid-template-columns: 1fr; gap: 30px; }
   .curling-heading h2 { font-size: clamp(42px, 12.5vw, 72px); }
   .curling-track { grid-auto-columns: minmax(280px, 83vw); margin-top: 46px; }
