@@ -57,7 +57,7 @@ export default async function ProductsPage() {
           <span className="kicker">The Sunnyland range</span>
           <h1>Games made<br />to move.</h1>
           <p>
-            Curling games, indoor sports, outdoor favourites and game-night originals—built
+            Curling games, indoor sports, outdoor favourites and game-night originals, built
             for retailers, importers and brands that want play people return to.
           </p>
           <a className="button" href="/#contact">Discuss your range <span aria-hidden="true">↗</span></a>

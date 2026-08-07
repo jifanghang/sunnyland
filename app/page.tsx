@@ -15,13 +15,37 @@ export const metadata: Metadata = {
 
 const categories = [...productCategories];
 
+const categoryDescriptions: Record<string, string> = {
+  "Other indoor sports":
+    "Tabletop and compact-format sports built for quick setup, repeat play and retail-ready ranges.",
+  "Outdoor leisure sports":
+    "Portable lawn, garden and travel games designed for active play across seasons and markets.",
+  "Indoor game":
+    "Social, skill and party games that bring easy-to-learn competition to homes and gatherings.",
+};
+
+function categorySectionId(category: string) {
+  return category
+    .toLowerCase()
+    .replace(/&/g, "and")
+    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/^-|-$/g, "");
+}
+
 export default async function Home() {
   const items = await getContentItems();
   const productItems = items.filter((item) => item.type === "product");
-  const products = productCategories
-    .slice(1)
-    .map((category) => productItems.find((item) => item.category === category))
-    .filter((product): product is (typeof productItems)[number] => Boolean(product));
+  const productGroups = productCategories.slice(1).map((category) => {
+    const categoryProducts = productItems.filter((item) => item.category === category);
+
+    return {
+      category,
+      description: categoryDescriptions[category],
+      href: `/products#${categorySectionId(category)}`,
+      productCount: categoryProducts.length,
+      products: categoryProducts.slice(0, 3),
+    };
+  });
   const news = items.filter((item) => item.type === "news").slice(0, 3);
   const topNews = news.find((item) => item.featured) || news[0];
 
@@ -51,28 +75,37 @@ export default async function Home() {
       <section className="section products-section" id="products">
         <div className="section-heading">
           <div>
-            <span className="kicker">Made to move</span>
-            <h2>Products worth<br />playing again.</h2>
+            <span className="kicker">Wide product range</span>
+            <h2>Various collections,<br />One factory.</h2>
           </div>
           <p>
-            From the garden to the games room, each collection is designed for
-            intuitive play, easy setup and one more round.
+            Explore three broader game categories, each developed for easy setup,
+            intuitive play and flexible private-label programmes.
           </p>
         </div>
-        <div className="product-grid">
-          {products.map((product, index) => (
-            <article className={`product-card product-card-${index + 1}`} key={product.id}>
-              <a className="product-image" href="/products">
-                <img src={product.imageUrl} alt={product.title} />
-                {product.featured && <span className="card-badge">Popular pick</span>}
-                <span className="card-arrow" aria-hidden="true">↗</span>
+        <div className="product-category-grid">
+          {productGroups.map((group, index) => (
+            <article className="product-category-card" key={group.category}>
+              <a className="product-category-link" href={group.href}>
+                <div className="product-category-visual">
+                  {group.products.map((product, imageIndex) => (
+                    <figure className={`product-category-image product-category-image-${imageIndex + 1}`} key={product.id}>
+                      <img src={product.imageUrl} alt={product.title} />
+                    </figure>
+                  ))}
+                  <span className="product-category-number">0{index + 1}</span>
+                  <span className="card-arrow" aria-hidden="true">↗</span>
+                </div>
+                <div className="product-category-copy">
+                  <div className="product-category-meta">
+                    <span>Product category</span>
+                    <span>{group.productCount} products</span>
+                  </div>
+                  <h3>{group.category}</h3>
+                  <p>{group.description}</p>
+                  <strong>Explore collection <span aria-hidden="true">↗</span></strong>
+                </div>
               </a>
-              <div className="product-meta">
-                <span>{product.category}</span>
-                <span>{product.slug.toUpperCase()}</span>
-              </div>
-              <h3>{product.title}</h3>
-              <p>{product.summary}</p>
             </article>
           ))}
         </div>
@@ -84,12 +117,12 @@ export default async function Home() {
         </div>
       </section>
 
-      <section className="faq-section" id="about" aria-labelledby="faq-title">
+      <section className="faq-section" id="faq" aria-labelledby="faq-title">
         <div className="faq-intro">
           <span className="kicker">Before we make it</span>
           <h2 id="faq-title">Questions,<br /><em>answered.</em></h2>
           <p>
-            The practical details buyers ask before placing an order—from
+            The practical details buyers ask before placing an order, from
             samples and lead times to documentation and delivery.
           </p>
           <a className="button button-cream" href="#contact">Ask us anything <span aria-hidden="true">↗</span></a>
@@ -117,7 +150,7 @@ export default async function Home() {
         <div className="section-heading news-heading">
           <div>
             <span className="kicker">Fresh from Sunnyland</span>
-            <h2>News from<br />the field.</h2>
+            <h2>Company News</h2>
           </div>
           <p>New products, play guides and a closer look at the games inspiring our team.</p>
         </div>
@@ -145,7 +178,7 @@ export default async function Home() {
       <section className="contact-section" id="contact">
         <div className="contact-intro">
           <span className="kicker">Let’s make something fun</span>
-          <h2>Ready<br />to play?</h2>
+          <h2>Get<br />in touch</h2>
           <p>Tell us what you’re building. Our team will be back to you within one business day.</p>
           <div className="contact-details">
             <div>
@@ -173,7 +206,7 @@ export default async function Home() {
           <input type="hidden" name="_subject" value="New inquiry from the Sunnyland website" />
           <input type="hidden" name="_template" value="table" />
           <input type="hidden" name="_captcha" value="false" />
-          <div className="form-title"><span>Start an inquiry</span><b>01</b></div>
+          <div className="form-title"><span>Start an inquiry</span></div>
           <label>
             Your name
             <input type="text" name="name" autoComplete="name" required placeholder="Name or company" />
