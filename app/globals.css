@@ -597,14 +597,15 @@ section[id] { scroll-margin-top: 118px; }
 
 .company-proof-section {
   padding: clamp(90px, 10vw, 150px) clamp(20px, 6vw, 96px);
+  position: relative;
+  isolation: isolate;
   overflow: hidden;
-  background:
-    linear-gradient(90deg, rgba(255,255,255,.035) 1px, transparent 1px) 0 0 / 54px 54px,
-    linear-gradient(rgba(255,255,255,.035) 1px, transparent 1px) 0 0 / 54px 54px,
-    var(--red);
+  background: var(--red);
   color: var(--white);
   border-bottom: 1px solid var(--ink);
 }
+.company-proof-section::before { content: ""; position: absolute; inset: 0; z-index: -2; background: url("/company-world-map.jpg") center / cover no-repeat; opacity: .72; }
+.company-proof-section::after { content: ""; position: absolute; inset: 0; z-index: -1; background: linear-gradient(90deg, rgba(168,28,36,.96) 0%, rgba(168,28,36,.82) 38%, rgba(168,28,36,.42) 100%), linear-gradient(180deg, rgba(168,28,36,.12) 0%, rgba(168,28,36,.68) 100%); }
 .company-proof-intro { display: grid; grid-template-columns: 1.15fr .85fr; gap: 10vw; align-items: end; }
 .company-proof-intro h2 { margin: 18px 0 0; max-width: 930px; font-size: clamp(52px, 6.8vw, 104px); line-height: .84; letter-spacing: -.045em; font-weight: 950; font-stretch: 118%; text-transform: uppercase; }
 .company-proof-intro h2 em { font-family: Georgia, "Times New Roman", serif; font-weight: 500; text-transform: none; color: var(--blush); }
@@ -974,6 +975,8 @@ footer a:hover { color: var(--white); }
   .company-credential { min-height: 100px; }
   .company-logo-row { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .company-logo-card { min-height: 98px; }
+  .company-proof-section::before { background-size: auto 620px; background-position: 68% 38px; background-repeat: no-repeat; }
+  .company-proof-section::after { background: linear-gradient(180deg, rgba(168,28,36,.76) 0%, rgba(168,28,36,.9) 42%, var(--red) 72%); }
   .section-heading { grid-template-columns: 1fr; gap: 28px; }
   .section-heading h2 { font-size: clamp(40px, 12.5vw, 66px); }
   .product-grid { grid-template-columns: 1fr; gap: 48px; }
