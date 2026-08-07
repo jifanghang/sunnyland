@@ -88,7 +88,7 @@ export default function CurlingCarousel() {
               quality control and export coordination together for brands and
               distributors around the world.
             </p>
-            <a className="button button-cream" href="/about">Meet Sunnyland <span aria-hidden="true">↗</span></a>
+            <a className="button company-proof-button" href="/about">Meet Sunnyland <span aria-hidden="true">↗</span></a>
           </div>
         </div>
 

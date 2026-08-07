@@ -610,7 +610,10 @@ section[id] { scroll-margin-top: 118px; }
 .company-proof-intro h2 { margin: 18px 0 0; max-width: 930px; font-size: clamp(52px, 6.8vw, 104px); line-height: .84; letter-spacing: -.045em; font-weight: 950; font-stretch: 118%; text-transform: uppercase; }
 .company-proof-intro h2 em { font-family: Georgia, "Times New Roman", serif; font-weight: 500; text-transform: none; color: var(--blush); }
 .company-proof-copy p { max-width: 560px; margin: 0; color: rgba(255,255,255,.82); font-size: 17px; line-height: 1.65; }
-.company-proof-copy .button { margin-top: 30px; box-shadow: 4px 4px 0 var(--ink); }
+.company-proof-button { min-height: 60px; margin-top: 30px; padding: 0 10px 0 25px; gap: 22px; border: 1px solid var(--white); border-radius: 999px; background: var(--ink); color: var(--white); box-shadow: 5px 5px 0 var(--blush); }
+.company-proof-button span { width: 38px; height: 38px; display: grid; place-items: center; border-radius: 50%; background: var(--white); color: var(--ink); font-size: 17px; transition: transform .2s ease, background .2s ease, color .2s ease; }
+.company-proof-button:hover { box-shadow: 3px 3px 0 var(--blush); }
+.company-proof-button:hover span { transform: rotate(45deg); background: var(--blush); }
 .company-credentials { margin-top: 64px; display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); gap: 11px; }
 .company-credential { min-width: 0; min-height: 112px; padding: 17px 15px; display: flex; flex-direction: column; justify-content: space-between; background: var(--white); color: var(--ink); border: 1px solid var(--ink); box-shadow: 4px 4px 0 var(--ink); }
 .company-credential strong { font-size: clamp(18px, 1.55vw, 25px); line-height: 1; letter-spacing: -.035em; }
