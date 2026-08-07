@@ -16,7 +16,7 @@ export default function CurlingCarousel() {
   }
 
   return (
-    <section className="curling-section" aria-labelledby="curling-title">
+    <section className="curling-section" id="curling" aria-labelledby="curling-title">
       <div className="curling-heading">
         <div>
           <span className="kicker">Our signature collection</span>

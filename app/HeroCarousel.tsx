@@ -44,7 +44,7 @@ export default function HeroCarousel({ topNews }: { topNews: HeroNews }) {
             any smooth floor, alongside a full range of original games made for global brands.
           </p>
           <div className="hero-actions">
-            <a className="button" href="/products#curling">Explore curling <span aria-hidden="true">↗</span></a>
+            <a className="button" href="#curling">Explore curling <span aria-hidden="true">↓</span></a>
             <a className="text-link" href="/about">Meet Sunnyland <span aria-hidden="true">↗</span></a>
           </div>
           <div className="hero-proof" aria-label="Company highlights">
@@ -72,18 +72,18 @@ export default function HeroCarousel({ topNews }: { topNews: HeroNews }) {
 
       <div className={`hero-slide hero-slide-range ${active === 1 ? "is-active" : ""}`} aria-hidden={active !== 1} inert={active !== 1 ? true : undefined}>
         <div className="hero-copy">
-          <div className="eyebrow"><span /> More ways to play</div>
-          <h1>One maker.<br /><em>Every game night.</em></h1>
+          <div className="eyebrow"><span /> For brands &amp; distributors</div>
+          <h1>Built for<br /><em>your market.</em></h1>
           <p>
-            Four focused collections—curling games, indoor sports, outdoor leisure
-            sports and indoor games—developed for easy setup and satisfying play.
+            Source proven games, customise the details and scale from sample to
+            production with one experienced Ningbo team.
           </p>
           <div className="hero-actions">
-            <a className="button" href="/products">View all products <span aria-hidden="true">↗</span></a>
-            <a className="text-link" href="/#contact">Develop your own <span aria-hidden="true">↗</span></a>
+            <a className="button" href="/products">Browse the range <span aria-hidden="true">↗</span></a>
+            <a className="text-link" href="/#contact">Start an inquiry <span aria-hidden="true">↗</span></a>
           </div>
-          <div className="hero-range-tags" aria-label="Popular product categories">
-            <span>Curling game</span><span>Other indoor sports</span><span>Outdoor leisure sports</span><span>Indoor game</span>
+          <div className="hero-range-tags" aria-label="Buyer services">
+            <span>OEM &amp; ODM</span><span>Custom branding</span><span>Export ready</span><span>Scalable orders</span>
           </div>
         </div>
         <div className="range-visual" aria-label="Selection of Sunnyland products">
