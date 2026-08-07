@@ -118,8 +118,8 @@ export default function HeroCarousel({ topNews }: { topNews: HeroNews }) {
             <a className="button" href="/products">Browse products <span aria-hidden="true">↗</span></a>
             <a className="text-link" href="/#contact">Start an inquiry <span aria-hidden="true">↗</span></a>
           </div>
-          <div className="hero-range-tags" aria-label="Buyer services">
-            <span>OEM &amp; ODM</span><span>Custom branding</span><span>Export ready</span><span>Scalable orders</span>
+          <div className="hero-range-tags" aria-label="Product categories">
+            <span>Curling game</span><span>Other indoor sports</span><span>Outdoor leisure sports</span><span>Indoor game</span>
           </div>
         </div>
         <div className="range-visual" aria-label="All Sunnyland product designs">
@@ -135,7 +135,7 @@ export default function HeroCarousel({ topNews }: { topNews: HeroNews }) {
               </div>
             ))}
           </div>
-          <div className="range-callout"><strong>{comicProducts.length}</strong><span>products<br />in view</span></div>
+          <div className="range-callout"><strong>4</strong><span>product<br />categories</span></div>
         </div>
       </div>
 
@@ -148,6 +148,12 @@ export default function HeroCarousel({ topNews }: { topNews: HeroNews }) {
           <div className="eyebrow"><span /> {topNews.category}</div>
           <h1 className="hero-news-title">{topNews.title}</h1>
           <p>{topNews.summary}</p>
+          {topNews.slug === "sunnyland-hk-toy-fair-2027" && (
+            <div className="hero-news-facts" aria-label="Exhibition details">
+              <div><span>Booth</span><strong>5E-G18</strong></div>
+              <div><span>Dates</span><strong>11–14 Jan 2027</strong></div>
+            </div>
+          )}
           <div className="hero-actions">
             <a className="button" href={`/news/${encodeURIComponent(topNews.slug)}`}>
               Read the story <span aria-hidden="true">↗</span>
