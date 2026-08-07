@@ -656,9 +656,9 @@ section[id] { scroll-margin-top: 118px; }
   box-shadow: 4px 4px 0 var(--sun);
 }
 
-.faq-section { padding: clamp(90px, 11vw, 160px) clamp(20px, 6vw, 96px); display: grid; grid-template-columns: minmax(300px, .72fr) minmax(520px, 1.28fr); gap: clamp(60px, 10vw, 150px); background: var(--ink); color: var(--cream); border-top: 1px solid var(--ink); }
-.faq-intro { align-self: start; position: sticky; top: 120px; }
-.faq-intro h2 { margin: 22px 0 30px; font-size: clamp(58px, 7vw, 108px); line-height: .84; letter-spacing: -.045em; font-stretch: 118%; text-transform: uppercase; }
+.faq-section { padding: clamp(90px, 11vw, 160px) clamp(20px, 6vw, 96px); display: grid; grid-template-columns: minmax(0, .9fr) minmax(520px, 1.1fr); gap: clamp(60px, 6vw, 96px); background: var(--ink); color: var(--cream); border-top: 1px solid var(--ink); }
+.faq-intro { min-width: 0; align-self: start; position: sticky; top: 120px; }
+.faq-intro h2 { margin: 22px 0 30px; font-size: clamp(58px, 5vw, 86px); line-height: .84; letter-spacing: -.045em; font-stretch: 118%; text-transform: uppercase; }
 .faq-intro h2 em { color: var(--blush); }
 .faq-intro p { max-width: 500px; margin: 0 0 36px; color: rgba(255,255,255,.7); font-size: 16px; line-height: 1.65; }
 .faq-list { border-top: 2px solid var(--cream); }
@@ -670,7 +670,12 @@ section[id] { scroll-margin-top: 118px; }
 .faq-list summary i { width: 30px; height: 30px; display: grid; place-items: center; border: 1px solid var(--cream); border-radius: 50%; font-size: 19px; font-style: normal; transition: transform .25s ease, background .25s ease, color .25s ease; }
 .faq-list details[open] summary i { transform: rotate(45deg); background: var(--red); color: var(--white); border-color: var(--white); }
 .faq-list details p { display: none; margin: 0 48px 30px 64px; color: rgba(255,255,255,.7); font-size: 14px; line-height: 1.7; }
-.faq-list details[open] p { display: block; }
+.faq-list details[open] p { display: block; animation: faq-answer-in .28s cubic-bezier(.22, 1, .36, 1) both; }
+
+@keyframes faq-answer-in {
+  from { opacity: 0; transform: translateY(-8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
 
 .news-section { background: var(--sheet); }
 .news-heading { margin-bottom: 60px; }
@@ -827,6 +832,11 @@ footer a:hover { color: var(--white); }
 @keyframes rise-in {
   from { opacity: 0; transform: translateY(30px); }
   to { opacity: 1; transform: none; }
+}
+
+@media (max-width: 1180px) {
+  .faq-section { grid-template-columns: 1fr; }
+  .faq-intro { position: static; }
 }
 
 @media (max-width: 1040px) {
