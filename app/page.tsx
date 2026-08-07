@@ -15,13 +15,37 @@ export const metadata: Metadata = {
 
 const categories = [...productCategories];
 
+const categoryDescriptions: Record<string, string> = {
+  "Other indoor sports":
+    "Tabletop and compact-format sports built for quick setup, repeat play and retail-ready ranges.",
+  "Outdoor leisure sports":
+    "Portable lawn, garden and travel games designed for active play across seasons and markets.",
+  "Indoor game":
+    "Social, skill and party games that bring easy-to-learn competition to homes and gatherings.",
+};
+
+function categorySectionId(category: string) {
+  return category
+    .toLowerCase()
+    .replace(/&/g, "and")
+    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/^-|-$/g, "");
+}
+
 export default async function Home() {
   const items = await getContentItems();
   const productItems = items.filter((item) => item.type === "product");
-  const products = productCategories
-    .slice(1)
-    .map((category) => productItems.find((item) => item.category === category))
-    .filter((product): product is (typeof productItems)[number] => Boolean(product));
+  const productGroups = productCategories.slice(1).map((category) => {
+    const categoryProducts = productItems.filter((item) => item.category === category);
+
+    return {
+      category,
+      description: categoryDescriptions[category],
+      href: `/products#${categorySectionId(category)}`,
+      productCount: categoryProducts.length,
+      products: categoryProducts.slice(0, 3),
+    };
+  });
   const news = items.filter((item) => item.type === "news").slice(0, 3);
   const topNews = news.find((item) => item.featured) || news[0];
 
@@ -55,24 +79,33 @@ export default async function Home() {
             <h2>Various collections,<br />One factory.</h2>
           </div>
           <p>
-            We have indoor sports, outdoor leisures, and indoor games.
-            Each collection is designed for easy setup and intuitive play.
+            Explore three broader game categories, each developed for easy setup,
+            intuitive play and flexible private-label programmes.
           </p>
         </div>
-        <div className="product-grid">
-          {products.map((product, index) => (
-            <article className={`product-card product-card-${index + 1}`} key={product.id}>
-              <a className="product-image" href="/products">
-                <img src={product.imageUrl} alt={product.title} />
-                {product.featured && <span className="card-badge">Popular pick</span>}
-                <span className="card-arrow" aria-hidden="true">↗</span>
+        <div className="product-category-grid">
+          {productGroups.map((group, index) => (
+            <article className="product-category-card" key={group.category}>
+              <a className="product-category-link" href={group.href}>
+                <div className="product-category-visual">
+                  {group.products.map((product, imageIndex) => (
+                    <figure className={`product-category-image product-category-image-${imageIndex + 1}`} key={product.id}>
+                      <img src={product.imageUrl} alt={product.title} />
+                    </figure>
+                  ))}
+                  <span className="product-category-number">0{index + 1}</span>
+                  <span className="card-arrow" aria-hidden="true">↗</span>
+                </div>
+                <div className="product-category-copy">
+                  <div className="product-category-meta">
+                    <span>Product category</span>
+                    <span>{group.productCount} products</span>
+                  </div>
+                  <h3>{group.category}</h3>
+                  <p>{group.description}</p>
+                  <strong>Explore collection <span aria-hidden="true">↗</span></strong>
+                </div>
               </a>
-              <div className="product-meta">
-                <span>{product.category}</span>
-                <span>{product.slug.toUpperCase()}</span>
-              </div>
-              <h3>{product.title}</h3>
-              <p>{product.summary}</p>
             </article>
           ))}
         </div>
