@@ -52,7 +52,7 @@ export default async function Home() {
         <div className="section-heading">
           <div>
             <span className="kicker">Wide product range</span>
-            <h2>Made for<br />real play.</h2>
+            <h2>Various collections,<br />One factory.</h2>
           </div>
           <p>
             We have indoor sports, outdoor leisures, and indoor games.
