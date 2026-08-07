@@ -52,7 +52,7 @@ export default async function Home() {
         <div className="section-heading">
           <div>
             <span className="kicker">Made to move</span>
-            <h2>Products worth<br />playing again.</h2>
+            <h2>Made for<br />real play.</h2>
           </div>
           <p>
             From the garden to the games room, each collection is designed for
@@ -117,7 +117,7 @@ export default async function Home() {
         <div className="section-heading news-heading">
           <div>
             <span className="kicker">Fresh from Sunnyland</span>
-            <h2>News from<br />the field.</h2>
+            <h2>Company News</h2>
           </div>
           <p>New products, play guides and a closer look at the games inspiring our team.</p>
         </div>
@@ -145,7 +145,7 @@ export default async function Home() {
       <section className="contact-section" id="contact">
         <div className="contact-intro">
           <span className="kicker">Let’s make something fun</span>
-          <h2>Ready<br />to play?</h2>
+          <h2>Get<br />in touch</h2>
           <p>Tell us what you’re building. Our team will be back to you within one business day.</p>
           <div className="contact-details">
             <div>
