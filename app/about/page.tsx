@@ -275,7 +275,7 @@ export default function AboutPage() {
         <a className="button button-dark" href="/#contact">Start a conversation <span aria-hidden="true">↗</span></a>
       </section>
 
-      <SiteFooter />
+      <SiteFooter showCta={false} />
     </main>
   );
 }

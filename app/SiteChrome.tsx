@@ -1,6 +1,6 @@
 import MobileNav from "./MobileNav";
 
-type Section = "products" | "about" | "news";
+type Section = "home" | "products" | "about" | "news";
 
 export function SiteHeader({ active }: { active?: Section }) {
   return (
@@ -14,6 +14,7 @@ export function SiteHeader({ active }: { active?: Section }) {
           <img className="brand-logo" src="/logo.png" alt="Sunnyland" />
         </a>
         <nav aria-label="Main navigation">
+          <a href="/" aria-current={active === "home" ? "page" : undefined}>Home</a>
           <a href="/products" aria-current={active === "products" ? "page" : undefined}>Products</a>
           <a href="/about" aria-current={active === "about" ? "page" : undefined}>About</a>
           <a href="/news" aria-current={active === "news" ? "page" : undefined}>News</a>
@@ -30,16 +31,18 @@ export function SiteHeader({ active }: { active?: Section }) {
   );
 }
 
-export function SiteFooter() {
+export function SiteFooter({ showCta = true }: { showCta?: boolean }) {
   return (
     <footer>
-      <div className="footer-cta">
-        <div>
-          <span className="footer-kicker">Ready when you are</span>
-          <p className="footer-headline">Play, made<br />better.</p>
+      {showCta && (
+        <div className="footer-cta">
+          <div>
+            <span className="footer-kicker">Ready when you are</span>
+            <p className="footer-headline">Play, made<br />better.</p>
+          </div>
+          <a className="button" href="/#contact">Start an inquiry <span aria-hidden="true">↗</span></a>
         </div>
-        <a className="button" href="/#contact">Start an inquiry <span aria-hidden="true">↗</span></a>
-      </div>
+      )}
       <div className="footer-grid">
         <div className="footer-brand">
           <a className="brand brand-light" href="/">
