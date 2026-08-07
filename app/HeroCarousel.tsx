@@ -10,6 +10,42 @@ type HeroNews = {
   slug: string;
 };
 
+const comicProducts = [
+  { code: "SSC001-A", image: "/curling-ssc001-a.jpg", name: "17 cm floor curling set" },
+  { code: "SSC001-B", image: "/curling-ssc001-b.jpg", name: "19 cm floor curling set" },
+  { code: "SSC001-C", image: "/curling-ssc001-c.jpg", name: "19.5 cm floor curling set" },
+  { code: "SSC001-D", image: "/curling-ssc001-d.jpg", name: "8 cm mini floor curling set" },
+  { code: "SSC001-E", image: "/curling-ssc001-e.jpg", name: "11 cm floor curling set" },
+  { code: "SSC001-F", image: "/curling-ssc001-f.jpg", name: "20 cm floor curling set" },
+  { code: "SSG011", image: "/product-ssg011.jpg", name: "Golf pong game set" },
+  { code: "SSB002", image: "/product-ssb002.jpg", name: "Fast sling puck game" },
+  { code: "SSB001", image: "/product-ssb001.jpg", name: "Three-in-one giant checkers" },
+  { code: "SSO020", image: "/product-sso020.jpg", name: "Tabletop air hockey game" },
+  { code: "SSO001", image: "/product-sso001.jpg", name: "Mini tabletop basketball" },
+  { code: "SSO014", image: "/product-sso014.jpg", name: "Four-player magnetic skill game" },
+  { code: "SSO009", image: "/product-sso009.jpg", name: "Portable table tennis set" },
+  { code: "SSO004", image: "/product-sso004.jpg", name: "Spike ball game set" },
+  { code: "SSDT005", image: "/product-ssdt005.jpg", name: "Roll-up magnetic dartboard" },
+  { code: "SSDT003", image: "/product-ssdt003.jpg", name: "Magnetic dartboard game" },
+  { code: "SSG001", image: "/product-ssg001.jpg", name: "Golf chipping practice net" },
+  { code: "SSL008", image: "/product-ssl008.jpg", name: "Premium kubb game set" },
+  { code: "SSL006", image: "/product-ssl006.jpg", name: "Giant wooden dice set" },
+  { code: "SSL001", image: "/product-ssl001.jpg", name: "French boules set" },
+  { code: "SSL002", image: "/product-ssl002.jpg", name: "Ladder ball toss game" },
+  { code: "SSL003", image: "/product-ssl003.jpg", name: "Wooden number block toss" },
+  { code: "SSD002", image: "/product-ssd002.jpg", name: "Shot glass roulette" },
+  { code: "SSD001", image: "/product-ssd001.jpg", name: "Shot glass drop game" },
+  { code: "SSD007", image: "/product-ssd007.jpg", name: "Wheel of shots" },
+  { code: "SSD008", image: "/product-ssd008.jpg", name: "Spin the shot" },
+  { code: "SSD009", image: "/product-ssd009.jpg", name: "Roulette shots game" },
+  { code: "SSO021", image: "/product-sso021.jpg", name: "Hook and ring toss game" },
+];
+
+const productComicStrips = Array.from(
+  { length: Math.ceil(comicProducts.length / 4) },
+  (_, index) => comicProducts.slice(index * 4, index * 4 + 4),
+);
+
 export default function HeroCarousel({ topNews }: { topNews: HeroNews }) {
   const [active, setActive] = useState(0);
   const [paused, setPaused] = useState(false);
@@ -86,11 +122,20 @@ export default function HeroCarousel({ topNews }: { topNews: HeroNews }) {
             <span>OEM &amp; ODM</span><span>Custom branding</span><span>Export ready</span><span>Scalable orders</span>
           </div>
         </div>
-        <div className="range-visual" aria-label="Selection of Sunnyland products">
-          <figure className="range-shot range-shot-main"><img src="/product-ssg011.jpg" alt="Golf pong game set" /></figure>
-          <figure className="range-shot range-shot-left"><img src="/product-ssb001.jpg" alt="Three-in-one giant checkers" /></figure>
-          <figure className="range-shot range-shot-right"><img src="/product-ssl002.jpg" alt="Ladder ball toss game" /></figure>
-          <div className="range-callout"><strong>4</strong><span>product<br />categories</span></div>
+        <div className="range-visual" aria-label="All Sunnyland product designs">
+          <div className="comic-strips">
+            {productComicStrips.map((strip, stripIndex) => (
+              <div className="comic-strip" key={stripIndex}>
+                {strip.map((product) => (
+                  <figure className="comic-panel" key={product.code}>
+                    <img src={product.image} alt={product.name} />
+                    <figcaption>{product.code}</figcaption>
+                  </figure>
+                ))}
+              </div>
+            ))}
+          </div>
+          <div className="range-callout"><strong>{comicProducts.length}</strong><span>products<br />in view</span></div>
         </div>
       </div>
 

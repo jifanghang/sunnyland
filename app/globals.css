@@ -407,13 +407,15 @@ section[id] { scroll-margin-top: 118px; }
 .hero-range-tags span { padding: 13px 0; border-top: 1px solid rgba(22,48,92,.26); font-size: 10px; font-weight: 900; letter-spacing: .08em; text-transform: uppercase; }
 .hero-range-tags span:nth-child(odd) { margin-right: 18px; }
 .range-visual { height: auto; min-height: 0; position: relative; overflow: hidden; background: var(--sheet); border-left: 1px solid var(--ink); }
-.range-visual::before { content: ""; position: absolute; inset: -20%; opacity: .18; background: repeating-radial-gradient(circle at 70% 44%, transparent 0 56px, var(--red) 57px 78px, transparent 79px 123px, var(--navy) 124px 145px, transparent 146px 190px); }
-.range-shot { position: absolute; margin: 0; padding: 8px; overflow: hidden; background: var(--cream); border: 1px solid rgba(255,255,255,.8); box-shadow: 0 22px 60px rgba(79,7,12,.28); }
-.range-shot img { height: 100%; object-fit: cover; }
-.range-shot-main { width: 61%; height: 66%; right: 12%; top: 17%; z-index: 3; }
-.range-shot-left { width: 34%; height: 31%; left: 4%; bottom: 7%; z-index: 4; }
-.range-shot-right { width: 34%; height: 31%; left: 4%; top: 6%; z-index: 5; }
-.range-callout { position: absolute; right: 5%; bottom: 5%; z-index: 7; width: 108px; height: 108px; padding: 17px; border-radius: 50%; display: flex; flex-direction: column; align-items: center; justify-content: center; background: var(--navy); color: var(--white); border: 1px solid var(--white); text-align: center; box-shadow: 5px 5px 0 rgba(79,7,12,.24); }
+.range-visual::before { content: ""; position: absolute; inset: 0; opacity: .14; background: radial-gradient(circle, var(--navy) 1.3px, transparent 1.5px) 0 0 / 11px 11px; }
+.comic-strips { position: absolute; inset: 24px -22px; z-index: 2; display: grid; grid-template-rows: repeat(7, minmax(0, 1fr)); gap: 8px; transform: rotate(-2.3deg) scale(1.035); }
+.comic-strip { min-height: 0; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 8px; }
+.comic-strip:nth-child(even) { transform: translateX(18px); }
+.comic-strip:nth-child(3n) { transform: translateX(-12px); }
+.comic-panel { min-width: 0; min-height: 0; margin: 0; position: relative; overflow: hidden; background: var(--cream); border: 3px solid var(--ink); box-shadow: 4px 4px 0 var(--red); }
+.comic-panel img { height: 100%; object-fit: cover; }
+.comic-panel figcaption { position: absolute; right: 0; bottom: 0; padding: 4px 6px; background: var(--ink); color: var(--white); font-size: 7px; font-weight: 900; letter-spacing: .08em; line-height: 1; }
+.range-callout { position: absolute; right: 4%; bottom: 4%; z-index: 7; width: 96px; height: 96px; padding: 15px; border-radius: 50%; display: flex; flex-direction: column; align-items: center; justify-content: center; background: var(--navy); color: var(--white); border: 2px solid var(--white); text-align: center; box-shadow: 5px 5px 0 var(--red); }
 .range-callout strong { font-size: 36px; line-height: .8; }
 .range-callout span { margin-top: 8px; font-size: 8px; font-weight: 900; letter-spacing: .08em; text-transform: uppercase; }
 .hero-slide-news { grid-template-columns: minmax(480px, .95fr) minmax(0, 1fr); background: var(--sheet); }
@@ -919,6 +921,13 @@ footer a:hover { color: var(--white); }
   .hero-slide-news .hero-copy { grid-row: 2; }
   .hero-carousel .hero-news-title { font-size: clamp(32px, 9.5vw, 48px); }
   .hero-carousel-controls { right: 14px; bottom: 14px; }
+  .comic-strips { inset: 14px -14px; gap: 5px; transform: rotate(-2deg) scale(1.02); }
+  .comic-strip { gap: 5px; }
+  .comic-panel { border-width: 2px; box-shadow: 2px 2px 0 var(--red); }
+  .comic-panel figcaption { padding: 3px 4px; font-size: 5px; }
+  .range-callout { width: 72px; height: 72px; padding: 10px; box-shadow: 3px 3px 0 var(--red); }
+  .range-callout strong { font-size: 27px; }
+  .range-callout span { margin-top: 5px; font-size: 6px; }
   .curling-heading { grid-template-columns: 1fr; gap: 30px; }
   .curling-heading h2 { font-size: clamp(42px, 12.5vw, 72px); }
   .curling-track { grid-auto-columns: minmax(280px, 83vw); margin-top: 46px; }
