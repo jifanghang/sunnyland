@@ -51,7 +51,7 @@ export default async function Home() {
 
   return (
     <main>
-      <SiteHeader />
+      <SiteHeader active="home" />
       {topNews && <HeroCarousel topNews={topNews} />}
 
       <section className="category-strip" aria-label="Product categories">
@@ -241,7 +241,7 @@ export default async function Home() {
         </form>
       </section>
 
-      <SiteFooter />
+      <SiteFooter showCta={false} />
     </main>
   );
 }

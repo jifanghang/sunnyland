@@ -4,10 +4,16 @@ import { useEffect, useState } from "react";
 import { createPortal } from "react-dom";
 
 const links = [
-  { href: "/products", label: "Products" },
+  { href: "/", label: "Home" },
   { href: "/about", label: "About" },
   { href: "/news", label: "News" },
-  { href: "/#contact", label: "Contact" },
+];
+
+const productCategories = [
+  { href: "/products#curling-game", label: "Curling" },
+  { href: "/products#other-indoor-sports", label: "Indoor Sports" },
+  { href: "/products#outdoor-leisure-sports", label: "Outdoor Leisure Sports" },
+  { href: "/products#indoor-game", label: "Indoor Game" },
 ];
 
 export default function MobileNav() {
@@ -37,13 +43,25 @@ export default function MobileNav() {
         createPortal(
           <div className="mobile-nav" id="mobile-nav" hidden={!open}>
             <nav aria-label="Mobile navigation">
-              {links.map((link, index) => (
-                <a key={link.href} href={link.href} onClick={() => setOpen(false)}>
-                  <span>{String(index + 1).padStart(2, "0")}</span>
-                  {link.label}
-                  <b aria-hidden="true">↗</b>
-                </a>
-              ))}
+              <a href={links[0].href} onClick={() => setOpen(false)}>
+                <span>01</span>{links[0].label}<b aria-hidden="true">↗</b>
+              </a>
+              <a href={links[1].href} onClick={() => setOpen(false)}>
+                <span>02</span>{links[1].label}<b aria-hidden="true">↗</b>
+              </a>
+              <details className="mobile-nav-products">
+                <summary><span>03</span>Products<b aria-hidden="true">+</b></summary>
+                <div className="mobile-product-links">
+                  {productCategories.map((category) => (
+                    <a key={category.href} href={category.href} onClick={() => setOpen(false)}>
+                      {category.label}<b aria-hidden="true">↗</b>
+                    </a>
+                  ))}
+                </div>
+              </details>
+              <a href={links[2].href} onClick={() => setOpen(false)}>
+                <span>04</span>{links[2].label}<b aria-hidden="true">↗</b>
+              </a>
             </nav>
             <div className="mobile-nav-footer">
               <a className="button" href="/#contact" onClick={() => setOpen(false)}>
