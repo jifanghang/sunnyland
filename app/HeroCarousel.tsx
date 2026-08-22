@@ -12,33 +12,17 @@ type HeroNews = {
 
 const comicProducts = [
   { code: "SSC001-A", image: "/curling-ssc001-a.jpg", name: "17 cm floor curling set" },
-  { code: "SSC001-B", image: "/curling-ssc001-b.jpg", name: "19 cm floor curling set" },
-  { code: "SSC001-C", image: "/curling-ssc001-c.jpg", name: "19.5 cm floor curling set" },
+  { code: "TENNIS", image: "/catalogue/outdoor/27-inch-aluminum-tennis-racket.png", name: "27 inch aluminium tennis racket" },
+  { code: "SSB001", image: "/catalogue/indoor-sports/ssb001-badminton-steel.jpg", name: "Badminton set with four steel rackets" },
+  { code: "AIR HOCKEY", image: "/catalogue/indoor-game/20-inch-led-air-hockey.png", name: "20 inch LED air hockey" },
   { code: "SSC001-D", image: "/curling-ssc001-d.jpg", name: "8 cm mini floor curling set" },
-  { code: "SSC001-E", image: "/curling-ssc001-e.jpg", name: "11 cm floor curling set" },
+  { code: "PICKLEBALL", image: "/catalogue/outdoor/pickleball-carbon-fiber-racket.jpg", name: "Carbon fibre pickleball paddle set" },
+  { code: "SSD003", image: "/catalogue/indoor-sports/ssd003-sisal-dartboard.jpg", name: "Professional sisal dartboard with mat" },
+  { code: "2 IN 1", image: "/catalogue/indoor-game/tabletop-2-in-1-soccer-basketball.png", name: "Tabletop soccer and basketball game" },
   { code: "SSC001-F", image: "/curling-ssc001-f.jpg", name: "20 cm floor curling set" },
-  { code: "SSG011", image: "/product-ssg011.jpg", name: "Golf pong game set" },
-  { code: "SSB002", image: "/product-ssb002.jpg", name: "Fast sling puck game" },
-  { code: "SSB001", image: "/product-ssb001.jpg", name: "Three-in-one giant checkers" },
-  { code: "SSO020", image: "/product-sso020.jpg", name: "Tabletop air hockey game" },
-  { code: "SSO001", image: "/product-sso001.jpg", name: "Mini tabletop basketball" },
-  { code: "SSO014", image: "/product-sso014.jpg", name: "Four-player magnetic skill game" },
-  { code: "SSO009", image: "/product-sso009.jpg", name: "Portable table tennis set" },
-  { code: "SSO004", image: "/product-sso004.jpg", name: "Spike ball game set" },
-  { code: "SSDT005", image: "/product-ssdt005.jpg", name: "Roll-up magnetic dartboard" },
-  { code: "SSDT003", image: "/product-ssdt003.jpg", name: "Magnetic dartboard game" },
-  { code: "SSG001", image: "/product-ssg001.jpg", name: "Golf chipping practice net" },
-  { code: "SSL008", image: "/product-ssl008.jpg", name: "Premium kubb game set" },
-  { code: "SSL006", image: "/product-ssl006.jpg", name: "Giant wooden dice set" },
-  { code: "SSL001", image: "/product-ssl001.jpg", name: "French boules set" },
-  { code: "SSL002", image: "/product-ssl002.jpg", name: "Ladder ball toss game" },
-  { code: "SSL003", image: "/product-ssl003.jpg", name: "Wooden number block toss" },
-  { code: "SSD002", image: "/product-ssd002.jpg", name: "Shot glass roulette" },
-  { code: "SSD001", image: "/product-ssd001.jpg", name: "Shot glass drop game" },
-  { code: "SSD007", image: "/product-ssd007.jpg", name: "Wheel of shots" },
-  { code: "SSD008", image: "/product-ssd008.jpg", name: "Spin the shot" },
-  { code: "SSD009", image: "/product-ssd009.jpg", name: "Roulette shots game" },
-  { code: "SSO021", image: "/product-sso021.jpg", name: "Hook and ring toss game" },
+  { code: "DISC GOLF", image: "/catalogue/outdoor/golf-disc-baskets.png", name: "Golf disc basket set" },
+  { code: "SSG001", image: "/catalogue/indoor-sports/ssg001-golf-putting-mat.jpg", name: "Indoor golf putting mat" },
+  { code: "SLING PUCK", image: "/catalogue/indoor-game/wooden-sling-puck.jpg", name: "Wooden sling puck game" },
 ];
 
 const productComicStrips = Array.from(
@@ -119,10 +103,10 @@ export default function HeroCarousel({ topNews }: { topNews: HeroNews }) {
             <a className="text-link" href="/#contact">Start an inquiry <span aria-hidden="true">↗</span></a>
           </div>
           <div className="hero-range-tags" aria-label="Product categories">
-            <span>Curling game</span><span>Other indoor sports</span><span>Outdoor leisure sports</span><span>Indoor game</span>
+            <span>Curling game</span><span>Outdoor Leisure Sports</span><span>Indoor Sports</span><span>Indoor Game</span>
           </div>
         </div>
-        <div className="range-visual" aria-label="All Sunnyland product designs">
+        <div className="range-visual" aria-label="Sunnyland product range highlights">
           <div className="comic-strips">
             {productComicStrips.map((strip, stripIndex) => (
               <div className="comic-strip" key={stripIndex}>

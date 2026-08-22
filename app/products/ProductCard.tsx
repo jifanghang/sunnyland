@@ -4,7 +4,8 @@ import { KeyboardEvent, useEffect, useRef, useState } from "react";
 import { createPortal } from "react-dom";
 
 export type ProductCardData = {
-  code: string;
+  id?: string;
+  code?: string;
   title: string;
   summary: string;
   body: string;
@@ -20,6 +21,10 @@ export default function ProductCard({ product }: { product: ProductCardData }) {
   const dialogRef = useRef<HTMLDivElement>(null);
   const closeButtonRef = useRef<HTMLButtonElement>(null);
   const triggerRef = useRef<HTMLButtonElement>(null);
+  const productId = (product.id || product.code || product.title)
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/^-|-$/g, "");
 
   useEffect(() => {
     if (!open) return;
@@ -72,7 +77,7 @@ export default function ProductCard({ product }: { product: ProductCardData }) {
           {(product.badge || product.featured) && <span>{product.badge || "Featured"}</span>}
           {product.images.length > 1 && <b>{product.images.length} photos</b>}
         </div>
-        <div className="catalog-card-meta"><span>{product.category}</span><span>{product.code}</span></div>
+        <div className="catalog-card-meta"><span>{product.category}</span>{product.code && <span>{product.code}</span>}</div>
         <h3>{product.title}</h3>
         <p>{product.summary}</p>
         <span className="catalog-card-link">View product details <i aria-hidden="true">↗</i></span>
@@ -86,7 +91,7 @@ export default function ProductCard({ product }: { product: ProductCardData }) {
             className="product-modal"
             role="dialog"
             aria-modal="true"
-            aria-labelledby={`product-${product.code}-title`}
+            aria-labelledby={`product-${productId}-title`}
             ref={dialogRef}
             onKeyDown={trapFocus}
           >
@@ -123,13 +128,13 @@ export default function ProductCard({ product }: { product: ProductCardData }) {
 
             <div className="product-modal-copy">
               <span className="kicker">{product.category}</span>
-              <div className="product-modal-code">{product.code}</div>
-              <h2 id={`product-${product.code}-title`}>{product.title}</h2>
+              {product.code && <div className="product-modal-code">{product.code}</div>}
+              <h2 id={`product-${productId}-title`}>{product.title}</h2>
               <p className="product-modal-summary">{product.summary}</p>
               <div className="product-modal-description">
                 {product.body.split("\n\n").map((paragraph) => <p key={paragraph}>{paragraph}</p>)}
               </div>
-              <a className="button button-dark" href={`mailto:info@chinasunnyland.com?subject=${encodeURIComponent(`Inquiry about ${product.code} ${product.title}`)}`}>
+              <a className="button button-dark" href={`mailto:info@chinasunnyland.com?subject=${encodeURIComponent(`Inquiry about ${product.code ? `${product.code} ` : ""}${product.title}`)}`}>
                 Enquire about this product <span aria-hidden="true">↗</span>
               </a>
             </div>

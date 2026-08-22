@@ -16,12 +16,12 @@ export const metadata: Metadata = {
 const categories = [...productCategories];
 
 const categoryDescriptions: Record<string, string> = {
-  "Other indoor sports":
-    "Tabletop and compact-format sports built for quick setup, repeat play and retail-ready ranges.",
-  "Outdoor leisure sports":
-    "Portable lawn, garden and travel games designed for active play across seasons and markets.",
-  "Indoor game":
-    "Social, skill and party games that bring easy-to-learn competition to homes and gatherings.",
+  "Outdoor Leisure Sports":
+    "Racket sports, disc golf and wooden garden games designed for active play across seasons and markets.",
+  "Indoor Sports":
+    "Badminton, table tennis, darts and putting sets built for approachable practice and repeat play.",
+  "Indoor Game":
+    "Compact tabletop, skill and party games that bring easy-to-learn competition to homes and gatherings.",
 };
 
 function categorySectionId(category: string) {

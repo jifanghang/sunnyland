@@ -1,4 +1,5 @@
 import { env } from "cloudflare:workers";
+import { catalogueProducts, catalogueRevision } from "../app/data/catalogue";
 import { normaliseProductCategory } from "../lib/product-categories";
 
 export type ContentType = "product" | "news";
@@ -19,7 +20,7 @@ export type ContentItem = {
 
 export type ContentInput = Omit<ContentItem, "id">;
 
-export const defaultContent: ContentItem[] = [
+const previousDefaultContent: ContentItem[] = [
   { id: 1, type: "product", title: "Golf pong game set", slug: "SSG011", summary: "A putting-green party challenge for 2–4 players, complete with putters, golf balls and scoring-hole covers.", body: "Players putt towards the opposing team’s holes, covering each successful target until one side completes the board. The long artificial-grass mat rolls up for compact storage and supports indoor or outdoor play.\n\nThe set includes a putting mat, two putters, golf balls, scoring-hole covers and a carry bag.", category: "Other indoor sports", imageUrl: "/product-ssg011.jpg", publishedAt: "2026-08-06", featured: true, sortOrder: 1 },
   { id: 2, type: "product", title: "Fast sling puck game", slug: "SSB002", summary: "A rapid two-player wooden tabletop game built around aim, speed and instant rematches.", body: "Each player uses the elastic launcher to send wooden pucks through the centre gate. The first player to clear every puck from their side wins.\n\nAvailable in large and small formats, the solid-wood game supports hand-eye coordination and packs easily for family play.", category: "Other indoor sports", imageUrl: "/product-ssb002.jpg", publishedAt: "2026-08-06", featured: false, sortOrder: 2 },
   { id: 3, type: "product", title: "3-in-1 giant checkers set", slug: "SSB001", summary: "Oversized checkers, tic-tac-toe and a reversible game rug in one portable family set.", body: "This three-in-one set combines giant checkers, tic-tac-toe and an additional play format on a reversible rug. Large pieces and a clear playing surface make it easy to use at home, school, parties and events.", category: "Other indoor sports", imageUrl: "/product-ssb001.jpg", publishedAt: "2026-08-06", featured: false, sortOrder: 3 },
@@ -49,6 +50,11 @@ export const defaultContent: ContentItem[] = [
   { id: 11, type: "news", title: "SSC001-F: our 20 cm floor curling set", slug: "20cm-iceless-curling-stone", summary: "The largest model in our current floor curling range pairs eight 20 cm stones with a full-length target mat.", body: "Meet SSC001-F, Sunnyland’s floor curling stone set with eight 20 cm diameter stones. It is the largest stone size in our current six-product curling range.\n\nIts generous size, considered weight and smooth glide bring the tactics and teamwork of curling to smooth indoor floors without requiring ice.\n\nThe complete set includes eight curling stones and a 150 cm × 520 cm target mat, ready for competitive play in homes, schools, clubs and activity spaces.", category: "New product", imageUrl: "/curling-ssc001-f.jpg", publishedAt: "2026-08-01", featured: false, sortOrder: 1 },
 ];
 
+export const defaultContent: ContentItem[] = [
+  ...catalogueProducts,
+  ...previousDefaultContent.filter((item) => item.type === "news"),
+];
+
 function db() {
   if (!env.DB) throw new Error("D1 binding DB is unavailable");
   return env.DB;
@@ -71,6 +77,7 @@ async function ensureDatabase() {
       sort_order INTEGER NOT NULL DEFAULT 0
     )`),
     database.prepare("CREATE INDEX IF NOT EXISTS content_items_type_order_idx ON content_items(type, sort_order, published_at)"),
+    database.prepare("CREATE TABLE IF NOT EXISTS site_content_state (key TEXT PRIMARY KEY, value TEXT NOT NULL)"),
   ]);
 
   const columns = await database.prepare("PRAGMA table_info(content_items)").all<{ name: string }>();
@@ -90,44 +97,35 @@ async function ensureDatabase() {
     ).bind(item.type, item.title, item.slug, item.summary, item.body, item.category, item.imageUrl, item.publishedAt, item.featured ? 1 : 0, item.sortOrder)));
   }
 
-  const catalogueProducts = defaultContent.filter((item) => item.type === "product");
-  const catalogueCount = await database.prepare(
-    `SELECT COUNT(DISTINCT slug) AS total FROM content_items
-     WHERE type='product' AND slug IN ('SSG011','SSB002','SSB001','SSO020','SSO001','SSO014','SSO009','SSO004','SSDT005','SSDT003','SSG001','SSL008','SSL006','SSL001','SSL002','SSL003','SSD002','SSD001','SSD007','SSD008','SSD009','SSO021')`
-  ).first<{ total: number }>();
-  if ((catalogueCount?.total ?? 0) < catalogueProducts.length) {
-    await database.batch(catalogueProducts.map((item) => database.prepare(
-      `INSERT INTO content_items (type,title,slug,summary,body,category,image_url,published_at,featured,sort_order)
-       SELECT ?,?,?,?,?,?,?,?,?,?
-       WHERE NOT EXISTS (SELECT 1 FROM content_items WHERE type='product' AND slug=?)`
-    ).bind(
-      item.type,
-      item.title,
-      item.slug,
-      item.summary,
-      item.body,
-      item.category,
-      item.imageUrl,
-      item.publishedAt,
-      item.featured ? 1 : 0,
-      item.sortOrder,
-      item.slug,
-    )));
-
-    await database.batch(catalogueProducts.map((item) => database.prepare(
-      `UPDATE content_items SET title=?,summary=?,body=?,category=?,image_url=?,published_at=?,featured=?,sort_order=?
-       WHERE type='product' AND slug=? AND image_url IN ('/golf.jpg','/ladder-ball.jpg','/wooden-toss.jpg','/checkers.jpg','/sling-puck.jpg','/roulette.jpg')`
-    ).bind(
-      item.title,
-      item.summary,
-      item.body,
-      item.category,
-      item.imageUrl,
-      item.publishedAt,
-      item.featured ? 1 : 0,
-      item.sortOrder,
-      item.slug,
-    )));
+  const currentCatalogueRevision = await database.prepare(
+    "SELECT value FROM site_content_state WHERE key='product_catalogue_revision'"
+  ).first<{ value: string }>();
+  if (currentCatalogueRevision?.value !== catalogueRevision) {
+    await database.batch([
+      database.prepare(
+        `DELETE FROM content_items
+         WHERE type='product'
+           AND UPPER(slug) NOT LIKE 'SSC%'
+           AND LOWER(category) NOT IN ('curling', 'curling game', 'curling & shuffleboard', 'curling and shuffleboard')`
+      ),
+      ...catalogueProducts.map((item) => database.prepare(
+        "INSERT INTO content_items (type,title,slug,summary,body,category,image_url,published_at,featured,sort_order) VALUES (?,?,?,?,?,?,?,?,?,?)"
+      ).bind(
+        item.type,
+        item.title,
+        item.slug,
+        item.summary,
+        item.body,
+        item.category,
+        item.imageUrl,
+        item.publishedAt,
+        item.featured ? 1 : 0,
+        item.sortOrder,
+      )),
+      database.prepare(
+        "INSERT OR REPLACE INTO site_content_state (key,value) VALUES ('product_catalogue_revision',?)"
+      ).bind(catalogueRevision),
+    ]);
   }
 
   const fairNews = defaultContent.find((item) => item.slug === "sunnyland-hk-toy-fair-2027");
@@ -224,13 +222,10 @@ async function ensureDatabase() {
   await database.prepare(
     `UPDATE content_items
      SET category = CASE
-       WHEN slug IN ('SSG011','SSB001','SSB002','SSO020','SSO001','SSO014','SSO009','SSO004','SSDT005','SSDT003') THEN 'Other indoor sports'
-       WHEN slug IN ('SSG001','SSL008','SSL006','SSL001','SSL002','SSL003') THEN 'Outdoor leisure sports'
-       WHEN slug IN ('SSD002','SSD001','SSD007','SSD008','SSD009','SSO021') THEN 'Indoor game'
-       WHEN category IN ('Curling', 'Curling & shuffleboard', 'Curling and shuffleboard') THEN 'Curling game'
-       WHEN category IN ('Darts', 'Indoor sports') THEN 'Other indoor sports'
-       WHEN category IN ('Golf', 'Lawn games', 'Outdoor games') THEN 'Outdoor leisure sports'
-       WHEN category IN ('Board games', 'Party games') THEN 'Indoor game'
+       WHEN UPPER(slug) LIKE 'SSC%' OR category IN ('Curling', 'Curling & shuffleboard', 'Curling and shuffleboard') THEN 'Curling game'
+       WHEN slug LIKE 'outdoor-%' OR category IN ('Golf', 'Lawn games', 'Outdoor games', 'Outdoor leisure sports') THEN 'Outdoor Leisure Sports'
+       WHEN slug IN ('SSB001','SSB002','SSD001','SSD002','SSD003','SSG001','SSG002','SST001','SST002','SST003') OR category IN ('Darts', 'Indoor sports', 'Other indoor sports') THEN 'Indoor Sports'
+       WHEN slug LIKE 'indoor-game-%' OR category IN ('Board games', 'Party games', 'Indoor game') THEN 'Indoor Game'
        ELSE category
      END
      WHERE type = 'product'`
