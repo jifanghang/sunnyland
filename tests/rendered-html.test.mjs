@@ -3,10 +3,11 @@ import { readFile } from "node:fs/promises";
 import test from "node:test";
 
 test("keeps the Sunnyland landing page connected to the refreshed catalogue", async () => {
-  const [page, hero, categories] = await Promise.all([
+  const [page, hero, categories, styles] = await Promise.all([
     readFile(new URL("../app/page.tsx", import.meta.url), "utf8"),
     readFile(new URL("../app/HeroCarousel.tsx", import.meta.url), "utf8"),
     readFile(new URL("../lib/product-categories.ts", import.meta.url), "utf8"),
+    readFile(new URL("../app/globals.css", import.meta.url), "utf8"),
   ]);
 
   assert.match(page, /HeroCarousel/);
@@ -14,7 +15,14 @@ test("keeps the Sunnyland landing page connected to the refreshed catalogue", as
   assert.match(page, /Various collections/);
   assert.match(page, /View all products/);
   assert.match(page, /formsubmit\.co\/info@chinasunnyland\.com/);
-  assert.match(hero, /catalogueProducts/);
+  assert.doesNotMatch(hero, /catalogueProducts/);
+  assert.equal((hero.match(/code: "/g) || []).length, 12);
+  for (const highlight of ["TENNIS", "AIR HOCKEY", "SSD003", "SLING PUCK"]) {
+    assert.match(hero, new RegExp(highlight));
+  }
+  assert.match(styles, /\.comic-strips\s*\{[^}]*grid-template-rows:\s*repeat\(3,/s);
+  assert.match(styles, /\.comic-panel img\s*\{[^}]*object-fit:\s*contain/s);
+  assert.match(styles, /\.hero-slide-range \.hero-copy\s*\{[^}]*linear-gradient\(135deg,\s*#1b3c70/s);
   assert.match(hero, /href="#curling"/);
   for (const category of ["Curling game", "Outdoor Leisure Sports", "Indoor Sports", "Indoor Game"]) {
     assert.match(categories, new RegExp(category));
