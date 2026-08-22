@@ -8,7 +8,7 @@ export const metadata: Metadata = {
     template: "%s · Sunnyland Sports",
   },
   description:
-    "Signature floor curling sets and original sports and games from an experienced Ningbo manufacturer.",
+    "Floor curling, outdoor leisure sports, indoor sports and original indoor games from an experienced Ningbo manufacturer.",
   icons: {
     icon: [{ url: "/favicon.png", type: "image/png", sizes: "256x256" }],
     shortcut: "/favicon.png",
@@ -16,15 +16,15 @@ export const metadata: Metadata = {
   },
   openGraph: {
     type: "website",
-    title: "Sunnyland — Play, made better.",
-    description: "Signature curling sets and original games, designed in Ningbo and played around the world.",
-    images: [{ url: "/og.png", width: 1200, height: 630, alt: "Sunnyland — Play, made better." }],
+    title: "Sunnyland Sports — Play, made better.",
+    description: "Explore the 2026 Sunnyland range: curling, outdoor leisure sports, indoor sports and original indoor games.",
+    images: [{ url: "/og-catalogue-2026.png", width: 1728, height: 910, alt: "Sunnyland Sports — 2026 product range" }],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Sunnyland — Play, made better.",
-    description: "Signature curling sets and original games, designed in Ningbo and played around the world.",
-    images: ["/og.png"],
+    title: "Sunnyland Sports — Play, made better.",
+    description: "Explore the 2026 Sunnyland range: curling, outdoor leisure sports, indoor sports and original indoor games.",
+    images: ["/og-catalogue-2026.png"],
   },
 };
 

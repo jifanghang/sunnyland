@@ -22,21 +22,21 @@ function sectionId(category: string) {
 const catalogueComicStrips = [
   [
     { src: "/curling-ssc001-a.jpg", code: "SSC001-A" },
-    { src: "/product-sso014.jpg", code: "SSO014" },
-    { src: "/product-ssl008.jpg", code: "SSL008" },
-    { src: "/product-ssd002.jpg", code: "SSD002" },
+    { src: "/catalogue/outdoor/27-inch-aluminum-tennis-racket.png", code: "Tennis" },
+    { src: "/catalogue/indoor-sports/ssb001-badminton-steel.jpg", code: "SSB001" },
+    { src: "/catalogue/indoor-game/20-inch-led-air-hockey.png", code: "Air hockey" },
   ],
   [
-    { src: "/product-ssg011.jpg", code: "SSG011" },
-    { src: "/product-sso020.jpg", code: "SSO020" },
-    { src: "/product-ssb001.jpg", code: "SSB001" },
-    { src: "/product-ssl003.jpg", code: "SSL003" },
+    { src: "/catalogue/outdoor/golf-disc-baskets.png", code: "Disc golf" },
+    { src: "/catalogue/indoor-sports/ssg001-golf-putting-mat.jpg", code: "SSG001" },
+    { src: "/catalogue/indoor-game/20-inch-soccer-table.png", code: "Table soccer" },
+    { src: "/catalogue/outdoor/wooden-dice-game.jpg", code: "Wooden dice" },
   ],
   [
     { src: "/curling-ssc001-f.jpg", code: "SSC001-F" },
-    { src: "/product-sso009.jpg", code: "SSO009" },
-    { src: "/product-ssl001.jpg", code: "SSL001" },
-    { src: "/product-ssd007.jpg", code: "SSD007" },
+    { src: "/catalogue/indoor-sports/ssd003-sisal-dartboard.jpg", code: "SSD003" },
+    { src: "/catalogue/outdoor/pickleball-carbon-fiber-racket.jpg", code: "Pickleball" },
+    { src: "/catalogue/indoor-game/tabletop-curling.jpg", code: "Tabletop curling" },
   ],
 ] as const;
 
@@ -64,8 +64,8 @@ export default async function ProductsPage() {
         </div>
         <div className="catalog-hero-collage">
           <img src="/curling-ssc001-a.jpg" alt="SSC001-A floor curling stone set" />
-          <img src="/product-ssg011.jpg" alt="Golf pong game set" />
-          <img src="/product-ssb001.jpg" alt="Giant checkers set" />
+          <img src="/catalogue/outdoor/27-inch-aluminum-tennis-racket.png" alt="27-inch aluminium tennis racket" />
+          <img src="/catalogue/indoor-game/20-inch-led-air-hockey.png" alt="20-inch LED air hockey game" />
           <span>4 categories<br /><strong>One playful partner</strong></span>
         </div>
       </section>
@@ -83,6 +83,7 @@ export default async function ProductsPage() {
         <ExpandableProductGrid itemCount={curlingProducts.length} category="Curling game">
           {curlingProducts.map((product) => (
             <ProductCard product={{
+              id: product.code,
               code: product.code,
               title: product.title,
               summary: product.copy,
@@ -106,7 +107,8 @@ export default async function ProductsPage() {
             <ExpandableProductGrid itemCount={categoryProducts.length} category={category}>
               {categoryProducts.map((product) => (
                 <ProductCard product={{
-                  code: product.slug.toUpperCase(),
+                  id: product.slug,
+                  code: /^SS[A-Z]\d{3}$/i.test(product.slug) ? product.slug.toUpperCase() : undefined,
                   title: product.title,
                   summary: product.summary,
                   body: product.body,
