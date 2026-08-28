@@ -307,14 +307,10 @@
 }
 .global-heading h2 { font-size: clamp(52px, 6.2vw, 95px); }
 .global-heading p { max-width: 570px; color: rgba(22,48,92,.7); font-size: 15px; line-height: 1.7; }
-.partner-names { display: grid; grid-template-columns: 1fr 1fr; align-content: start; border-top: 1px solid var(--ink); }
-.partner-card { min-height: 142px; padding: 30px 26px; position: relative; display: grid; place-items: center; border-bottom: 1px solid var(--ink); }
-.partner-card:nth-child(even) { border-left: 1px solid var(--ink); }
-.partner-card i { position: absolute; top: 18px; left: 19px; color: var(--orange); font-size: 9px; font-style: normal; letter-spacing: 0; }
-.partner-logo { display: block; width: auto; max-width: 78%; height: auto; max-height: 72px; object-fit: contain; }
-.partner-logo-target, .partner-logo-lidl { max-width: 70px; max-height: 70px; }
-.partner-logo-disney { max-height: 66px; }
-.partner-logo-nanu-nana { max-width: 86%; }
+.partner-names { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); align-content: start; border-top: 1px solid var(--ink); border-left: 1px solid var(--ink); }
+.partner-card { min-width: 0; min-height: 0; aspect-ratio: 1; padding: 0; position: relative; overflow: hidden; display: grid; place-items: center; background: var(--white); border-right: 1px solid var(--ink); border-bottom: 1px solid var(--ink); }
+.partner-card i { position: absolute; top: 12px; left: 12px; z-index: 1; min-width: 28px; padding: 5px 6px; background: rgba(255,255,255,.88); color: var(--orange); font-size: 9px; font-style: normal; font-weight: 900; letter-spacing: 0; text-align: center; }
+.partner-logo { display: block; width: 100%; height: 100%; object-fit: cover; }
 
 .exhibition-section {
   padding: clamp(68px, 7vw, 105px) clamp(20px, 6vw, 96px);
@@ -439,8 +435,7 @@
   .custom-section { grid-template-columns: 1fr; }
   .custom-image { min-height: 520px; }
   .custom-copy { padding: 75px 22px; }
-  .partner-card { min-height: 116px; padding: 24px 18px; }
-  .partner-logo { max-height: 62px; }
+  .partner-names { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .exhibition-copy { grid-template-columns: 1fr; gap: 24px; }
   .exhibition-copy h2 { max-width: 540px; }
   .exhibition-details { padding-bottom: 0; }
@@ -457,8 +452,7 @@
 }
 
 @media (max-width: 480px) {
-  .partner-names { grid-template-columns: 1fr; }
-  .partner-card:nth-child(even) { border-left: 0; }
+  .partner-names { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .exhibition-gallery { grid-template-columns: 1fr; box-shadow: 7px 7px 0 rgba(80, 8, 14, .28); }
   .exhibition-gallery img, .exhibition-gallery img:first-child { grid-column: auto; aspect-ratio: 4/3; }
   .innovation-grid article { grid-template-columns: 1fr; }

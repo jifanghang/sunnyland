@@ -26,12 +26,12 @@ const standards = [
 ];
 
 const partners = [
-  { name: "Target", logo: "/partners/target.svg", slug: "target" },
-  { name: "Disney", logo: "/partners/disney.svg", slug: "disney" },
-  { name: "Lidl", logo: "/partners/lidl.svg", slug: "lidl" },
-  { name: "myToys", logo: "/partners/mytoys.svg", slug: "mytoys" },
-  { name: "Nanu-Nana", logo: "/partners/nanu-nana.svg", slug: "nanu-nana" },
-  { name: "Smyths Toys", logo: "/partners/smyths.svg", slug: "smyths" },
+  { name: "Decathlon", logo: "/partners/decathlon.png", slug: "decathlon" },
+  { name: "Lekia", logo: "/partners/lekia.png", slug: "lekia" },
+  { name: "SVP Sports", logo: "/partners/svp-sports.png", slug: "svp-sports" },
+  { name: "Snoopy", logo: "/partners/snoopy.png", slug: "snoopy" },
+  { name: "Target", logo: "/partners/target.png", slug: "target" },
+  { name: "Wilson", logo: "/partners/wilson.png", slug: "wilson" },
 ];
 
 const officeSlides = [
@@ -81,8 +81,8 @@ export default function AboutPage() {
           </div>
           <div className="about-story-copy">
             <p className="story-lead">
-              Ningbo Haishu Advancing &amp; Rising Trading Co., Ltd. was founded
-              in 2008, close to both Ningbo and Shanghai ports.
+              Ningbo Advancing and Rising Trading Co. Ltd was founded in 2008,
+              close to both Ningbo and Shanghai ports.
             </p>
             <p>
               What began as a specialist supplier of novel sporting goods has
