@@ -187,7 +187,11 @@ export default async function Home() {
             </div>
             <div>
               <span>Phone</span>
-              <a href="tel:+8613003751301">+86 130 0375 1301</a>
+              <div className="contact-link-list">
+                <a href="tel:+8613003751301">+86 130 0375 1301</a>
+                <a href="tel:+8657487163558">+86 574 87163558</a>
+                <a href="tel:+8657487124668">+86 574 87124668</a>
+              </div>
             </div>
             <div>
               <span>Visit us</span>

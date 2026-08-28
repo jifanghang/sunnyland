@@ -10,9 +10,9 @@ export const metadata: Metadata = {
   description:
     "Floor curling, outdoor leisure sports, indoor sports and original indoor games from an experienced Ningbo manufacturer.",
   icons: {
-    icon: [{ url: "/favicon.png", type: "image/png", sizes: "256x256" }],
-    shortcut: "/favicon.png",
-    apple: "/favicon.png",
+    icon: [{ url: "/favicon.png?v=20260828", type: "image/png", sizes: "256x256" }],
+    shortcut: "/favicon.png?v=20260828",
+    apple: "/favicon.png?v=20260828",
   },
   openGraph: {
     type: "website",
@@ -32,6 +32,9 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
   return (
     <html lang="en">
       <head>
+        <link rel="icon" href="/favicon.png?v=20260828" type="image/png" sizes="256x256" />
+        <link rel="shortcut icon" href="/favicon.png?v=20260828" type="image/png" />
+        <link rel="apple-touch-icon" href="/favicon.png?v=20260828" />
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
         <link

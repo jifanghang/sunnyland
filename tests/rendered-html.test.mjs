@@ -102,16 +102,20 @@ test("keeps product details accessible and expandable", async () => {
 });
 
 test("ships the refreshed sharing card and Sites configuration", async () => {
-  const [layout, sharingCard, hosting, packageJson] = await Promise.all([
+  const [layout, sharingCard, favicon, hosting, packageJson] = await Promise.all([
     readFile(new URL("../app/layout.tsx", import.meta.url), "utf8"),
     readFile(new URL("../public/og-catalogue-2026.png", import.meta.url)),
+    readFile(new URL("../public/favicon.png", import.meta.url)),
     readFile(new URL("../.openai/hosting.json", import.meta.url), "utf8"),
     readFile(new URL("../package.json", import.meta.url), "utf8"),
   ]);
 
   assert.match(layout, /og-catalogue-2026\.png/);
   assert.match(layout, /2026 Sunnyland range/);
+  assert.match(layout, /favicon\.png\?v=20260828/);
+  assert.match(layout, /rel="shortcut icon"/);
   assert.ok(sharingCard.length > 100_000);
+  assert.ok(favicon.length > 10_000);
   assert.match(hosting, /"project_id": "appgprj_/);
   assert.match(hosting, /"d1": "DB"/);
   assert.match(packageJson, /build:cloudflare/);
@@ -131,5 +135,28 @@ test("retains the content manager and media-rich company page", async () => {
   assert.match(about, /5,000 m²/);
   assert.match(about, /about-company\.mp4/);
   assert.match(about, /about-factory\.mp4/);
+  for (const partner of ["decathlon", "lekia", "svp-sports", "snoopy", "target", "wilson"]) {
+    assert.match(about, new RegExp(`/partners/${partner}\\.png`));
+    const partnerCard = await readFile(new URL(`../public/partners/${partner}.png`, import.meta.url));
+    assert.ok(partnerCard.length > 100_000, `${partner} should contain a partner-card image`);
+  }
+  assert.match(aboutCss, /grid-template-columns: repeat\(3, minmax\(0, 1fr\)\)/);
+  assert.match(aboutCss, /aspect-ratio: 1/);
   assert.match(aboutCss, /video-grid/);
+});
+
+test("publishes the registered company identity and landlines", async () => {
+  const [home, chrome, about] = await Promise.all([
+    readFile(new URL("../app/page.tsx", import.meta.url), "utf8"),
+    readFile(new URL("../app/SiteChrome.tsx", import.meta.url), "utf8"),
+    readFile(new URL("../app/about/page.tsx", import.meta.url), "utf8"),
+  ]);
+
+  for (const phone of ["+86 574 87163558", "+86 574 87124668"]) {
+    assert.match(home, new RegExp(phone.replaceAll("+", "\\+")));
+    assert.match(chrome, new RegExp(phone.replaceAll("+", "\\+")));
+  }
+  assert.match(chrome, /Sunnyland is a trademark/);
+  assert.match(chrome, /official registered name is Ningbo Advancing and Rising Trading Co\. Ltd/);
+  assert.match(about, /Ningbo Advancing and Rising Trading Co\. Ltd was founded in 2008/);
 });

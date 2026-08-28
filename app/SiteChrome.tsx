@@ -68,6 +68,8 @@ export function SiteFooter({ showCta = true }: { showCta?: boolean }) {
         <div>
           <strong>Contact</strong>
           <a href="tel:+8613003751301">+86 130 0375 1301</a>
+          <a href="tel:+8657487163558">+86 574 87163558</a>
+          <a href="tel:+8657487124668">+86 574 87124668</a>
           <a href="mailto:info@chinasunnyland.com">info@chinasunnyland.com</a>
           <span>King Intl Mansion, Haishu District,<br />Ningbo, China</span>
         </div>
@@ -79,7 +81,10 @@ export function SiteFooter({ showCta = true }: { showCta?: boolean }) {
       </div>
       <div className="footer-watermark" aria-hidden="true">Sunnyland</div>
       <div className="footer-bottom">
-        <span>© {new Date().getFullYear()} Sunnyland. All rights reserved.</span>
+        <div className="footer-legal">
+          <span>© {new Date().getFullYear()} Sunnyland. All rights reserved.</span>
+          <span>Sunnyland is a trademark. The company&apos;s official registered name is Ningbo Advancing and Rising Trading Co. Ltd.</span>
+        </div>
         <a href="/admin">Content manager</a>
       </div>
     </footer>
