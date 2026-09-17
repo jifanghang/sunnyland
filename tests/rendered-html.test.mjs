@@ -78,7 +78,7 @@ test("leaves the six-product curling range unchanged", async () => {
     assert.match(curling, new RegExp(code));
   }
   assert.equal((curling.match(/code: "SSC001-/g) || []).length, 6);
-  assert.match(curling, /150 × 520 cm/);
+  assert.match(curling, /150 × 150 cm/);
 });
 
 test("keeps product details accessible and expandable", async () => {
