@@ -1,6 +1,7 @@
 import { env } from "cloudflare:workers";
 import { catalogueProducts, catalogueRevision } from "../app/data/catalogue";
 import { normaliseProductCategory } from "../lib/product-categories";
+import { megaShowAnnouncement } from "../app/data/announcements";
 
 export type ContentType = "product" | "news";
 
@@ -51,6 +52,7 @@ const previousDefaultContent: ContentItem[] = [
 ];
 
 export const defaultContent: ContentItem[] = [
+  megaShowAnnouncement,
   ...catalogueProducts,
   ...previousDefaultContent.filter((item) => item.type === "news"),
 ];
@@ -127,6 +129,18 @@ async function ensureDatabase() {
       ).bind(catalogueRevision),
     ]);
   }
+
+  await database.prepare(
+    `INSERT INTO content_items (type,title,slug,summary,body,category,image_url,published_at,featured,sort_order)
+     SELECT ?,?,?,?,?,?,?,?,?,?
+     WHERE NOT EXISTS (SELECT 1 FROM content_items WHERE type='news' AND slug=?)`
+  ).bind(
+    megaShowAnnouncement.type, megaShowAnnouncement.title, megaShowAnnouncement.slug,
+    megaShowAnnouncement.summary, megaShowAnnouncement.body, megaShowAnnouncement.category,
+    megaShowAnnouncement.imageUrl, megaShowAnnouncement.publishedAt,
+    megaShowAnnouncement.featured ? 1 : 0, megaShowAnnouncement.sortOrder,
+    megaShowAnnouncement.slug,
+  ).run();
 
   const fairNews = defaultContent.find((item) => item.slug === "sunnyland-hk-toy-fair-2027");
   if (fairNews) {

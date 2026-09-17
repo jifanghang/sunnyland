@@ -135,8 +135,9 @@ test("retains the content manager and media-rich company page", async () => {
   assert.match(about, /5,000 m²/);
   assert.match(about, /about-company\.mp4/);
   assert.match(about, /about-factory\.mp4/);
+  const partners = await readFile(new URL("../app/data/partners.ts", import.meta.url), "utf8");
   for (const partner of ["decathlon", "lekia", "svp-sports", "snoopy", "target", "wilson"]) {
-    assert.match(about, new RegExp(`/partners/${partner}\\.png`));
+    assert.match(partners, new RegExp(`/partners/${partner}\\.png`));
     const partnerCard = await readFile(new URL(`../public/partners/${partner}.png`, import.meta.url));
     assert.ok(partnerCard.length > 100_000, `${partner} should contain a partner-card image`);
   }

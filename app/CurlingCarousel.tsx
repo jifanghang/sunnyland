@@ -2,6 +2,7 @@
 
 import { useRef } from "react";
 import { curlingProducts } from "./data/curling";
+import { partners } from "./data/partners";
 
 const credentials = [
   { value: "2008", label: "Founded in Ningbo" },
@@ -10,15 +11,6 @@ const credentials = [
   { value: "5", label: "Assembly lines" },
   { value: "ISO 9001", label: "Quality management" },
   { value: "BSCI", label: "Audited production" },
-];
-
-const partners = [
-  { name: "Target", logo: "/partners/target.svg", slug: "target" },
-  { name: "Disney", logo: "/partners/disney.svg", slug: "disney" },
-  { name: "Lidl", logo: "/partners/lidl.svg", slug: "lidl" },
-  { name: "myToys", logo: "/partners/mytoys.svg", slug: "mytoys" },
-  { name: "Nanu-Nana", logo: "/partners/nanu-nana.svg", slug: "nanu-nana" },
-  { name: "Smyths Toys", logo: "/partners/smyths.svg", slug: "smyths" },
 ];
 
 export default function CurlingCarousel() {

@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { SiteFooter, SiteHeader } from "../SiteChrome";
 import AboutStats from "./AboutStats";
 import PhotoSlideshow from "./PhotoSlideshow";
+import { partners } from "../data/partners";
 import "./about.css";
 
 export const metadata: Metadata = {
@@ -23,15 +24,6 @@ const standards = [
   ["ISO 9001", "Quality management", "Documented quality processes support consistent production and improvement."],
   ["EN71", "European toy safety", "Products are developed to conform with relevant European toy-safety requirements."],
   ["ASTM F963", "US toy safety", "Materials and finished products are prepared for applicable US market standards."],
-];
-
-const partners = [
-  { name: "Decathlon", logo: "/partners/decathlon.png", slug: "decathlon" },
-  { name: "Lekia", logo: "/partners/lekia.png", slug: "lekia" },
-  { name: "SVP Sports", logo: "/partners/svp-sports.png", slug: "svp-sports" },
-  { name: "Snoopy", logo: "/partners/snoopy.png", slug: "snoopy" },
-  { name: "Target", logo: "/partners/target.png", slug: "target" },
-  { name: "Wilson", logo: "/partners/wilson.png", slug: "wilson" },
 ];
 
 const officeSlides = [
@@ -245,8 +237,8 @@ export default function AboutPage() {
           </div>
         </div>
         <div className="exhibition-gallery">
-          <img src="/about-exhibition-1.jpg" alt="Sunnyland team with a customer" />
-          <img src="/about-exhibition-2.jpg" alt="Sunnyland representative at an international exhibition" />
+          <img src="/about-exhibition-display-2026.jpg" alt="Hong Kong Toys & Games Fair exhibition display with a bear and robot" />
+          <img src="/about-exhibition-blocks-2026.jpg" alt="Colourful block-built display at the Hong Kong Toys & Games Fair" />
           <img src="/about-exhibition-3.jpg" alt="Sunnyland team at a trade show" />
         </div>
       </section>
