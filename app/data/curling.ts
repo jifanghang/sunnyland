@@ -42,8 +42,8 @@ export const curlingProducts = [
   {
     code: "SSC001-F",
     title: "Floor curling stone set of 8 - 20 cm",
-    copy: "Eight 20 cm floor curling stones with a 150 × 520 cm target mat.",
-    details: "The largest stone format in the current Sunnyland range pairs eight 20 cm floor curling stones with a full-length 150 × 520 cm target mat. It is designed for competitive-feeling play in schools, clubs and larger activity spaces.\n\nThe complete set delivers a clear playing lane and target while packing into dedicated storage bags after use.",
+    copy: "Eight 20 cm floor curling stones with a 150 × 150 cm target mat.",
+    details: "The largest stone format in the current Sunnyland range pairs eight 20 cm floor curling stones with a full-length 150 × 150 cm target mat. It is designed for competitive-feeling play in schools, clubs and larger activity spaces.\n\nThe complete set delivers a clear playing lane and target while packing into dedicated storage bags after use.",
     image: "/curling-ssc001-f.jpg",
     badge: "20 cm stones",
   },

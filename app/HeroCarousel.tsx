@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { exhibitionDetails } from "./data/announcements";
 
 type HeroNews = {
   title: string;
@@ -30,16 +31,16 @@ const productComicStrips = Array.from(
   (_, index) => comicProducts.slice(index * 4, index * 4 + 4),
 );
 
-export default function HeroCarousel({ topNews }: { topNews: HeroNews }) {
+export default function HeroCarousel({ news }: { news: HeroNews[] }) {
   const [active, setActive] = useState(0);
   const [paused, setPaused] = useState(false);
-  const total = 3;
+  const total = 2 + news.length;
 
   useEffect(() => {
     if (paused || window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
     const timer = window.setInterval(() => setActive((current) => (current + 1) % total), 7000);
     return () => window.clearInterval(timer);
-  }, [paused]);
+  }, [paused, total]);
 
   function move(direction: -1 | 1) {
     setActive((current) => (current + direction + total) % total);
@@ -123,19 +124,20 @@ export default function HeroCarousel({ topNews }: { topNews: HeroNews }) {
         </div>
       </div>
 
-      <div className={`hero-slide hero-slide-news ${active === 2 ? "is-active" : ""}`} aria-hidden={active !== 2} inert={active !== 2 ? true : undefined}>
+      {news.map((topNews, index) => (
+      <div key={topNews.slug} className={`hero-slide hero-slide-news ${active === index + 2 ? "is-active" : ""}`} aria-hidden={active !== index + 2} inert={active !== index + 2 ? true : undefined}>
         <div className="hero-news-image">
           <img src={topNews.imageUrl} alt="" />
-          <span>Latest story</span>
+          <span>{index === 0 ? "Latest announcement" : "Upcoming event"}</span>
         </div>
         <div className="hero-copy">
           <div className="eyebrow"><span /> {topNews.category}</div>
           <h1 className="hero-news-title">{topNews.title}</h1>
           <p>{topNews.summary}</p>
-          {topNews.slug === "sunnyland-hk-toy-fair-2027" && (
+          {exhibitionDetails[topNews.slug] && (
             <div className="hero-news-facts" aria-label="Exhibition details">
-              <div><span>Booth</span><strong>5E-G18</strong></div>
-              <div><span>Dates</span><strong>11–14 Jan 2027</strong></div>
+              <div><span>Booth</span><strong>{exhibitionDetails[topNews.slug].booth}</strong></div>
+              <div><span>Dates</span><strong>{exhibitionDetails[topNews.slug].dates}</strong></div>
             </div>
           )}
           <div className="hero-actions">
@@ -146,11 +148,12 @@ export default function HeroCarousel({ topNews }: { topNews: HeroNews }) {
           </div>
         </div>
       </div>
+      ))}
 
       <div className="hero-carousel-controls">
         <button type="button" onClick={() => move(-1)} aria-label="Previous highlight">←</button>
         <div className="hero-dots" aria-label="Choose a highlight">
-          {["Curling", "Product range", "Latest news"].map((label, index) => (
+          {["Curling", "Product range", ...news.map((item) => item.title)].map((label, index) => (
             <button
               type="button"
               className={active === index ? "is-active" : ""}
@@ -161,7 +164,7 @@ export default function HeroCarousel({ topNews }: { topNews: HeroNews }) {
             />
           ))}
         </div>
-        <span>{String(active + 1).padStart(2, "0")} / 03</span>
+        <span>{String(active + 1).padStart(2, "0")} / {String(total).padStart(2, "0")}</span>
         <button type="button" onClick={() => move(1)} aria-label="Next highlight">→</button>
       </div>
     </section>

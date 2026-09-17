@@ -1,6 +1,7 @@
 import { env } from "cloudflare:workers";
 import { catalogueProducts, catalogueRevision } from "../app/data/catalogue";
 import { normaliseProductCategory } from "../lib/product-categories";
+import { megaShowAnnouncement } from "../app/data/announcements";
 
 export type ContentType = "product" | "news";
 
@@ -47,10 +48,11 @@ const previousDefaultContent: ContentItem[] = [
   { id: 8, type: "news", title: "Why floor curling keeps everyone moving", slug: "floor-curling-guide", summary: "A simple guide to setup, scoring and the small details that make the game so inclusive.", body: "Floor curling keeps the strategy of the ice while removing the need for skates, cold conditions or a specialist rink. A smooth indoor floor is enough to begin.\n\nPlayers take turns sending stones towards a target, balancing accuracy, weight and teamwork. Because the motion is controlled and the rules are easy to explain, the game works well across ages and ability levels.\n\nStart with short rounds, clear scoring zones and teams of two to four. Once everyone understands the pace, introduce blocking shots and tactical placement.", category: "How to play", imageUrl: "/curling-floor.jpg", publishedAt: "2026-05-30", featured: false, sortOrder: 2 },
   { id: 9, type: "news", title: "From Ningbo to game night", slug: "made-in-ningbo", summary: "A look at how our team develops, checks and prepares new games for markets around the world.", body: "Every product begins with a play experience: what should people do, feel and want to repeat? From there, our Ningbo team turns the idea into materials, mechanisms, samples and packaging.\n\nApproved designs move through production and quality checks before export preparation. Close access to Ningbo and Shanghai ports helps us coordinate programmes for retailers and importers around the world.\n\nThat combination of playful thinking and practical manufacturing is what carries an idea from the first sketch to game night.", category: "Inside Sunnyland", imageUrl: "/about-production.jpg", publishedAt: "2026-04-16", featured: false, sortOrder: 3 },
   { id: 10, type: "news", title: "Exhibition announcement: Hong Kong Toys & Games Fair", slug: "sunnyland-hk-toy-fair-2027", summary: "Visit Sunnyland at booth 5E-G18 in Hong Kong from 11–14 January 2027.", body: "You are cordially invited to visit Sunnyland at the Hong Kong Toys & Games Fair.\n\nDate: 11–14 January 2027\nVenue: Hong Kong Convention and Exhibition Centre, Wan Chai\nBooth number: 5E-G18\n\nWe look forward to welcoming customers, partners and new friends to our booth and sharing the latest additions to the Sunnyland range.", category: "Events", imageUrl: "/exhibition.jpg", publishedAt: "2026-08-01", featured: true, sortOrder: 0 },
-  { id: 11, type: "news", title: "SSC001-F: our 20 cm floor curling set", slug: "20cm-iceless-curling-stone", summary: "The largest model in our current floor curling range pairs eight 20 cm stones with a full-length target mat.", body: "Meet SSC001-F, Sunnyland’s floor curling stone set with eight 20 cm diameter stones. It is the largest stone size in our current six-product curling range.\n\nIts generous size, considered weight and smooth glide bring the tactics and teamwork of curling to smooth indoor floors without requiring ice.\n\nThe complete set includes eight curling stones and a 150 cm × 520 cm target mat, ready for competitive play in homes, schools, clubs and activity spaces.", category: "New product", imageUrl: "/curling-ssc001-f.jpg", publishedAt: "2026-08-01", featured: false, sortOrder: 1 },
+  { id: 11, type: "news", title: "SSC001-F: our 20 cm floor curling set", slug: "20cm-iceless-curling-stone", summary: "The largest model in our current floor curling range pairs eight 20 cm stones with a full-length target mat.", body: "Meet SSC001-F, Sunnyland’s floor curling stone set with eight 20 cm diameter stones. It is the largest stone size in our current six-product curling range.\n\nIts generous size, considered weight and smooth glide bring the tactics and teamwork of curling to smooth indoor floors without requiring ice.\n\nThe complete set includes eight curling stones and a 150 cm × 150 cm target mat, ready for competitive play in homes, schools, clubs and activity spaces.", category: "New product", imageUrl: "/curling-ssc001-f.jpg", publishedAt: "2026-08-01", featured: false, sortOrder: 1 },
 ];
 
 export const defaultContent: ContentItem[] = [
+  megaShowAnnouncement,
   ...catalogueProducts,
   ...previousDefaultContent.filter((item) => item.type === "news"),
 ];
@@ -127,6 +129,18 @@ async function ensureDatabase() {
       ).bind(catalogueRevision),
     ]);
   }
+
+  await database.prepare(
+    `INSERT INTO content_items (type,title,slug,summary,body,category,image_url,published_at,featured,sort_order)
+     SELECT ?,?,?,?,?,?,?,?,?,?
+     WHERE NOT EXISTS (SELECT 1 FROM content_items WHERE type='news' AND slug=?)`
+  ).bind(
+    megaShowAnnouncement.type, megaShowAnnouncement.title, megaShowAnnouncement.slug,
+    megaShowAnnouncement.summary, megaShowAnnouncement.body, megaShowAnnouncement.category,
+    megaShowAnnouncement.imageUrl, megaShowAnnouncement.publishedAt,
+    megaShowAnnouncement.featured ? 1 : 0, megaShowAnnouncement.sortOrder,
+    megaShowAnnouncement.slug,
+  ).run();
 
   const fairNews = defaultContent.find((item) => item.slug === "sunnyland-hk-toy-fair-2027");
   if (fairNews) {

@@ -711,11 +711,8 @@ section[id] { scroll-margin-top: 118px; }
 .company-partners { margin-top: 64px; }
 .company-partners-label { display: block; margin-bottom: 14px; font-size: 9px; font-weight: 900; letter-spacing: .12em; text-transform: uppercase; }
 .company-logo-row { display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); border-top: 1px solid rgba(255,255,255,.6); border-left: 1px solid rgba(255,255,255,.6); }
-.company-logo-card { min-width: 0; min-height: 112px; padding: 22px 16px; display: grid; place-items: center; background: rgba(255,255,255,.96); border-right: 1px solid rgba(22,48,92,.22); border-bottom: 1px solid rgba(22,48,92,.22); }
-.company-logo { display: block; width: auto; max-width: 78%; max-height: 56px; object-fit: contain; }
-.company-logo-target, .company-logo-lidl { max-width: 60px; max-height: 60px; }
-.company-logo-disney { max-height: 52px; }
-.company-logo-nanu-nana { max-width: 88%; }
+.company-logo-card { min-width: 0; aspect-ratio: 1; overflow: hidden; display: grid; place-items: center; background: var(--white); border-right: 1px solid rgba(22,48,92,.22); border-bottom: 1px solid rgba(22,48,92,.22); }
+.company-logo { display: block; width: 100%; height: 100%; object-fit: contain; }
 
 .section { padding: clamp(90px, 11vw, 160px) clamp(20px, 6vw, 96px); }
 .products-section { background: var(--sheet); }
@@ -1108,7 +1105,6 @@ footer a:hover { color: var(--white); }
   .company-credentials { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 9px; }
   .company-credential { min-height: 100px; }
   .company-logo-row { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-  .company-logo-card { min-height: 98px; }
   .company-proof-section::before { background-size: auto 620px; background-position: 68% 38px; background-repeat: no-repeat; }
   .company-proof-section::after { background: linear-gradient(180deg, rgba(168,28,36,.76) 0%, rgba(168,28,36,.9) 42%, var(--red) 72%); }
   .section-heading { grid-template-columns: 1fr; gap: 28px; }

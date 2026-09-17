@@ -46,13 +46,16 @@ export default async function Home() {
       products: categoryProducts.slice(0, 3),
     };
   });
-  const news = items.filter((item) => item.type === "news").slice(0, 3);
-  const topNews = news.find((item) => item.featured) || news[0];
+  const news = items.filter((item) => item.type === "news")
+    .sort((a, b) => a.sortOrder - b.sortOrder || b.publishedAt.localeCompare(a.publishedAt))
+    .slice(0, 3);
+  const featuredNews = news.filter((item) => item.featured).slice(0, 2);
+  const heroNews = featuredNews.length ? featuredNews : news.slice(0, 1);
 
   return (
     <main>
       <SiteHeader active="home" />
-      {topNews && <HeroCarousel topNews={topNews} />}
+      <HeroCarousel news={heroNews} />
 
       <section className="category-strip" aria-label="Product categories">
         <div className="category-track">
